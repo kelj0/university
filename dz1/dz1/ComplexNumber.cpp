@@ -1,6 +1,6 @@
 #include "ComplexNumber.h"
 
-void set_real(){std::cout << "Setting real\n";}
+void ComplexNumber::set_real(){std::cout << "Setting real\n";}
 
 void ComplexNumber::set_real(int a) {
 	std::cout << "Setting real a->" << a << std::endl;
