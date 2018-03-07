@@ -5,9 +5,9 @@
 class ComplexNumber {
 public:
 	
-	void set_real(int real) {};
-	void set_imaginary(int imaginary) {};
-	double get() { return 10; };
+	void set_real(int real);
+	void set_imaginary(int imaginary);
+	double get();
 
 	ComplexNumber() {
 		
@@ -22,8 +22,7 @@ public:
 		
 	};
 
-	
-};
 
+};
 
 #endif
