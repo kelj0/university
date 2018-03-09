@@ -11,12 +11,19 @@ void Pravokutnik::get_visina(int y){
 	visina = y;
 }
 
-void Pravokutnik::upis_u_polje(){
+void Pravokutnik::upis_u_polje(Pravokutnik p[]){
 	for (int i = 0; i < 5; i++) {
-		cout << "Upisite sirinu:";
-		
-
+		int x;
+		int y;
+		cout << "Sirina " << i + 1 << " pravokutnika:";
+		cin >> x;
+		cout << endl;
+		p[i].sirina=x;
+		cout << "Visina " << i + 1 << " pravokutnika:";
+		cin >> y;
+		cout << endl;
+		p[i].visina=y;
 	}
-
 }
+
 
