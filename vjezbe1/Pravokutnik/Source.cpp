@@ -6,14 +6,24 @@ using namespace std;
 int main() {
 	Pravokutnik p[5];
 
-	p->upis_u_polje(p);
-	
+	for (int i = 0; i < 5; i++) {
+		int x;
+		int y;
+		cout << "Sirina " << i + 1 << " pravokutnika:";
+		cin >> x;
+		cout << endl;
+		p[i].set_sirina(x);
+		cout << "Visina " << i + 1 << " pravokutnika:";
+		cin >> y;
+		cout << endl;
+		p[i].set_visina(y);
+	}
 	ofstream wFile("Pravokutnik.txt");
 	if (!wFile) {
 		cout << "Cannot open file!\n";
 	}
 	for (int i = 0; i < 5; i++) {
-		wFile << "P(" << p[i].sirina << ", " << p[i].visina << ") = " << p[i].sirina*p[i].visina << endl;
+		wFile << "P(" << p[i].get_sirina() << ", " << p[i].get_visina() << ") = " << p[i].get_sirina()*p[i].get_visina() << endl;
 	}
 	wFile.close();
 
