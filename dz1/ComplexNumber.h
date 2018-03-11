@@ -19,6 +19,9 @@ public:
 		
 	};
 
+private:
+	int real;
+	int imaginary;
 
 };
 
