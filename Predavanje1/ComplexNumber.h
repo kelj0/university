@@ -9,15 +9,15 @@ public:
 	void set_imaginary(int imaginary);
 	double get();
 
-	ComplexNumber() {
+	ComplexNumber();
 		
-	};
-	ComplexNumber(int real, int imaginary) {
+	
+	ComplexNumber(int real, int imaginary);
 		
-	};
-	ComplexNumber(ComplexNumber k1, ComplexNumber k2) {
+	
+	ComplexNumber(ComplexNumber k1, ComplexNumber k2);
 		
-	};
+	
 
 private:
 	int real;
