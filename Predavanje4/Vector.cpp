@@ -62,15 +62,8 @@ void Vector::insert(int n, double element)
 
 int Vector::get_capacity() { return capacity; }
 
-
 double Vector::get_elem(int n){ return arr[n]; }
 
-int Vector::get_size()
-{
-	return size;
-}
+int Vector::get_size() { return size; }
 
-Vector::~Vector()
-{
-	delete[] arr;
-}
+Vector::~Vector() { delete[] arr; }
