@@ -2,12 +2,11 @@
 #define list_H
 
 struct Node{
-		int val;
-		Node* pPrev;
-		Node* pNext;
-	};
-class list
-{
+	int val;
+	Node* pPrev;
+	Node* pNext;
+};
+class list{
 public:
 	list();
 	void push_back(int val);
