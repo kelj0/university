@@ -12,7 +12,6 @@ public:
 	list();
 	void push_back(int val);
 	Node *begin();
-	Node *end();
 private:
 	
 	Node* head = nullptr;

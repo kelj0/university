@@ -21,7 +21,4 @@ void list::push_back(int val)
 		tail = node;
 	}
 }
-
 Node *list::begin() {return head;}
-
-Node *list::end() {return tail;} //Its not element after last its the last element
