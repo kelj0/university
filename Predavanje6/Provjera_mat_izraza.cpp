@@ -6,7 +6,7 @@ int main() {
 	std::stack<char> s;
 	std::string equation;
 
-	std::cout << "Enter equation to check:  ";
+	std::cout << "Enter equation to check: ";
 	std::getline(std::cin, equation);
 	for (char i : equation) {
 		if (i=='('){
