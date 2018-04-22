@@ -1,0 +1,12 @@
+﻿  Console.cpp
+d:\c++\spa\dz2\console.cpp(76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\c++\spa\dz2\console.cpp(148): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\c++\spa\dz2\console.cpp(289): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\c++\spa\dz2\console.cpp(310): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\c++\spa\dz2\console.cpp(336): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  main.cpp
+d:\c++\spa\dz2\main.cpp(11): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  dz2.vcxproj -> D:\c++\SPA\dz2\Debug\dz2.exe
