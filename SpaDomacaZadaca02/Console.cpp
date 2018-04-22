@@ -17,45 +17,52 @@ void Console::drawEverything() {
 	pWindow->draw(redSquareT);
 	pWindow->draw(whiteBoard);
 	pWindow->draw(whiteBoardT);
-	if (startProcess) {
+	pWindow->draw(genT);
+	if (startWhiteboard) {
 		pWindow->draw(start);
 		pWindow->draw(startT);
+		pWindow->draw(backButton);
+		pWindow->draw(backButtonT);
 	}
 }
 
 void Console::draw()
 {
 	setShapes();
+	whiteBoardT.setString("WHITEBOARD");
+	whiteBoardT.setPosition(sf::Vector2f(450,85));
 	pWindow->clear(sf::Color(0, 0, 0));
+
+	genSTR = "Gen:" + std::to_string(gen);
+	genT.setString(genSTR);
 
 	drawEverything();
 	drawArray();
 	pWindow->display();
 	
 	create_if_click();
-	std::this_thread::sleep_until(system_clock::now() + 10ms);
+
+	sf::sleep(sf::Time(sf::milliseconds(10)));
+	//std::this_thread::sleep_until(system_clock::now() + 10ms);
 	create_if_click();
 
 	pWindow->clear(sf::Color(0, 0, 0));
 	drawEverything();
-
+	
 	drawSecondState();
 	pWindow->display();
 	
 	create_if_click();
-	std::this_thread::sleep_until(system_clock::now() + 10ms);
+	sf::sleep(sf::Time(sf::milliseconds(10)));
+	//std::this_thread::sleep_until(system_clock::now() + 10ms);
 	create_if_click();
-
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)&&whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
-			clearAndMakeEmptyBoard();
-	}
 
 }
 
 bool Console::randomAlive()
 {
 	int randn = rand() % 4;
-	if (randn == 0)
+	if (randn == 3)
 		return true;
 	return false;
 }
@@ -208,6 +215,12 @@ void Console::setShapes()
 	start.setOutlineThickness(5);
 	start.setOutlineColor(sf::Color(255, 255, 255));
 	start.setPosition(sf::Vector2f(475, 130));
+
+	backButton.setSize(sf::Vector2f(50,30));
+	backButton.setPosition(sf::Vector2f(370,100));
+	backButton.setFillColor(sf::Color(179, 0, 0));
+	backButton.setOutlineThickness(4);
+	backButton.setOutlineColor(sf::Color(204, 204, 0));
 }
 
 void Console::nearLives() 
@@ -240,9 +253,11 @@ void Console::setText()
 {
 	greenSquareT.setString("-Living cell");
 	redSquareT.setString("-Dies in next gen");
-	blueSquareT.setString("-Borns in next gen");
+	blueSquareT.setString("-Born in next gen");
 	startT.setString("START");
 	whiteBoardT.setString("WHITEBOARD");
+	backButtonT.setString("BACK");
+	started.setString("RUNNING");
 
 
 	greenSquareT.setFont(font);
@@ -251,6 +266,7 @@ void Console::setText()
 	greenSquareT.setCharacterSize(20);
 	redSquareT.setCharacterSize(20);
 	blueSquareT.setCharacterSize(20);
+
 
 	greenSquareT.setFillColor(sf::Color(255,255,255));
 	redSquareT.setFillColor(sf::Color(255, 255, 255));
@@ -270,39 +286,92 @@ void Console::setText()
 	whiteBoardT.setFillColor(sf::Color(0,0,0));
 	whiteBoardT.setCharacterSize(15);
 	whiteBoardT.setFont(font);
+
+	genT.setCharacterSize(20);
+	genT.setFillColor(sf::Color(255,255,255));
+	genT.setFont(font);
+	genT.setPosition(sf::Vector2f(30,140));
+
+	backButtonT.setCharacterSize(15);
+	backButtonT.setFillColor(sf::Color(255,255,255));
+	backButtonT.setFont(font);
+	backButtonT.setPosition(sf::Vector2f(375,105));
+
+	started.setCharacterSize(20);
+	started.setFillColor(sf::Color(255, 255, 255));
+	started.setFont(font);
+	started.setPosition(sf::Vector2f(600, 100));
+
 }
 
 void Console::clearAndMakeEmptyBoard()
 {
-	gen = 0;
-	startProcess = true;
-	while (true) {
-
-		if (gen == 0) {
-			pWindow->clear(sf::Color(0, 0, 0));;
-			//Set empty drawing board
-			int y = 210;
-			for (int i = 0; i < 50; ++i) {
-				int x = 0;
-				for (int j = 0; j < 100; ++j) {
-					mainArray[i][j] = noLife;
-					mainArray[i][j].setPosition(x, y);
-					isAlive[i][j] = false;
-					x += 10;
-				}
-				y += 10;
+	blueLife.setOutlineColor(sf::Color(255, 255, 255));
+	if (mode==0) {
+		pWindow->clear(sf::Color(0, 0, 0));;
+		//Set empty drawing board
+		int y = 210;
+		for (int i = 0; i < 50; ++i) {
+			int x = 0;
+			for (int j = 0; j < 100; ++j) {
+				mainArray[i][j] = noLife;
+				mainArray[i][j].setPosition(x, y);
+				isAlive[i][j] = false;
+				x += 10;
 			}
-			drawEverything();
-			blueLife.setOutlineColor(sf::Color(255,255,255));
-			pWindow->display();
-
-			++gen;
+			y += 10;
 		}
+		drawEverything();
+			
+		pWindow->display();
 
-		// Catch clicks and draw it 
-		else if(!start.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+		++mode;
+	}//if
+
+	// Catch clicks and draw it 
+	else if(mode==1) {
+		pWindow->clear(sf::Color(0,0,0));
+			
+		create_if_click();
+			
+		int y = 210;
+		for (int i = 0; i < 50; ++i) {
+			int x = 0;
+			for (int j = 0; j < 100; ++j) {
+				mainArray[i][j].setPosition(x, y);
+				pWindow->draw(mainArray[i][j]);
+				x += 10;
+			}
+			y += 10;
+		}
+		drawEverything();
+		whiteBoardT.setString("CLEAR");
+		whiteBoardT.setPosition(sf::Vector2f(475, 85));
+		pWindow->display();
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && start.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
+			mode = 2;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+			startWhiteboard = false;
+			mode = 0;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
+			startWhiteboard = false;
+	}//else if
+		
+	//Start automated process
+	else if (mode==2) {
+
 			pWindow->clear(sf::Color(0,0,0));
+
+			genSTR = "Gen:" + std::to_string(gen);
+			genT.setString(genSTR);
+
+			sf::sleep(sf::Time(sf::milliseconds(10)));
 			create_if_click();
+
+			nearLives();
+			fillArray();
 			int y = 210;
 			for (int i = 0; i < 50; ++i) {
 				int x = 0;
@@ -314,39 +383,21 @@ void Console::clearAndMakeEmptyBoard()
 				y += 10;
 			}
 			drawEverything();
-			nearLives();
-			blueLife.setOutlineColor(sf::Color(255, 255, 255));
+			whiteBoardT.setString("CLEAR");
+			pWindow->draw(started);
+			whiteBoardT.setPosition(sf::Vector2f(475,85));
+			++gen;
 			pWindow->display();
-		}
-		
-		//Start automated process
-		else if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-			while (true) {
-				if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-					break;
-				create_if_click();
-				std::this_thread::sleep_until(system_clock::now() + 500ms);
-
-				nearLives();
-				fillArray();
-				int y = 210;
-				for (int i = 0; i < 50; ++i) {
-					int x = 0;
-					for (int j = 0; j < 100; ++j) {
-						mainArray[i][j].setPosition(x, y);
-						pWindow->draw(mainArray[i][j]);
-						x += 10;
-					}
-					y += 10;
-				}
-				drawEverything();
-				
-				pWindow->display();
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+				startWhiteboard = false;
+				mode = 0;
 			}
-		}
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
+				startWhiteboard = false;
 
-	}
-}
+	} //else if
+
+} // FOO
 
 void Console::create_if_click() 
 {

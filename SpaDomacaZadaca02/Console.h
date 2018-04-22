@@ -7,6 +7,7 @@
 #include <chrono>
 #include <vector>
 #include <time.h>
+#include <string>
 using namespace std::chrono_literals;
 using std::chrono::system_clock;
 
@@ -19,20 +20,21 @@ public:
 	void setShapes();
 	void setText();
 	int gen = 0;
-
+	bool startWhiteboard = false;
 	void clearAndMakeEmptyBoard();
+	sf::RectangleShape whiteBoard;
+	sf::RectangleShape start;
+	sf::RectangleShape backButton;
 
 private:
-
 	sf::RenderWindow *pWindow;
-
 	//Main vectors,arrays..
 	bool isAlive[50][100];
 	std::vector<std::vector<sf::RectangleShape>> mainArray;
 	std::vector<sf::RectangleShape> tempArray;
 	int howManyLifes[50][100];
+	int mode = 0;
 
-	bool startProcess=false;
 	
 
 	//I changed colors during programing and i didnt want to change all blueLifes so i just change his color to grey :P
@@ -50,15 +52,19 @@ private:
 	sf::RectangleShape greenSquare;
 	sf::RectangleShape redSquare;
 	sf::RectangleShape blueSquare;
+
 	sf::Font font;
 	sf::Text greenSquareT;
 	sf::Text redSquareT;
 	sf::Text blueSquareT;
-	sf::RectangleShape whiteBoard;
-	sf::RectangleShape start;
+	
+	sf::Text started;
 	sf::Text whiteBoardT;
 	sf::Text startT;
+	sf::Text genT;
+	std::string genSTR;
 
+	sf::Text backButtonT;
 
 	bool randomAlive();
 	void fillArray0();

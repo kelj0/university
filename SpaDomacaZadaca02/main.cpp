@@ -15,6 +15,9 @@ int main() {
 	
 	Console console(&window);
 	console.setText();
+
+	bool startProcess = false;
+
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -24,7 +27,17 @@ int main() {
 		sf::Vector2i localPosition = sf::Mouse::getPosition(window);
 		mouseLocation(localPosition);
 
-		console.draw();
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && console.backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(window)))
+			console.startWhiteboard = false;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && console.whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(window))) {
+			console.startWhiteboard = true;			
+			console.gen = 0;
+		}
+		if(console.startWhiteboard){
+			console.clearAndMakeEmptyBoard();
+		}
+		else
+			console.draw();
 	}
 
 	return 0;
