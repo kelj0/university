@@ -1,3 +1,4 @@
+#include <SFML/Graphics.hpp>
 #include "Console.h"
 
 
@@ -8,15 +9,15 @@ void mouseLocation(sf::Vector2i localPosition)
 
 int main() {
 	srand(time(0));
-	
+
 	sf::RenderWindow window(sf::VideoMode(1000, 720), "GAME OF LIFE");
 	window.setFramerateLimit(60);
-	
+
 	Console console(&window);
 	console.setText();
 
-	bool startProcess = false;
-
+	 bool startProcess = false;
+	
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -38,6 +39,5 @@ int main() {
 		else
 			console.draw();
 	}
-
 	return 0;
 }

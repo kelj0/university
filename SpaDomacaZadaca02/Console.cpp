@@ -4,6 +4,10 @@ Console::Console(sf::RenderWindow * window)
 {
 	pWindow = window;
 	font.loadFromFile("arial.ttf");
+	if (!font.loadFromFile("arial.ttf")) {
+		std::cout << "\nSOMETHING IS WRONG WITH LOADING FONT(6 line in Console.cpp)\n";
+	}
+
 }
 
 void Console::drawEverything() {
@@ -23,12 +27,16 @@ void Console::drawEverything() {
 		pWindow->draw(startT);
 		pWindow->draw(backButton);
 		pWindow->draw(backButtonT);
+		pWindow->draw(instructionsT);
+		pWindow->draw(gun);
+		pWindow->draw(gunT);
+		whiteBoardT.setString("CLEAR");
+		whiteBoardT.setPosition(sf::Vector2f(475, 85));
 	}
 }
 
 void Console::draw()
 {
-	setShapes();
 	whiteBoardT.setString("WHITEBOARD");
 	whiteBoardT.setPosition(sf::Vector2f(450,85));
 	pWindow->clear(sf::Color(0, 0, 0));
@@ -36,14 +44,16 @@ void Console::draw()
 	genSTR = "Gen:" + std::to_string(gen);
 	genT.setString(genSTR);
 
-	drawEverything();
+	
 	drawArray();
+	drawEverything();
 	pWindow->display();
 	
 	create_if_click();
 
 	sf::sleep(sf::Time(sf::milliseconds(10)));
-	//std::this_thread::sleep_until(system_clock::now() + 10ms);
+
+
 	create_if_click();
 
 	pWindow->clear(sf::Color(0, 0, 0));
@@ -52,9 +62,10 @@ void Console::draw()
 	drawSecondState();
 	pWindow->display();
 	
-	create_if_click();
+	create_if_click();	
+
 	sf::sleep(sf::Time(sf::milliseconds(10)));
-	//std::this_thread::sleep_until(system_clock::now() + 10ms);
+
 	create_if_click();
 
 }
@@ -91,6 +102,7 @@ void Console::drawArray()
 
 void Console::fillArray0()
 {
+	setShapes();
 	for (unsigned int y = 0; y < 50; ++y) {
 		mainArray.push_back(tempArray);
 		for (unsigned int x = 0; x < 100; ++x) {
@@ -136,9 +148,10 @@ void Console::fillArray()
 					mainArray[y][x] = blueLife;
 					isAlive[y][x] = false;
 				}
-				else
+				else {
+					mainArray[y][x] = noLife;
 					isAlive[y][x] = false;
-				
+				}
 			}
 		}
 	}
@@ -179,7 +192,9 @@ void Console::setShapes()
 	blueLife.setOutlineColor(sf::Color(100, 100, 100));
 
 
-	noLife.setSize(sf::Vector2f(10,10));
+	noLife.setSize(sf::Vector2f(9,9));
+	noLife.setOutlineColor(sf::Color(30,30,30));
+	noLife.setOutlineThickness(1);
 	noLife.setFillColor(sf::Color(0,0,0));
 
 	greenSquare.setSize(sf::Vector2f(8, 8));
@@ -221,10 +236,20 @@ void Console::setShapes()
 	backButton.setFillColor(sf::Color(179, 0, 0));
 	backButton.setOutlineThickness(4);
 	backButton.setOutlineColor(sf::Color(204, 204, 0));
+
+	gun.setSize(sf::Vector2f(250,40));
+	gun.setFillColor(sf::Color(0, 128, 0));
+	gun.setOutlineThickness(2);
+	gun.setOutlineColor(sf::Color(102, 51, 0));
+	gun.setPosition(700,130);
 }
 
 void Console::nearLives() 
 {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+		startWhiteboard = true;
+		gen = 0;
+	}
 	for (unsigned int y = 0; y < 50; ++y) {
 		for (unsigned int x = 0; x < 100; ++x) {
 			int Lifes = 0;
@@ -258,6 +283,8 @@ void Console::setText()
 	whiteBoardT.setString("WHITEBOARD");
 	backButtonT.setString("BACK");
 	started.setString("RUNNING");
+	instructionsT.setString("Create new life - Left mouse button\n\"Kill\" life - Right mouse button");
+	gunT.setString("Press me to draw GUN!");
 
 
 	greenSquareT.setFont(font);
@@ -302,12 +329,24 @@ void Console::setText()
 	started.setFont(font);
 	started.setPosition(sf::Vector2f(600, 100));
 
+	instructionsT.setCharacterSize(20);
+	instructionsT.setFillColor(sf::Color(255, 255, 255));
+	instructionsT.setFont(font);
+	instructionsT.setPosition(sf::Vector2f(600, 20));
+
+
+	gunT.setPosition(715, 135);
+	gunT.setCharacterSize(20);
+	gunT.setFont(font);
+	gunT.setFillColor(sf::Color::White);
 }
 
 void Console::clearAndMakeEmptyBoard()
 {
+
 	blueLife.setOutlineColor(sf::Color(255, 255, 255));
 	if (mode==0) {
+		
 		pWindow->clear(sf::Color(0, 0, 0));;
 		//Set empty drawing board
 		int y = 210;
@@ -345,8 +384,6 @@ void Console::clearAndMakeEmptyBoard()
 			y += 10;
 		}
 		drawEverything();
-		whiteBoardT.setString("CLEAR");
-		whiteBoardT.setPosition(sf::Vector2f(475, 85));
 		pWindow->display();
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && start.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
@@ -355,53 +392,70 @@ void Console::clearAndMakeEmptyBoard()
 			startWhiteboard = false;
 			mode = 0;
 		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && gun.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+			startWhiteboard = true;
+			mode = 3;
+			gen = 0;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
 			startWhiteboard = false;
+			gen = 0;
+			mode = 0;
+		}
 	}//else if
 		
 	//Start automated process
-	else if (mode==2) {
+	else if (mode == 2) {
+		
+		pWindow->clear(sf::Color(0, 0, 0));
 
-			pWindow->clear(sf::Color(0,0,0));
+		genSTR = "Gen:" + std::to_string(gen);
+		genT.setString(genSTR);
 
-			genSTR = "Gen:" + std::to_string(gen);
-			genT.setString(genSTR);
+		sf::sleep(sf::Time(sf::milliseconds(10)));
+		create_if_click();
 
-			sf::sleep(sf::Time(sf::milliseconds(10)));
-			create_if_click();
-
-			nearLives();
-			fillArray();
-			int y = 210;
-			for (int i = 0; i < 50; ++i) {
-				int x = 0;
-				for (int j = 0; j < 100; ++j) {
-					mainArray[i][j].setPosition(x, y);
-					pWindow->draw(mainArray[i][j]);
-					x += 10;
-				}
-				y += 10;
+		nearLives();
+		fillArray();
+		int y = 210;
+		for (int i = 0; i < 50; ++i) {
+			int x = 0;
+			for (int j = 0; j < 100; ++j) {
+				mainArray[i][j].setPosition(x, y);
+				pWindow->draw(mainArray[i][j]);
+				x += 10;
 			}
-			drawEverything();
-			whiteBoardT.setString("CLEAR");
-			pWindow->draw(started);
-			whiteBoardT.setPosition(sf::Vector2f(475,85));
-			++gen;
-			pWindow->display();
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
-				startWhiteboard = false;
-				mode = 0;
-			}
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow)))
-				startWhiteboard = false;
-
+			y += 10;
+		}
+		drawEverything();
+		pWindow->draw(started);
+		++gen;
+		pWindow->display();
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && gun.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+			startWhiteboard = true;
+			mode = 3;
+			gen = 0;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && whiteBoard.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+			startWhiteboard = false;
+			mode = 0;
+		}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && backButton.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+			startWhiteboard = false;
+			gen = 0;
+			mode = 0;
+		}
 	} //else if
-
+	else if (mode==3) {
+		drawGun();
+		mode = 1;
+	}
 } // FOO
 
-void Console::create_if_click() 
+void Console::create_if_click()
 {
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		for (unsigned int y = 0; y < 50; ++y) {
 			for (unsigned int x = 0; x < 100; ++x) {
 				if (mainArray[y][x].getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
@@ -411,4 +465,43 @@ void Console::create_if_click()
 			}
 		}
 	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+		
+		for (unsigned int y = 0; y < 50; ++y) {
+			for (unsigned int x = 0; x < 100; ++x) {
+				if (mainArray[y][x].getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*pWindow))) {
+					mainArray[y][x] = noLife;
+				
+					isAlive[y][x] = false;
+				}
+			}
+		}
+	}
+}
+
+void Console::drawGun() {
+	std::ifstream out("koordinate.txt");
+	if (!out) {
+		std::cout << "Txt file not loaded (koordinate.txt),line 473 -Console.cpp";
+	}
+	int tX;
+	int tY;
+	out >> tX;
+	out >> tY;
+	for (unsigned int y = 0; y < 50; ++y) {
+		for (unsigned int x = 0; x < 100; ++x) {
+			//if ((x == 53 && y == 14)||(x == 51 && y == 15)||(x ==53 && y == 15)||(x ==41 && y == 16)||(x ==42 && y == 16)||(x == 43&& y == 16)||(x ==49 && y == 16)||(x ==50 && y == 16)||(x == 63&& y == 16)||(x ==64 && y == 16)||(x ==40 && y == 17)||(x ==44 && y == 17)||(x == 50&& y == 17)||(x == 63&& y == 17)||(x == 64&& y == 17)||(x ==29 && y ==18 )||(x == 30&& y == 18)||(x ==39 && y == 18)||(x == 45&& y == 18)||(x ==49 && y == 18)||(x ==50 && y ==18)||(x ==29 && y == 19)||(x == 30&& y == 19)||(x == 43&& y == 19)||(x == 45&& y == 19)||(x == && y == 19)||(x == && y == 19)) {
+			if(y==tY&&x==tX){
+				mainArray[y][x] = greenLife;
+				isAlive[y][x]=true;
+				out >> tX;
+				out >> tY;
+			}
+			else {
+				mainArray[y][x] = noLife;
+				isAlive[y][x]=false;
+			}
+		}
+	}
+	out.close();
 }
