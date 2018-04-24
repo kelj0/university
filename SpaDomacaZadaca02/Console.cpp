@@ -22,6 +22,7 @@ void Console::drawEverything() {
 	pWindow->draw(whiteBoard);
 	pWindow->draw(whiteBoardT);
 	pWindow->draw(genT);
+	pWindow->draw(madeByT);
 	if (startWhiteboard) {
 		pWindow->draw(start);
 		pWindow->draw(startT);
@@ -176,6 +177,7 @@ void Console::drawSecondState()
 
 void Console::setShapes()
 {
+	// CELLS
 	greenLife.setSize(sf::Vector2f(8,8));
 	greenLife.setFillColor(sf::Color(100, 250, 50));
 	greenLife.setOutlineThickness(2);
@@ -191,12 +193,10 @@ void Console::setShapes()
 	blueLife.setFillColor(sf::Color(20, 20, 50));
 	blueLife.setOutlineColor(sf::Color(100, 100, 100));
 
-
-	noLife.setSize(sf::Vector2f(9,9));
-	noLife.setOutlineColor(sf::Color(30,30,30));
-	noLife.setOutlineThickness(1);
+	noLife.setSize(sf::Vector2f(10,10));
 	noLife.setFillColor(sf::Color(0,0,0));
 
+	// Info
 	greenSquare.setSize(sf::Vector2f(8, 8));
 	greenSquare.setFillColor(sf::Color(100, 250, 50));
 	greenSquare.setOutlineThickness(2);
@@ -219,6 +219,7 @@ void Console::setShapes()
 	line.setFillColor(sf::Color(250,250,250));
 	line.setPosition(0,200);
 
+	// Buttons
 	whiteBoard.setSize(sf::Vector2f(100,30));
 	whiteBoard.setFillColor(sf::Color(255, 255, 255));
 	whiteBoard.setOutlineThickness(5);
@@ -226,20 +227,20 @@ void Console::setShapes()
 	whiteBoard.setPosition(sf::Vector2f(450,80));
 
 	start.setSize(sf::Vector2f(50, 20));
-	start.setFillColor(sf::Color(236,231,19));
-	start.setOutlineThickness(5);
+	start.setFillColor(sf::Color(0, 170, 0));
+	start.setOutlineThickness(1);
 	start.setOutlineColor(sf::Color(255, 255, 255));
 	start.setPosition(sf::Vector2f(475, 130));
 
 	backButton.setSize(sf::Vector2f(50,30));
 	backButton.setPosition(sf::Vector2f(370,100));
-	backButton.setFillColor(sf::Color(179, 0, 0));
-	backButton.setOutlineThickness(4);
+	backButton.setFillColor(sf::Color(200, 0, 0));
+	backButton.setOutlineThickness(2);
 	backButton.setOutlineColor(sf::Color(204, 204, 0));
 
 	gun.setSize(sf::Vector2f(250,40));
-	gun.setFillColor(sf::Color(0, 128, 0));
-	gun.setOutlineThickness(2);
+	gun.setFillColor(sf::Color(236, 231, 19));
+	gun.setOutlineThickness(1);
 	gun.setOutlineColor(sf::Color(102, 51, 0));
 	gun.setPosition(700,130);
 }
@@ -285,7 +286,7 @@ void Console::setText()
 	started.setString("RUNNING");
 	instructionsT.setString("Create new life - Left mouse button\n\"Kill\" life - Right mouse button");
 	gunT.setString("Press me to draw GUN!");
-
+	madeByT.setString("Made by Karlo");
 
 	greenSquareT.setFont(font);
 	redSquareT.setFont(font);
@@ -334,11 +335,15 @@ void Console::setText()
 	instructionsT.setFont(font);
 	instructionsT.setPosition(sf::Vector2f(600, 20));
 
-
 	gunT.setPosition(715, 135);
 	gunT.setCharacterSize(20);
 	gunT.setFont(font);
-	gunT.setFillColor(sf::Color::White);
+	gunT.setFillColor(sf::Color(0,0,0));
+
+	madeByT.setPosition(sf::Vector2f(250, 20));
+	madeByT.setCharacterSize(20);
+	madeByT.setFont(font);
+	madeByT.setFillColor(sf::Color(255,255,255));
 }
 
 void Console::clearAndMakeEmptyBoard()

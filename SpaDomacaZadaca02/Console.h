@@ -74,7 +74,7 @@ private:
 	sf::Text backButtonT;
 
 	sf::Text gunT;
-	
+	sf::Text madeByT;	
 	
 
 	bool randomAlive();
