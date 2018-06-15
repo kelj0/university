@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Desktop\DSA-dz3\Zadatak2.cpp">
+    <ClCompile Include="Zadatak2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

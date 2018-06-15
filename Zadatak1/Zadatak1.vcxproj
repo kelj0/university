@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{23AC0799-B935-4586-B112-B113593511DD}</ProjectGuid>
+    <ProjectGuid>{638D6299-22E2-487B-B4F5-A7EDB15A7087}</ProjectGuid>
     <RootNamespace>Zadatak1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
