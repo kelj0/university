@@ -82,3 +82,14 @@ Formatiraj tako da bude € na kraju a - ispred negativnog broja
 
 
 =====================================================================================
+
+
+```=RANK.EQ(D2,D$2:D$101,1)```   Poredak prodaje
+```=IFERROR(VLOOKUP(B2,Direktori!$A$5:$B$22,2,FALSE),"")``` Direktor
+
+![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Direktori.png)
+
+
+=====================================================================================
+
+
