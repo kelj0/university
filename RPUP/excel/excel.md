@@ -1,8 +1,10 @@
 `=IF(COUNT(C5:F5)=0,"Nije pisao",IF(COUNT(C5:F5)<>COUNTA(C5:F5),"Prepisivanje",VLOOKUP(G5,$J$3:$K$7,2,1)))`
-![](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika1.png)
+![.](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika1.png)
 
 `=COUNTIF($H$3:$H$79,K3)` A
+
 `=L3/COUNTA($B$3:$B$79)`  B
+
 ![](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika2.png)
 
 `=COUNTIFS($C$3:$C$79,G4,$D$3:$D$79,1)` Promjeni zadnji parametar ovisno koja je godina
@@ -14,7 +16,8 @@ IF(VLOOKUP(D3,$A$3:$B$95,2,TRUE)="Prezi","Sway")),
 IF(RANDBETWEEN(0,1)=0,"Sway","Prezi"))```
 Pretty print
 ```
-IFERROR(
+
+```IFERROR(
     IF(
         VLOOKUP(D3,$A$3:$B$95,2,FALSE)="Sway",",
         IF(
@@ -23,6 +26,7 @@ IFERROR(
      ),
 IF(RANDBETWEEN(0,1)=0,"Test0","test1")
 )```
+
 sway..prezi
 
 
