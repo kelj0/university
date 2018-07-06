@@ -57,3 +57,10 @@ sway..prezi
 ![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika7.png)
 
 =====================================================================================
+
+
+Formatiraj tako da bude € na kraju a - ispred negativnog broja
+![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/FormatCells.png)
+
+=====================================================================================
+
