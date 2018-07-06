@@ -19,8 +19,9 @@
 ```
 =IFERROR(IF(VLOOKUP(D3,$A$3:$B$95,2,FALSE)="Sway","Prezi",
 IF(VLOOKUP(D3,$A$3:$B$95,2,TRUE)="Prezi","Sway")),
-IF(RANDBETWEEN(0,1)=0,"Sway","Prezi"))```
+IF(RANDBETWEEN(0,1)=0,"Sway","Prezi"))
 ```
+
 Pretty print
 
 ```
@@ -40,7 +41,7 @@ sway..prezi
 
 ```=VLOOKUP($A4,$M$5:$Q$20,B$2,0)```
 
-![]("https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika4.png")
+![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika4.png)
 
 =====================================================================================
 
