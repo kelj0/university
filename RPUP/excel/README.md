@@ -76,3 +76,9 @@ Formatiraj tako da bude € na kraju a - ispred negativnog broja
 
 
 =====================================================================================
+
+
+![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Krediti.png)
+
+
+=====================================================================================
