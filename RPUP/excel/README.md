@@ -69,3 +69,9 @@ Formatiraj tako da bude € na kraju a - ispred negativnog broja
 
 =====================================================================================
 
+```=(TODAY()-C2)/365```
+
+![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/BrojGod.png)
+
+
+=====================================================================================
