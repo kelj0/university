@@ -39,27 +39,32 @@ sway..prezi
 =====================================================================================
 
 ```=VLOOKUP($A4,$M$5:$Q$20,B$2,0)```
+
 ![]("https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika4.png")
 
 =====================================================================================
 
 ```=VLOOKUP(F3,$A$3:$B$8,2,1)```
+
 ![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika5.png)
 
 =====================================================================================
 
 ```=VLOOKUP(A3,Skladište!A:E,4,0)```
+
 ![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika6.png)
 
 =====================================================================================
 
 ```=VLOOKUP(A20,A3:B14,2,0)```
+
 ![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/Slika7.png)
 
 =====================================================================================
 
 
 Formatiraj tako da bude € na kraju a - ispred negativnog broja
+
 ![](https://github.com/kkeglje/university/blob/master/RPUP/excel/pictures/FormatCells.png)
 
 =====================================================================================
