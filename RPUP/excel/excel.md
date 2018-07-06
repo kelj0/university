@@ -16,7 +16,8 @@
 
 =====================================================================================
 
-```=IFERROR(IF(VLOOKUP(D3,$A$3:$B$95,2,FALSE)="Sway","Prezi",
+```
+=IFERROR(IF(VLOOKUP(D3,$A$3:$B$95,2,FALSE)="Sway","Prezi",
 IF(VLOOKUP(D3,$A$3:$B$95,2,TRUE)="Prezi","Sway")),
 IF(RANDBETWEEN(0,1)=0,"Sway","Prezi"))```
 ```
