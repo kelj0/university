@@ -1,21 +1,21 @@
-`=IF(COUNT(C5:F5)=0,"Nije pisao",IF(COUNT(C5:F5)<>COUNTA(C5:F5),"Prepisivanje",VLOOKUP(G5,$J$3:$K$7,2,1)))`
+```=IF(COUNT(C5:F5)=0,"Nije pisao",IF(COUNT(C5:F5)<>COUNTA(C5:F5),"Prepisivanje",VLOOKUP(G5,$J$3:$K$7,2,1)))```
 ![.](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika1.png)
 
-`=COUNTIF($H$3:$H$79,K3)` A
+```=COUNTIF($H$3:$H$79,K3)``` A
 
-`=L3/COUNTA($B$3:$B$79)`  B
+```=L3/COUNTA($B$3:$B$79)```  B
 
 ![](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika2.png)
 
-`=COUNTIFS($C$3:$C$79,G4,$D$3:$D$79,1)` Promjeni zadnji parametar ovisno koja je godina
+```=COUNTIFS($C$3:$C$79,G4,$D$3:$D$79,1)``` Promjeni zadnji parametar ovisno koja je godina
 ![](https://github.com/kkeglje/university/RPUP/excel/pictures/Slika3.png)
 
 
 ```=IFERROR(IF(VLOOKUP(D3,$A$3:$B$95,2,FALSE)="Sway","Prezi",
 IF(VLOOKUP(D3,$A$3:$B$95,2,TRUE)="Prezi","Sway")),
 IF(RANDBETWEEN(0,1)=0,"Sway","Prezi"))```
-Pretty print
 ```
+Pretty print
 
 ```IFERROR(
     IF(
