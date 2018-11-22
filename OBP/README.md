@@ -32,8 +32,8 @@ SELECT * FROM neki_pogled
 * Implementacija sucelja prema korisnicima baze
 
 ```
-Primjeri od 1-11 u practice.sql
-```
+Primjeri od 1-11 u practice.sql [Predavanje2/3] 
+``` 
 
 
 ##### Izmjena podataka kroz poglede
@@ -44,7 +44,7 @@ Podatke je moguce mijenjati samo ako se radi o tablici uz sljedece uvijete:
 * Referencirani stupci ne smiju biti dijelom GROUP BY, HAVING niti DISTINCT ključnih riječi
 * Pogled sadržava sve neophodne stupce
 ```
-Primjeri od 12-17 u practice.sql
+Primjeri od 12-17 u practice.sql [Predavanje2/3]  
 ```
 
 ##### Dodatne opcije pogleda
@@ -76,5 +76,5 @@ SELECT_naredba
 	* Nije prava e
 
 ```
-Primjeri 18,19.. u practice.sql
+Primjeri 18,19.. u practice.sql [Predavanje2/3]  
 ```
