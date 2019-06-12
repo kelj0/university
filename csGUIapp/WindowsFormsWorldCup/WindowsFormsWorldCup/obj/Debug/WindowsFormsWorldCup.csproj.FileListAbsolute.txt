@@ -1,0 +1,14 @@
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.csprojAssemblyReference.cache
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.Properties.Resources.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.csproj.GenerateResource.cache
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.csproj.CoreCompileInputs.cache
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\WindowsFormsWorldCup.exe.config
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\WindowsFormsWorldCup.exe
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\WindowsFormsWorldCup.pdb
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.exe
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.pdb
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\DataLayer.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestSharp.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\DataLayer.pdb
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestSharp.xml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.csproj.CopyComplete
