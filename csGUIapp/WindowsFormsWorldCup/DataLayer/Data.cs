@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
+using Newtonsoft.Json;
 
 namespace DataLayer
 { 
@@ -19,12 +20,20 @@ namespace DataLayer
         public string GetUrl(string url)
         {
             var client = new RestClient(url);
-
             var response = client.Execute(new RestRequest());
-
             return response.Content;
         }
 
-
+        public List<string> GetCountryNames()
+        {
+            dynamic response = JsonConvert.DeserializeObject(GetUrl("https://world-cup-json-2018.herokuapp.com/teams"));
+            List<string> country = new List<string>();
+            foreach (var s in response)
+            {
+                //Console.WriteLine(s.country);
+                country.Add((string)s.country);
+            }
+            return country;
+        }
     }
 }

@@ -19,7 +19,7 @@
             }
             base.Dispose(disposing);
         }
-
+        
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.fullteamLB = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // fullteamLB
+            // 
+            this.fullteamLB.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
+            this.fullteamLB.FormattingEnabled = true;
+            this.fullteamLB.Location = new System.Drawing.Point(12, 189);
+            this.fullteamLB.Name = "fullteamLB";
+            this.fullteamLB.Size = new System.Drawing.Size(340, 316);
+            this.fullteamLB.TabIndex = 0;
+            this.fullteamLB.SelectedIndexChanged += new System.EventHandler(this.fullteamLB_SelectedIndexChanged);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(831, 570);
+            this.Controls.Add(this.fullteamLB);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListBox fullteamLB;
     }
 }
 

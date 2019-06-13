@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsWorldCup;
+using DataLayer;
 
 namespace WindowsFormsWorldCup
 {
@@ -15,6 +17,13 @@ namespace WindowsFormsWorldCup
         public Form1()
         {
             InitializeComponent();
+            Data test = new Data();
+            fullteamLB.DataSource = test.GetCountryNames();
+        }
+
+        private void fullteamLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
