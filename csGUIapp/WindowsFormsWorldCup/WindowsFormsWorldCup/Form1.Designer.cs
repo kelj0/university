@@ -28,34 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.fullteamLB = new System.Windows.Forms.ListBox();
+            this.cb_teamChooser = new System.Windows.Forms.ComboBox();
+            this.btn_teamApply = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // fullteamLB
+            // cb_teamChooser
             // 
-            this.fullteamLB.AccessibleRole = System.Windows.Forms.AccessibleRole.SplitButton;
-            this.fullteamLB.FormattingEnabled = true;
-            this.fullteamLB.Location = new System.Drawing.Point(12, 189);
-            this.fullteamLB.Name = "fullteamLB";
-            this.fullteamLB.Size = new System.Drawing.Size(340, 316);
-            this.fullteamLB.TabIndex = 0;
-            this.fullteamLB.SelectedIndexChanged += new System.EventHandler(this.fullteamLB_SelectedIndexChanged);
+            this.cb_teamChooser.FormattingEnabled = true;
+            this.cb_teamChooser.Location = new System.Drawing.Point(280, 116);
+            this.cb_teamChooser.Name = "cb_teamChooser";
+            this.cb_teamChooser.Size = new System.Drawing.Size(157, 21);
+            this.cb_teamChooser.TabIndex = 0;
+            // 
+            // btn_teamApply
+            // 
+            this.btn_teamApply.Location = new System.Drawing.Point(477, 116);
+            this.btn_teamApply.Name = "btn_teamApply";
+            this.btn_teamApply.Size = new System.Drawing.Size(75, 23);
+            this.btn_teamApply.TabIndex = 1;
+            this.btn_teamApply.Text = "button1";
+            this.btn_teamApply.UseVisualStyleBackColor = true;
+            this.btn_teamApply.Click += new System.EventHandler(this.btn_teamApply_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(305, 78);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Choose favorite team";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(831, 570);
-            this.Controls.Add(this.fullteamLB);
+            this.ClientSize = new System.Drawing.Size(777, 532);
+            this.Controls.Add(this.btn_teamApply);
+            this.Controls.Add(this.cb_teamChooser);
+            this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox fullteamLB;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox cb_teamChooser;
+        private System.Windows.Forms.Button btn_teamApply;
+        private System.Windows.Forms.Label label1;
     }
 }
 
