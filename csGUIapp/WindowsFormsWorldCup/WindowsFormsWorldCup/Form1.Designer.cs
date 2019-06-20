@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.cb_teamChooser = new System.Windows.Forms.ComboBox();
             this.btn_teamApply = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.dgv_StartingElevenYellowCardsGoals = new System.Windows.Forms.DataGridView();
+            this.Fav = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Players = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YellowCards = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.img_loading = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.img_loading)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_teamChooser
@@ -60,13 +68,62 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Choose favorite team";
             // 
+            // dgv_StartingElevenYellowCardsGoals
+            // 
+            this.dgv_StartingElevenYellowCardsGoals.AllowUserToAddRows = false;
+            this.dgv_StartingElevenYellowCardsGoals.AllowUserToDeleteRows = false;
+            this.dgv_StartingElevenYellowCardsGoals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_StartingElevenYellowCardsGoals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Fav,
+            this.Players,
+            this.YellowCards});
+            this.dgv_StartingElevenYellowCardsGoals.Location = new System.Drawing.Point(221, 159);
+            this.dgv_StartingElevenYellowCardsGoals.Name = "dgv_StartingElevenYellowCardsGoals";
+            this.dgv_StartingElevenYellowCardsGoals.ReadOnly = true;
+            this.dgv_StartingElevenYellowCardsGoals.Size = new System.Drawing.Size(379, 318);
+            this.dgv_StartingElevenYellowCardsGoals.TabIndex = 4;
+            this.dgv_StartingElevenYellowCardsGoals.Visible = false;
+            // 
+            // Fav
+            // 
+            this.Fav.HeaderText = "";
+            this.Fav.Name = "Fav";
+            this.Fav.ReadOnly = true;
+            // 
+            // Players
+            // 
+            this.Players.HeaderText = "Players";
+            this.Players.Name = "Players";
+            this.Players.ReadOnly = true;
+            // 
+            // YellowCards
+            // 
+            this.YellowCards.HeaderText = "YellowCards";
+            this.YellowCards.Name = "YellowCards";
+            this.YellowCards.ReadOnly = true;
+            // 
+            // img_loading
+            // 
+            this.img_loading.Image = ((System.Drawing.Image)(resources.GetObject("img_loading.Image")));
+            this.img_loading.InitialImage = ((System.Drawing.Image)(resources.GetObject("img_loading.InitialImage")));
+            this.img_loading.Location = new System.Drawing.Point(167, 60);
+            this.img_loading.Name = "img_loading";
+            this.img_loading.Size = new System.Drawing.Size(464, 256);
+            this.img_loading.TabIndex = 5;
+            this.img_loading.TabStop = false;
+            this.img_loading.WaitOnLoad = true;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(777, 532);
+            this.Controls.Add(this.img_loading);
+            this.Controls.Add(this.dgv_StartingElevenYellowCardsGoals);
             this.Controls.Add(this.btn_teamApply);
             this.Controls.Add(this.cb_teamChooser);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.img_loading)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -78,6 +135,11 @@
         private System.Windows.Forms.ComboBox cb_teamChooser;
         private System.Windows.Forms.Button btn_teamApply;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dgv_StartingElevenYellowCardsGoals;
+        private System.Windows.Forms.DataGridViewImageColumn Fav;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Players;
+        private System.Windows.Forms.DataGridViewTextBoxColumn YellowCards;
+        private System.Windows.Forms.PictureBox img_loading;
     }
 }
 

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
+using System.Threading;
 
 namespace DataLayer
 {
@@ -17,6 +17,7 @@ namespace DataLayer
         private const string TeamsUrl = "https://world-cup-json-2018.herokuapp.com/teams";
         private const string MatchesUrl = "https://world-cup-json-2018.herokuapp.com/matches/country?fifa_code=";
         private const string ResultsUrl = "https://world-cup-json-2018.herokuapp.com/teams/results";
+        
 
         ///<summary>
         /// Fetches given url, returns response content
@@ -24,7 +25,18 @@ namespace DataLayer
         public static async Task<string> GetUrl(string url)
         {
             var client = new RestClient(url);
-            var response = await Task.Run(() => client.Execute(new RestRequest()));
+            var response = await client.ExecuteTaskAsync(new RestRequest());
+
+            if(!response.IsSuccessful)
+            {
+                Console.WriteLine($"Response code: {response.StatusCode}");
+                response = client.Execute(new RestRequest());
+
+                if (!response.IsSuccessful)
+                {
+                    throw new WebException("Problems with fetching url, please check your network connection");
+                }
+            }
             return response.Content;
 
         }
@@ -52,7 +64,7 @@ namespace DataLayer
                 if (s.country == favoriteTeam)
                     return s.fifa_code;
             }
-            throw new System.ArgumentException("Cant find country with " + favoriteTeam + " name");
+            throw new System.ArgumentException($"Cant find country with {favoriteTeam} name");
 
         }
 
@@ -76,36 +88,6 @@ namespace DataLayer
         public static async Task<dynamic> GetCountryMatches(string fifa_code)
         {
             return JsonConvert.DeserializeObject(await Task.Run(() => GetUrl(MatchesUrl + fifa_code)));
-        }
-
-
-        ///<summary>
-        /// Returns number of yellow cards
-        ///</summary
-        public static async Task<int> GetPlayerYellowCardNumber(string player_name, string fifa_code)
-        {
-            dynamic response = JsonConvert.DeserializeObject(await Task.Run(() => GetUrl(MatchesUrl + fifa_code)));
-            int c = 0;
-            foreach (var match in response)
-            {
-                if (match.home_team.code == fifa_code)
-                {
-                    foreach (var e in match.home_team_events)
-                    {
-                        if (e.type_of_event == "yellow-card" && e.player == player_name)
-                            c++;
-                    }
-                }
-                else
-                {
-                    foreach (var e in match.away_team_events)
-                    {
-                        if (e.type_of_event == "yellow-card" && e.player == player_name)
-                            c++;
-                    }
-                }
-            }
-            return c;
         }
 
         ///<summary>
@@ -134,8 +116,8 @@ namespace DataLayer
                     }
                 }
             }
-
-            throw new System.ArgumentException("Problems fetching first eleven, maybe your fifa_id is wrong?");
+            throw new ArgumentException("Problems fetching first eleven, maybe your fifa_id is wrong?");
         }
+
     }
 }
