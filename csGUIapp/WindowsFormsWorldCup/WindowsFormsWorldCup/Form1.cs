@@ -17,20 +17,15 @@ namespace WindowsFormsWorldCup
 {
     public partial class Form1 : Form
     {
-
-        public string favoriteTeam;
-        public string favoriteTeamcode;
-        public List<List<string>> firstEleven = new List<List<string>>();
         public string fifa_id;
         public dynamic matches;
-
+        Team team;
 
         public Form1()
         {
             InitializeComponent();
             Task.Run(()=>SetTeams());
             //Task.Run(()=>TestFunctions());
-            
         }
 
         private async void TestFunctions()
@@ -69,13 +64,11 @@ namespace WindowsFormsWorldCup
         {
             showLoading();
 
-            dynamic fifa_id = await Data.GetCountryMatches(favoriteTeamcode);
-            List<string> p = await Data.GetMatchFirstEleven((string)fifa_id[0].fifa_id, favoriteTeamcode);
             Image i = Image.FromFile(@"..\..\..\static\tux.png");
 
-            foreach (var item in firstEleven)
+            foreach (var p in team.firsteleven)
             {
-                dgv_StartingElevenYellowCardsGoals.Rows.Add(new object[] {i,item[0],item[1]});
+                dgv_StartingElevenYellowCardsGoals.Rows.Add(new object[] {i,team.players[p].name,team.players[p].cards});
             }            
             dgv_StartingElevenYellowCardsGoals.Show();
 
@@ -90,55 +83,18 @@ namespace WindowsFormsWorldCup
 
         private async void btn_teamApply_Click(object sender, EventArgs e)
         {
-            favoriteTeam = cb_teamChooser.Text;
+            string fifa_code = await Task.Run(() => Data.GetCountryCode(cb_teamChooser.Text));
+            team = new Team(cb_teamChooser.Text, fifa_code);
+            await Task.Run(()=>showLoading());
             cb_teamChooser.Hide();
             btn_teamApply.Hide();
             label1.Hide();
+            await Task.Run(()=>team.SetUp());
 
-            showLoading();
-
-            favoriteTeamcode = await Task.Run(() => Data.GetCountryCode(favoriteTeam));
-            fifa_id = (string)(await Data.GetCountryMatches(favoriteTeamcode))[0].fifa_id;
-
-            
-            setFirstEleven();
             showMain();
-
-            hideLoading();
         }
 
-        private async void setFirstEleven()
-        {
-            List<string> players = await Data.GetMatchFirstEleven(fifa_id, favoriteTeamcode);
-            dynamic match = (await Data.GetCountryMatches(favoriteTeamcode))[0];
-            int s = 0;
-            foreach (var player in players)
-            {
-                int c = 0;
-                if (match.home_team.code == favoriteTeamcode)
-                {
-                    foreach (var e in match.home_team_events)
-                    {
-                        if (e.type_of_event == "yellow-card" && e.player == player)
-                            c++;
-                    }
-                }
-                else
-                {
-                    foreach (var e in match.away_team_events)
-                    {
-                        if (e.type_of_event == "yellow-card" && e.player == player)
-                            c++;
-                    }
-                }
-                firstEleven.Add(new List<string>());
-                firstEleven[s].Add(player);
-                firstEleven[s++].Add(c.ToString());
-
-            }    
-        }
-
-        private async void showLoading() {await Task.Run(()=>img_loading.Show()); }
-        private async void hideLoading() {await Task.Run(() => img_loading.Hide()); }
+        private void showLoading() {img_loading.Show(); }
+        private void hideLoading() {img_loading.Hide(); }
     }
 }

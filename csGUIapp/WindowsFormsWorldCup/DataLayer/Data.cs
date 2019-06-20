@@ -29,7 +29,7 @@ namespace DataLayer
 
             if(!response.IsSuccessful)
             {
-                Console.WriteLine($"Response code: {response.StatusCode}");
+                Console.WriteLine($"Cant fetch url.. Response code: {response.StatusCode}. Fetching again..");
                 response = client.Execute(new RestRequest());
 
                 if (!response.IsSuccessful)
@@ -118,6 +118,8 @@ namespace DataLayer
             }
             throw new ArgumentException("Problems fetching first eleven, maybe your fifa_id is wrong?");
         }
+
+
 
     }
 }
