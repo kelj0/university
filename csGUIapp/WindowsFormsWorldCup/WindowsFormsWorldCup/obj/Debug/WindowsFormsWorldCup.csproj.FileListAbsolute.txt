@@ -64,3 +64,5 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\Newto
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.Form1.resources
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestSharp.dll
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestSharp.xml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.ChooseLanguage.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.ChooseFavoritePlayers.resources

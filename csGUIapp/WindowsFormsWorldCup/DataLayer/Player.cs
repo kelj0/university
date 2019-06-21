@@ -14,6 +14,7 @@ namespace DataLayer
         public bool captain { get; set; }
         public int goals { get; set; }
         public int cards { get; set; }
+        public bool favorite { get; set; }
 
         public override string ToString() => $"{name} {shirt_number} {position} {(captain ? "yes" : "no")} {goals} {cards}";
     }
