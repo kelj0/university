@@ -13,7 +13,7 @@ namespace WindowsFormsWorldCup
     public partial class ChooseLanguage : Form
     {
         private Form1 f;
-        private bool first = true;
+        public bool first = true;
         public ChooseLanguage(Form1 f)
         {
             InitializeComponent();
@@ -23,6 +23,10 @@ namespace WindowsFormsWorldCup
         
         public async void btn_english_Click(object sender, EventArgs e)
         {
+            if (!first && !f.confirmationBox())
+            {
+                return;
+            }
             f.changeLanguageToENG();
             Hide();
 
@@ -37,6 +41,10 @@ namespace WindowsFormsWorldCup
 
         public async void btn_croatian_Click_1(object sender, EventArgs e)
         {
+            if (!first && !f.confirmationBox())
+            {
+                return;
+            }
             f.changeLanguageToCRO();
             Hide();
 
@@ -49,5 +57,24 @@ namespace WindowsFormsWorldCup
             }
         }
 
+        private async void ChooseLanguage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (first)
+            {
+                Hide();
+                e.Cancel = true;
+                f.changeLanguageToCRO();
+                f.img_loading.Visible = true;
+                await Task.Run(() => f.SetTeams());
+                f.showTeamChooser();
+                first = false;
+                return;
+            }
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
     }
 }

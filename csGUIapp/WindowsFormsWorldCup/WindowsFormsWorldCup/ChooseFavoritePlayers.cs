@@ -37,7 +37,14 @@ namespace WindowsFormsWorldCup
             }
 
             Hide();
+            f.prepareMain();
             f.showMain();
+        }
+
+        private void clb_allPlayersToChoose_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked && clb_allPlayersToChoose.CheckedItems.Count >= 3)
+                e.NewValue = CheckState.Unchecked;
         }
     }
 }

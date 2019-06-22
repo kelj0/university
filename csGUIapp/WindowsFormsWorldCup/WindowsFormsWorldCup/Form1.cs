@@ -23,6 +23,13 @@ namespace WindowsFormsWorldCup
         public string lng;
         ChooseLanguage form2;
         ChooseFavoritePlayers favoritePlayersForm;
+        RangLists rangLists;
+        public string q;
+        public string a;
+        private Rectangle dragBoxFromMouseDown;
+        private int rowIndexFromMouseDown;
+        private int rowIndexOfItemUnderMouseToDrop;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,6 +42,10 @@ namespace WindowsFormsWorldCup
             hideTeamChooser();
             form2 = new ChooseLanguage(this);
             favoritePlayersForm = new ChooseFavoritePlayers(this);
+            rangLists = new RangLists(this);
+
+            await Task.Run(()=>form2.BringToFront());
+            form2.Show();
         }
 
         public async void TestFunctions()
@@ -48,8 +59,6 @@ namespace WindowsFormsWorldCup
 
         public async void SetTeams()
         {
-            
-            button1.Hide();
             showLoading();
             List<string> countries = await Task.Run(() => Data.GetCountryNames());
 
@@ -75,56 +84,50 @@ namespace WindowsFormsWorldCup
             btn_teamApply.Hide();
         }
 
-        public void showSettings()
-        {
-            //TODO
-        }
-
-        public void hideSettings()
-        {
-            //TODO
-        }
+        public bool confirmationBox()
+            => MessageBox.Show(q, a, MessageBoxButtons.YesNo) == DialogResult.Yes ? true : false;
 
         public async void showMain()
         {
             showLoading();
 
-            Image i = Image.FromFile(@"..\..\..\static\tux.png");
-
-            foreach (var p in team.firsteleven)
-            {
-                dgv_StartingElevenYellowCardsGoals.Rows.Add(
-                    new object[] {
-                        i,
-                        (team.players[p].captain?"C":""),
-                        (team.players[p].favorite?"★":""),
-                        team.players[p].name,
-                        team.players[p].cards,
-                        team.players[p].goals,
-                    });
-            }
-            foreach (var p in team.substitutions)
-            {
-                dgv_substitues.Rows.Add(
-                    new object[] {
-                        i,
-                        (team.players[p].captain?"C":""),
-                        (team.players[p].favorite?"★":""),
-                        team.players[p].name,
-                        team.players[p].cards,
-                        team.players[p].goals,
-                    });
-            }
-            pnl_players.Show();
-
+            pnl_favoritePlayers.Show();
+            pnl_notFavoritePlayers.Show();
+            btn_rangLists.Show();
             hideLoading();
         }
 
-        public async void hideMain()
+        public async void prepareMain()
         {
-            dgv_StartingElevenYellowCardsGoals.Hide();
+            Image i = Image.FromFile(@"..\..\..\static\tux.png");
 
+            foreach (var p in team.players)
+            {
+                if (p.Value.favorite)
+                {
+                    dgv_favPlayers.Rows.Add(
+                        new object[] {
+                        i,
+                        p.Value.name,
+                        p.Value.shirt_number,
+                        p.Value.position,
+                        p.Value.captain?"C":""
+                        });
+                }
+                else
+                {
+                    dgv_notFavPlayers.Rows.Add(
+                    new object[] {
+                        i,
+                        p.Value.name,
+                        p.Value.shirt_number,
+                        p.Value.position,
+                        p.Value.captain?"C":""
+                    });
+                }
+            }
         }
+
 
         public void showLoading() { img_loading.Show(); }
         public void hideLoading() { img_loading.Hide(); }
@@ -136,20 +139,32 @@ namespace WindowsFormsWorldCup
             lbl_chooseTeam.Text = "Choose favorite team";
             btn_teamApply.Text = "Apply";
             btn_settings.Text = "Settings";
-            lbl_firstEleven.Text = "First eleven";
-            lbl_substitutes.Text = "Substitues";
-            dgv_substitues.Columns[1].HeaderText = "Cpt";
-            dgv_substitues.Columns[2].HeaderText = "Favorite";
-            dgv_substitues.Columns[3].HeaderText = "Name";
-            dgv_substitues.Columns[4].HeaderText = "Cards";
-            dgv_substitues.Columns[5].HeaderText = "Goals";
-            dgv_StartingElevenYellowCardsGoals.Columns[1].HeaderText = "Cpt";
-            dgv_StartingElevenYellowCardsGoals.Columns[2].HeaderText = "Favorite";
-            dgv_StartingElevenYellowCardsGoals.Columns[3].HeaderText = "Name";
-            dgv_StartingElevenYellowCardsGoals.Columns[4].HeaderText = "Cards";
-            dgv_StartingElevenYellowCardsGoals.Columns[5].HeaderText = "Goals";
+            rangLists.lbl_firstEleven.Text = "First eleven";
+            rangLists.lbl_substitutes.Text = "Substitues";
+            rangLists.dgv_substitues.Columns[1].HeaderText = "Cpt";
+            rangLists.dgv_substitues.Columns[2].HeaderText = "Favorite";
+            rangLists.dgv_substitues.Columns[3].HeaderText = "Name";
+            rangLists.dgv_substitues.Columns[4].HeaderText = "Cards";
+            rangLists.dgv_substitues.Columns[5].HeaderText = "Goals";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[1].HeaderText = "Cpt";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[2].HeaderText = "Favorite";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[3].HeaderText = "Name";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[4].HeaderText = "Cards";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[5].HeaderText = "Goals";
             favoritePlayersForm.lbl_chooseFavoritePlayers.Text = "Choose favorite players";
             favoritePlayersForm.btn_chooseFavoritePlayers.Text = "Choose";
+            btn_rangLists.Text = "Rang lists";
+            q = "Are you sure?";
+            a = "Confirm Cancel";
+            dgv_favPlayers.Columns[1].HeaderText = "Name";
+            dgv_favPlayers.Columns[2].HeaderText = "Number";
+            dgv_favPlayers.Columns[3].HeaderText = "Position";
+            dgv_favPlayers.Columns[4].HeaderText = "Cpt";
+            dgv_notFavPlayers.Columns[1].HeaderText = "Name";
+            dgv_notFavPlayers.Columns[2].HeaderText = "Number";
+            dgv_notFavPlayers.Columns[3].HeaderText = "Position";
+            dgv_notFavPlayers.Columns[4].HeaderText = "Cpt";
+            lbl_favorites.Text = "Favorite players";
         }
 
         public void changeLanguageToCRO()
@@ -158,20 +173,32 @@ namespace WindowsFormsWorldCup
             lbl_chooseTeam.Text = "Odaberite omiljeni tim";
             btn_teamApply.Text = "Potvrdi";
             btn_settings.Text = "Postavke";
-            lbl_firstEleven.Text = "Prvih jedanaest";
-            lbl_substitutes.Text = "Zamjene";
-            dgv_substitues.Columns[1].HeaderText = "Kap";
-            dgv_substitues.Columns[2].HeaderText = "Omiljeni";
-            dgv_substitues.Columns[3].HeaderText = "Ime";
-            dgv_substitues.Columns[4].HeaderText = "Kartoni";
-            dgv_substitues.Columns[5].HeaderText = "Golovi";
-            dgv_StartingElevenYellowCardsGoals.Columns[1].HeaderText = "Kap";
-            dgv_StartingElevenYellowCardsGoals.Columns[2].HeaderText = "Omiljeni";
-            dgv_StartingElevenYellowCardsGoals.Columns[3].HeaderText = "Ime";
-            dgv_StartingElevenYellowCardsGoals.Columns[4].HeaderText = "Kartoni";
-            dgv_StartingElevenYellowCardsGoals.Columns[5].HeaderText = "Golovi";
+            rangLists.lbl_firstEleven.Text = "Prvih jedanaest";
+            rangLists.lbl_substitutes.Text = "Zamjene";
+            rangLists.dgv_substitues.Columns[1].HeaderText = "Kap";
+            rangLists.dgv_substitues.Columns[2].HeaderText = "Omiljeni";
+            rangLists.dgv_substitues.Columns[3].HeaderText = "Ime";
+            rangLists.dgv_substitues.Columns[4].HeaderText = "Kartoni";
+            rangLists.dgv_substitues.Columns[5].HeaderText = "Golovi";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[1].HeaderText = "Kap";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[2].HeaderText = "Omiljeni";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[3].HeaderText = "Ime";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[4].HeaderText = "Kartoni";
+            rangLists.dgv_StartingElevenYellowCardsGoals.Columns[5].HeaderText = "Golovi";
             favoritePlayersForm.lbl_chooseFavoritePlayers.Text = "Odaberite svoje omiljene igrace";
             favoritePlayersForm.btn_chooseFavoritePlayers.Text = "Odaberi";
+            btn_rangLists.Text = "Rang liste";
+            q = "Jeste li sigurni?";
+            a = "Potvrdi Otkazi";
+            dgv_favPlayers.Columns[1].HeaderText = "Ime";
+            dgv_favPlayers.Columns[2].HeaderText = "Broj";
+            dgv_favPlayers.Columns[3].HeaderText = "Pozicija";
+            dgv_favPlayers.Columns[4].HeaderText = "Kap";
+            dgv_notFavPlayers.Columns[1].HeaderText = "Ime";
+            dgv_notFavPlayers.Columns[2].HeaderText = "Broj";
+            dgv_notFavPlayers.Columns[3].HeaderText = "Pozicija";
+            dgv_notFavPlayers.Columns[4].HeaderText = "Kap";
+            lbl_favorites.Text = "Omiljeni igraci";
         }
 
 
@@ -188,16 +215,127 @@ namespace WindowsFormsWorldCup
 
             favoritePlayersForm.populateCheckBox(team.players);
             favoritePlayersForm.Show();
+            favoritePlayersForm.BringToFront();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            form2.Show();
-        }
-
+        
         private void btn_settings_Click(object sender, EventArgs e)
         {
             form2.Show();
         }
+
+        private void btn_rangLists_Click(object sender, EventArgs e)
+        {
+            rangLists.prepareRankedPlayersAndMatches();
+            rangLists.Show();
+        }
+
+        private void dgv_favPlayers_MouseDown(object sender, MouseEventArgs e)
+        {
+            rowIndexFromMouseDown = dgv_favPlayers.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1)
+            {
+                Size dragSize = SystemInformation.DragSize;
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2),
+                                                               e.Y - (dragSize.Height / 2)),
+                                                               dragSize);
+            }
+            else
+            {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
+            
+        }
+
+        private void dgv_favPlayers_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
+                    DragDropEffects dropEffect = dgv_favPlayers.DoDragDrop(
+                    dgv_favPlayers.Rows[rowIndexFromMouseDown],
+                    DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void dgv_favPlayers_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dgv_favPlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            Point clientPoint = dgv_notFavPlayers.PointToClient(new Point(e.X, e.Y));
+
+            rowIndexOfItemUnderMouseToDrop =
+                dgv_notFavPlayers.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            if (e.Effect == DragDropEffects.Move)
+            {
+                DataGridViewRow rowToMove = e.Data.GetData(
+                    typeof(DataGridViewRow)) as DataGridViewRow;
+                dgv_notFavPlayers.Rows.RemoveAt(rowIndexFromMouseDown);
+                dgv_favPlayers.Rows.Add(rowToMove);
+                team.players[(string)rowToMove.Cells[1].Value].favorite = true;
+            }
+
+        }
+
+        private void dgv_notFavPlayers_MouseDown(object sender, MouseEventArgs e)
+        {
+            rowIndexFromMouseDown = dgv_notFavPlayers.HitTest(e.X, e.Y).RowIndex;
+            if (rowIndexFromMouseDown != -1)
+            {
+                Size dragSize = SystemInformation.DragSize;
+                dragBoxFromMouseDown = new Rectangle(new Point(e.X - (dragSize.Width / 2),
+                                                               e.Y - (dragSize.Height / 2)),
+                                                               dragSize);
+            }
+            else
+            {
+                dragBoxFromMouseDown = Rectangle.Empty;
+            }
+
+        }
+
+        private void dgv_notFavPlayers_MouseMove(object sender, MouseEventArgs e)
+        {
+            if ((e.Button & MouseButtons.Left) == MouseButtons.Left)
+            {
+                if (dragBoxFromMouseDown != Rectangle.Empty &&
+                    !dragBoxFromMouseDown.Contains(e.X, e.Y))
+                {
+                    DragDropEffects dropEffect = dgv_notFavPlayers.DoDragDrop(
+                    dgv_notFavPlayers.Rows[rowIndexFromMouseDown],
+                    DragDropEffects.Move);
+                }
+            }
+        }
+
+        private void dgv_notFavPlayers_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void dgv_notFavPlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            Point clientPoint = dgv_favPlayers.PointToClient(new Point(e.X, e.Y));
+
+            rowIndexOfItemUnderMouseToDrop =
+                dgv_favPlayers.HitTest(clientPoint.X, clientPoint.Y).RowIndex;
+
+            if (e.Effect == DragDropEffects.Move)
+            {
+                DataGridViewRow rowToMove = e.Data.GetData(
+                    typeof(DataGridViewRow)) as DataGridViewRow;
+                dgv_favPlayers.Rows.RemoveAt(rowIndexFromMouseDown);
+                dgv_notFavPlayers.Rows.Add(rowToMove);
+                team.players[(string)rowToMove.Cells[1].Value].favorite = false;
+            }
+        }
+
+        
     }
 }

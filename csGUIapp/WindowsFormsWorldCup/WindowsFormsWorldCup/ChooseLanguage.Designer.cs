@@ -60,7 +60,9 @@
             this.Controls.Add(this.btn_english);
             this.Controls.Add(this.btn_croatian);
             this.Name = "ChooseLanguage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChooseLanguage";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChooseLanguage_FormClosing);
             this.ResumeLayout(false);
 
         }

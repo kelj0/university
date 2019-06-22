@@ -66,3 +66,4 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestS
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\bin\Debug\RestSharp.xml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.ChooseLanguage.resources
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.ChooseFavoritePlayers.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WindowsFormsWorldCup\obj\Debug\WindowsFormsWorldCup.RangLists.resources

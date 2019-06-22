@@ -33,29 +33,28 @@
             this.btn_teamApply = new System.Windows.Forms.Button();
             this.lbl_chooseTeam = new System.Windows.Forms.Label();
             this.img_loading = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.pnl_players = new System.Windows.Forms.Panel();
-            this.lbl_substitutes = new System.Windows.Forms.Label();
-            this.lbl_firstEleven = new System.Windows.Forms.Label();
-            this.dgv_substitues = new System.Windows.Forms.DataGridView();
-            this.dgv_StartingElevenYellowCardsGoals = new System.Windows.Forms.DataGridView();
             this.btn_settings = new System.Windows.Forms.Button();
-            this._Pic = new System.Windows.Forms.DataGridViewImageColumn();
-            this._Cpt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._Fav = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._playerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._Cards = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._Goals = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pic = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Cpt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fav = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.playerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cards = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Goals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_rangLists = new System.Windows.Forms.Button();
+            this.pnl_favoritePlayers = new System.Windows.Forms.Panel();
+            this.pnl_notFavoritePlayers = new System.Windows.Forms.Panel();
+            this.dgv_favPlayers = new System.Windows.Forms.DataGridView();
+            this.dgv_notFavPlayers = new System.Windows.Forms.DataGridView();
+            this.favPlayersPic = new System.Windows.Forms.DataGridViewImageColumn();
+            this.favPlayersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.favPlayersNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.favPLayersPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.favPlayersCpt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.notFavPlayersPic = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notFavPlayersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notFavPlayersNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.notFavPLayersPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_favorites = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.img_loading)).BeginInit();
-            this.pnl_players.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_substitues)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).BeginInit();
+            this.pnl_favoritePlayers.SuspendLayout();
+            this.pnl_notFavoritePlayers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_favPlayers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_notFavPlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_teamChooser
@@ -90,7 +89,7 @@
             // 
             this.img_loading.Image = ((System.Drawing.Image)(resources.GetObject("img_loading.Image")));
             this.img_loading.InitialImage = ((System.Drawing.Image)(resources.GetObject("img_loading.InitialImage")));
-            this.img_loading.Location = new System.Drawing.Point(251, 140);
+            this.img_loading.Location = new System.Drawing.Point(254, 140);
             this.img_loading.Name = "img_loading";
             this.img_loading.Size = new System.Drawing.Size(464, 256);
             this.img_loading.TabIndex = 5;
@@ -98,194 +97,197 @@
             this.img_loading.Visible = false;
             this.img_loading.WaitOnLoad = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(398, 250);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(139, 67);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Odaberite Jezik/Choose your language";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pnl_players
-            // 
-            this.pnl_players.Controls.Add(this.lbl_substitutes);
-            this.pnl_players.Controls.Add(this.lbl_firstEleven);
-            this.pnl_players.Controls.Add(this.dgv_substitues);
-            this.pnl_players.Controls.Add(this.dgv_StartingElevenYellowCardsGoals);
-            this.pnl_players.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnl_players.Location = new System.Drawing.Point(0, 0);
-            this.pnl_players.Name = "pnl_players";
-            this.pnl_players.Size = new System.Drawing.Size(355, 637);
-            this.pnl_players.TabIndex = 7;
-            this.pnl_players.Visible = false;
-            // 
-            // lbl_substitutes
-            // 
-            this.lbl_substitutes.AutoSize = true;
-            this.lbl_substitutes.Location = new System.Drawing.Point(119, 304);
-            this.lbl_substitutes.Name = "lbl_substitutes";
-            this.lbl_substitutes.Size = new System.Drawing.Size(59, 13);
-            this.lbl_substitutes.TabIndex = 7;
-            this.lbl_substitutes.Text = "Substitutes";
-            // 
-            // lbl_firstEleven
-            // 
-            this.lbl_firstEleven.AutoSize = true;
-            this.lbl_firstEleven.Location = new System.Drawing.Point(116, 8);
-            this.lbl_firstEleven.Name = "lbl_firstEleven";
-            this.lbl_firstEleven.Size = new System.Drawing.Size(62, 13);
-            this.lbl_firstEleven.TabIndex = 6;
-            this.lbl_firstEleven.Text = "First Eleven";
-            // 
-            // dgv_substitues
-            // 
-            this.dgv_substitues.AllowUserToAddRows = false;
-            this.dgv_substitues.AllowUserToDeleteRows = false;
-            this.dgv_substitues.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_substitues.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._Pic,
-            this._Cpt,
-            this._Fav,
-            this._playerName,
-            this._Cards,
-            this._Goals});
-            this.dgv_substitues.Location = new System.Drawing.Point(0, 320);
-            this.dgv_substitues.Name = "dgv_substitues";
-            this.dgv_substitues.ReadOnly = true;
-            this.dgv_substitues.Size = new System.Drawing.Size(352, 284);
-            this.dgv_substitues.TabIndex = 5;
-            // 
-            // dgv_StartingElevenYellowCardsGoals
-            // 
-            this.dgv_StartingElevenYellowCardsGoals.AllowUserToAddRows = false;
-            this.dgv_StartingElevenYellowCardsGoals.AllowUserToDeleteRows = false;
-            this.dgv_StartingElevenYellowCardsGoals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_StartingElevenYellowCardsGoals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Pic,
-            this.Cpt,
-            this.Fav,
-            this.playerName,
-            this.Cards,
-            this.Goals});
-            this.dgv_StartingElevenYellowCardsGoals.Location = new System.Drawing.Point(0, 24);
-            this.dgv_StartingElevenYellowCardsGoals.Name = "dgv_StartingElevenYellowCardsGoals";
-            this.dgv_StartingElevenYellowCardsGoals.ReadOnly = true;
-            this.dgv_StartingElevenYellowCardsGoals.Size = new System.Drawing.Size(352, 263);
-            this.dgv_StartingElevenYellowCardsGoals.TabIndex = 4;
-            // 
             // btn_settings
             // 
-            this.btn_settings.Location = new System.Drawing.Point(820, 24);
+            this.btn_settings.Location = new System.Drawing.Point(820, 25);
             this.btn_settings.Name = "btn_settings";
             this.btn_settings.Size = new System.Drawing.Size(75, 23);
             this.btn_settings.TabIndex = 8;
-            this.btn_settings.Text = "button2";
+            this.btn_settings.Text = "Settings";
             this.btn_settings.UseVisualStyleBackColor = true;
             this.btn_settings.Visible = false;
             this.btn_settings.Click += new System.EventHandler(this.btn_settings_Click);
             // 
-            // _Pic
+            // btn_rangLists
             // 
-            this._Pic.HeaderText = "";
-            this._Pic.Name = "_Pic";
-            this._Pic.ReadOnly = true;
-            this._Pic.Width = 25;
+            this.btn_rangLists.Location = new System.Drawing.Point(820, 66);
+            this.btn_rangLists.Name = "btn_rangLists";
+            this.btn_rangLists.Size = new System.Drawing.Size(75, 23);
+            this.btn_rangLists.TabIndex = 9;
+            this.btn_rangLists.Text = "Rang lists";
+            this.btn_rangLists.UseVisualStyleBackColor = true;
+            this.btn_rangLists.Visible = false;
+            this.btn_rangLists.Click += new System.EventHandler(this.btn_rangLists_Click);
             // 
-            // _Cpt
+            // pnl_favoritePlayers
             // 
-            this._Cpt.HeaderText = "Cpt";
-            this._Cpt.Name = "_Cpt";
-            this._Cpt.ReadOnly = true;
-            this._Cpt.Width = 28;
+            this.pnl_favoritePlayers.AllowDrop = true;
+            this.pnl_favoritePlayers.Controls.Add(this.lbl_favorites);
+            this.pnl_favoritePlayers.Controls.Add(this.dgv_favPlayers);
+            this.pnl_favoritePlayers.Location = new System.Drawing.Point(56, 25);
+            this.pnl_favoritePlayers.Name = "pnl_favoritePlayers";
+            this.pnl_favoritePlayers.Size = new System.Drawing.Size(284, 527);
+            this.pnl_favoritePlayers.TabIndex = 10;
+            this.pnl_favoritePlayers.Visible = false;
             // 
-            // _Fav
+            // pnl_notFavoritePlayers
             // 
-            this._Fav.HeaderText = "Favorite";
-            this._Fav.Name = "_Fav";
-            this._Fav.ReadOnly = true;
-            this._Fav.Width = 50;
+            this.pnl_notFavoritePlayers.AllowDrop = true;
+            this.pnl_notFavoritePlayers.Controls.Add(this.dgv_notFavPlayers);
+            this.pnl_notFavoritePlayers.Location = new System.Drawing.Point(462, 25);
+            this.pnl_notFavoritePlayers.Name = "pnl_notFavoritePlayers";
+            this.pnl_notFavoritePlayers.Size = new System.Drawing.Size(289, 527);
+            this.pnl_notFavoritePlayers.TabIndex = 11;
+            this.pnl_notFavoritePlayers.Visible = false;
             // 
-            // _playerName
+            // dgv_favPlayers
             // 
-            this._playerName.HeaderText = "Name";
-            this._playerName.Name = "_playerName";
-            this._playerName.ReadOnly = true;
-            this._playerName.Width = 120;
+            this.dgv_favPlayers.AllowDrop = true;
+            this.dgv_favPlayers.AllowUserToAddRows = false;
+            this.dgv_favPlayers.AllowUserToDeleteRows = false;
+            this.dgv_favPlayers.AllowUserToResizeRows = false;
+            this.dgv_favPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_favPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.favPlayersPic,
+            this.favPlayersName,
+            this.favPlayersNumber,
+            this.favPLayersPosition,
+            this.favPlayersCpt});
+            this.dgv_favPlayers.Location = new System.Drawing.Point(0, 55);
+            this.dgv_favPlayers.Name = "dgv_favPlayers";
+            this.dgv_favPlayers.ReadOnly = true;
+            this.dgv_favPlayers.RowHeadersVisible = false;
+            this.dgv_favPlayers.Size = new System.Drawing.Size(282, 472);
+            this.dgv_favPlayers.TabIndex = 0;
+            this.dgv_favPlayers.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgv_favPlayers_DragDrop);
+            this.dgv_favPlayers.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgv_favPlayers_DragEnter);
+            this.dgv_favPlayers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgv_favPlayers_MouseDown);
+            this.dgv_favPlayers.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgv_favPlayers_MouseMove);
             // 
-            // _Cards
+            // dgv_notFavPlayers
             // 
-            this._Cards.HeaderText = "Cards";
-            this._Cards.Name = "_Cards";
-            this._Cards.ReadOnly = true;
-            this._Cards.Width = 45;
+            this.dgv_notFavPlayers.AllowDrop = true;
+            this.dgv_notFavPlayers.AllowUserToAddRows = false;
+            this.dgv_notFavPlayers.AllowUserToDeleteRows = false;
+            this.dgv_notFavPlayers.AllowUserToResizeRows = false;
+            this.dgv_notFavPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_notFavPlayers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewImageColumn1,
+            this.notFavPlayersPic,
+            this.notFavPlayersName,
+            this.notFavPlayersNumber,
+            this.notFavPLayersPosition});
+            this.dgv_notFavPlayers.Location = new System.Drawing.Point(0, 55);
+            this.dgv_notFavPlayers.Name = "dgv_notFavPlayers";
+            this.dgv_notFavPlayers.ReadOnly = true;
+            this.dgv_notFavPlayers.RowHeadersVisible = false;
+            this.dgv_notFavPlayers.Size = new System.Drawing.Size(288, 472);
+            this.dgv_notFavPlayers.TabIndex = 1;
+            this.dgv_notFavPlayers.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgv_notFavPlayers_DragDrop);
+            this.dgv_notFavPlayers.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgv_notFavPlayers_DragEnter);
+            this.dgv_notFavPlayers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgv_notFavPlayers_MouseDown);
+            this.dgv_notFavPlayers.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dgv_notFavPlayers_MouseMove);
             // 
-            // _Goals
+            // favPlayersPic
             // 
-            this._Goals.HeaderText = "Goals";
-            this._Goals.Name = "_Goals";
-            this._Goals.ReadOnly = true;
-            this._Goals.Width = 40;
+            this.favPlayersPic.HeaderText = "";
+            this.favPlayersPic.Name = "favPlayersPic";
+            this.favPlayersPic.ReadOnly = true;
+            this.favPlayersPic.Width = 25;
             // 
-            // Pic
+            // favPlayersName
             // 
-            this.Pic.HeaderText = "";
-            this.Pic.Name = "Pic";
-            this.Pic.ReadOnly = true;
-            this.Pic.Width = 25;
+            this.favPlayersName.HeaderText = "Name";
+            this.favPlayersName.Name = "favPlayersName";
+            this.favPlayersName.ReadOnly = true;
+            this.favPlayersName.Width = 120;
             // 
-            // Cpt
+            // favPlayersNumber
             // 
-            this.Cpt.HeaderText = "Cpt";
-            this.Cpt.Name = "Cpt";
-            this.Cpt.ReadOnly = true;
-            this.Cpt.Width = 28;
+            this.favPlayersNumber.HeaderText = "Number";
+            this.favPlayersNumber.Name = "favPlayersNumber";
+            this.favPlayersNumber.ReadOnly = true;
+            this.favPlayersNumber.Width = 50;
             // 
-            // Fav
+            // favPLayersPosition
             // 
-            this.Fav.HeaderText = "Favorite";
-            this.Fav.Name = "Fav";
-            this.Fav.ReadOnly = true;
-            this.Fav.Width = 50;
+            this.favPLayersPosition.HeaderText = "Position";
+            this.favPLayersPosition.Name = "favPLayersPosition";
+            this.favPLayersPosition.ReadOnly = true;
+            this.favPLayersPosition.Width = 55;
             // 
-            // playerName
+            // favPlayersCpt
             // 
-            this.playerName.HeaderText = "Name";
-            this.playerName.Name = "playerName";
-            this.playerName.ReadOnly = true;
-            this.playerName.Width = 120;
+            this.favPlayersCpt.HeaderText = "Cpt";
+            this.favPlayersCpt.Name = "favPlayersCpt";
+            this.favPlayersCpt.ReadOnly = true;
+            this.favPlayersCpt.Width = 28;
             // 
-            // Cards
+            // dataGridViewImageColumn1
             // 
-            this.Cards.HeaderText = "Cards";
-            this.Cards.Name = "Cards";
-            this.Cards.ReadOnly = true;
-            this.Cards.Width = 45;
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.ReadOnly = true;
+            this.dataGridViewImageColumn1.Width = 25;
             // 
-            // Goals
+            // notFavPlayersPic
             // 
-            this.Goals.HeaderText = "Goals";
-            this.Goals.Name = "Goals";
-            this.Goals.ReadOnly = true;
-            this.Goals.Width = 40;
+            this.notFavPlayersPic.HeaderText = "Name";
+            this.notFavPlayersPic.Name = "notFavPlayersPic";
+            this.notFavPlayersPic.ReadOnly = true;
+            this.notFavPlayersPic.Width = 120;
+            // 
+            // notFavPlayersName
+            // 
+            this.notFavPlayersName.HeaderText = "Number";
+            this.notFavPlayersName.Name = "notFavPlayersName";
+            this.notFavPlayersName.ReadOnly = true;
+            this.notFavPlayersName.Width = 50;
+            // 
+            // notFavPlayersNumber
+            // 
+            this.notFavPlayersNumber.HeaderText = "Position";
+            this.notFavPlayersNumber.Name = "notFavPlayersNumber";
+            this.notFavPlayersNumber.ReadOnly = true;
+            this.notFavPlayersNumber.Width = 55;
+            // 
+            // notFavPLayersPosition
+            // 
+            this.notFavPLayersPosition.HeaderText = "Cpt";
+            this.notFavPLayersPosition.Name = "notFavPLayersPosition";
+            this.notFavPLayersPosition.ReadOnly = true;
+            this.notFavPLayersPosition.Width = 28;
+            // 
+            // lbl_favorites
+            // 
+            this.lbl_favorites.AutoSize = true;
+            this.lbl_favorites.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_favorites.Location = new System.Drawing.Point(89, 14);
+            this.lbl_favorites.Name = "lbl_favorites";
+            this.lbl_favorites.Size = new System.Drawing.Size(60, 24);
+            this.lbl_favorites.TabIndex = 1;
+            this.lbl_favorites.Text = "label1";
             // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.ClientSize = new System.Drawing.Size(907, 637);
+            this.Controls.Add(this.pnl_notFavoritePlayers);
+            this.Controls.Add(this.pnl_favoritePlayers);
+            this.Controls.Add(this.btn_rangLists);
             this.Controls.Add(this.btn_settings);
-            this.Controls.Add(this.pnl_players);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.img_loading);
             this.Controls.Add(this.btn_teamApply);
             this.Controls.Add(this.cb_teamChooser);
             this.Controls.Add(this.lbl_chooseTeam);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.img_loading)).EndInit();
-            this.pnl_players.ResumeLayout(false);
-            this.pnl_players.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_substitues)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).EndInit();
+            this.pnl_favoritePlayers.ResumeLayout(false);
+            this.pnl_favoritePlayers.PerformLayout();
+            this.pnl_notFavoritePlayers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_favPlayers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_notFavPlayers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -298,25 +300,23 @@
         public System.Windows.Forms.Button btn_teamApply;
         public System.Windows.Forms.Label lbl_chooseTeam;
         public System.Windows.Forms.PictureBox img_loading;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel pnl_players;
-        public System.Windows.Forms.DataGridView dgv_StartingElevenYellowCardsGoals;
-        private System.Windows.Forms.Label lbl_substitutes;
-        private System.Windows.Forms.Label lbl_firstEleven;
-        public System.Windows.Forms.DataGridView dgv_substitues;
         public System.Windows.Forms.Button btn_settings;
-        private System.Windows.Forms.DataGridViewImageColumn _Pic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _Cpt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _Fav;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _playerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _Cards;
-        private System.Windows.Forms.DataGridViewTextBoxColumn _Goals;
-        private System.Windows.Forms.DataGridViewImageColumn Pic;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cpt;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fav;
-        private System.Windows.Forms.DataGridViewTextBoxColumn playerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cards;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Goals;
+        private System.Windows.Forms.Button btn_rangLists;
+        private System.Windows.Forms.Panel pnl_favoritePlayers;
+        private System.Windows.Forms.Panel pnl_notFavoritePlayers;
+        private System.Windows.Forms.DataGridView dgv_favPlayers;
+        private System.Windows.Forms.DataGridView dgv_notFavPlayers;
+        private System.Windows.Forms.DataGridViewImageColumn favPlayersPic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn favPlayersName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn favPlayersNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn favPLayersPosition;
+        private System.Windows.Forms.DataGridViewTextBoxColumn favPlayersCpt;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notFavPlayersPic;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notFavPlayersName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notFavPlayersNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notFavPLayersPosition;
+        private System.Windows.Forms.Label lbl_favorites;
     }
 }
 

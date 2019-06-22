@@ -50,6 +50,7 @@
             this.clb_allPlayersToChoose.Name = "clb_allPlayersToChoose";
             this.clb_allPlayersToChoose.Size = new System.Drawing.Size(236, 409);
             this.clb_allPlayersToChoose.TabIndex = 1;
+            this.clb_allPlayersToChoose.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clb_allPlayersToChoose_ItemCheck);
             // 
             // btn_chooseFavoritePlayers
             // 
