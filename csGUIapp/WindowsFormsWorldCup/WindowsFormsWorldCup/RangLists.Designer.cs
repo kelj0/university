@@ -44,8 +44,14 @@
             this.playerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cards = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Goals = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_matches = new System.Windows.Forms.DataGridView();
+            this.Location = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Visitors = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Home_team = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Away_team = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_substitues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_matches)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_substitutes
@@ -188,11 +194,57 @@
             this.Goals.ReadOnly = true;
             this.Goals.Width = 40;
             // 
+            // dgv_matches
+            // 
+            this.dgv_matches.AllowUserToAddRows = false;
+            this.dgv_matches.AllowUserToDeleteRows = false;
+            this.dgv_matches.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_matches.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Location,
+            this.Visitors,
+            this.Home_team,
+            this.Away_team});
+            this.dgv_matches.Location = new System.Drawing.Point(380, 69);
+            this.dgv_matches.Name = "dgv_matches";
+            this.dgv_matches.ReadOnly = true;
+            this.dgv_matches.RowHeadersVisible = false;
+            this.dgv_matches.Size = new System.Drawing.Size(503, 357);
+            this.dgv_matches.TabIndex = 12;
+            // 
+            // Location
+            // 
+            this.Location.HeaderText = "Location";
+            this.Location.Name = "Location";
+            this.Location.ReadOnly = true;
+            this.Location.Width = 140;
+            // 
+            // Visitors
+            // 
+            this.Visitors.HeaderText = "Visitors";
+            this.Visitors.Name = "Visitors";
+            this.Visitors.ReadOnly = true;
+            this.Visitors.Width = 120;
+            // 
+            // Home_team
+            // 
+            this.Home_team.HeaderText = "Home team";
+            this.Home_team.Name = "Home_team";
+            this.Home_team.ReadOnly = true;
+            this.Home_team.Width = 120;
+            // 
+            // Away_team
+            // 
+            this.Away_team.HeaderText = "Away team";
+            this.Away_team.Name = "Away_team";
+            this.Away_team.ReadOnly = true;
+            this.Away_team.Width = 120;
+            // 
             // RangLists
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 591);
+            this.Controls.Add(this.dgv_matches);
             this.Controls.Add(this.lbl_substitutes);
             this.Controls.Add(this.lbl_firstEleven);
             this.Controls.Add(this.dgv_substitues);
@@ -203,6 +255,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RangLists_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_substitues)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_StartingElevenYellowCardsGoals)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_matches)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,5 +279,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn playerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cards;
         private System.Windows.Forms.DataGridViewTextBoxColumn Goals;
+        public System.Windows.Forms.DataGridView dgv_matches;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Location;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Visitors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Home_team;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Away_team;
     }
 }

@@ -18,7 +18,6 @@ namespace WindowsFormsWorldCup
     public partial class Form1 : Form
     {
         public string fifa_id;
-        public dynamic matches;
         public Team team;
         public string lng;
         ChooseLanguage form2;
@@ -40,12 +39,44 @@ namespace WindowsFormsWorldCup
         public async void run()
         {
             hideTeamChooser();
+
             form2 = new ChooseLanguage(this);
             favoritePlayersForm = new ChooseFavoritePlayers(this);
             rangLists = new RangLists(this);
 
-            await Task.Run(()=>form2.BringToFront());
-            form2.Show();
+            try
+            {
+                string contents = File.ReadAllText(@"..\..\..\config.txt");
+                Console.WriteLine($"Found existing config\n{contents}");
+                List<string> config = contents.Split('|').ToList();
+                //0 lng
+                //1 name
+                //2 fav players(split with ,)
+                List<string> favPlayers = config[2].Split(',').ToList();
+                if (config[0]=="CRO"){changeLanguageToCRO();}
+                else{changeLanguageToENG();}
+                form2.first = false;
+                fifa_id = await Data.GetCountryCode(config[1]);
+                team = new Team(config[1], fifa_id);
+                await Task.Run(()=>team.SetUp());
+                foreach (var p in favPlayers)
+                {
+                    if (p == "") { continue; }  
+                    team.players[p].favorite = true;
+                }
+                await Task.Run(()=>prepareMain());
+                showMain();
+            }
+            catch(Exception e)
+            {
+                if(e is FileNotFoundException)
+                {
+                    form2.first = true;
+                    await Task.Run(()=>form2.BringToFront());
+                    form2.Show();
+                }
+            }
+            
         }
 
         public async void TestFunctions()
@@ -61,10 +92,8 @@ namespace WindowsFormsWorldCup
         {
             showLoading();
             List<string> countries = await Task.Run(() => Data.GetCountryNames());
-
             showTeamChooser();
             hideLoading();
-
             cb_teamChooser.DataSource = countries;
             cb_teamChooser.SelectedItem = countries[0];
         }
@@ -90,10 +119,10 @@ namespace WindowsFormsWorldCup
         public async void showMain()
         {
             showLoading();
-
             pnl_favoritePlayers.Show();
             pnl_notFavoritePlayers.Show();
             btn_rangLists.Show();
+            btn_settings.Show();
             hideLoading();
         }
 
@@ -165,6 +194,10 @@ namespace WindowsFormsWorldCup
             dgv_notFavPlayers.Columns[3].HeaderText = "Position";
             dgv_notFavPlayers.Columns[4].HeaderText = "Cpt";
             lbl_favorites.Text = "Favorite players";
+            rangLists.dgv_matches.Columns[0].HeaderText = "Location";
+            rangLists.dgv_matches.Columns[1].HeaderText = "Visitors";
+            rangLists.dgv_matches.Columns[2].HeaderText = "Home team";
+            rangLists.dgv_matches.Columns[3].HeaderText = "Away team";
         }
 
         public void changeLanguageToCRO()
@@ -199,6 +232,10 @@ namespace WindowsFormsWorldCup
             dgv_notFavPlayers.Columns[3].HeaderText = "Pozicija";
             dgv_notFavPlayers.Columns[4].HeaderText = "Kap";
             lbl_favorites.Text = "Omiljeni igraci";
+            rangLists.dgv_matches.Columns[0].HeaderText = "Lokacija";
+            rangLists.dgv_matches.Columns[1].HeaderText = "Posjetitelji";
+            rangLists.dgv_matches.Columns[2].HeaderText = "Domacin";
+            rangLists.dgv_matches.Columns[3].HeaderText = "Gost";
         }
 
 
@@ -206,7 +243,8 @@ namespace WindowsFormsWorldCup
         {
             string fifa_code = await Task.Run(() => Data.GetCountryCode(cb_teamChooser.Text));
             team = new Team(cb_teamChooser.Text, fifa_code);
-
+            lbl_teamName.Text = cb_teamChooser.Text;
+            lbl_teamName.Show();
             await Task.Run(()=>hideTeamChooser());
             await Task.Run(()=>showLoading());
 
@@ -216,6 +254,7 @@ namespace WindowsFormsWorldCup
             favoritePlayersForm.populateCheckBox(team.players);
             favoritePlayersForm.Show();
             favoritePlayersForm.BringToFront();
+        
         }
         
         private void btn_settings_Click(object sender, EventArgs e)
@@ -229,6 +268,8 @@ namespace WindowsFormsWorldCup
             rangLists.Show();
         }
 
+    
+        /* Drag n drop favorite players events */
         private void dgv_favPlayers_MouseDown(object sender, MouseEventArgs e)
         {
             rowIndexFromMouseDown = dgv_favPlayers.HitTest(e.X, e.Y).RowIndex;
@@ -336,6 +377,25 @@ namespace WindowsFormsWorldCup
             }
         }
 
-        
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string favPlayers = "";
+            foreach (var p in team.players)
+            {
+                if (p.Value.favorite)
+                {
+                    favPlayers += p.Value.name + ",";
+                }
+            }
+            favPlayers = favPlayers.Remove(favPlayers.Length - 1);
+
+            FileStream fs = new FileStream(@"..\..\..\config.txt", FileMode.Create, FileAccess.Write, FileShare.Write);
+            fs.Close();
+            using (StreamWriter sw = new StreamWriter(@"..\..\..\config.txt", true, Encoding.ASCII))
+            {
+                sw.Write($"{lng}|{team.teamName}|{favPlayers}");
+            }
+            Console.WriteLine($"Wrote new config to config.txt\n{lng}|{team.teamName}|{favPlayers}");
+        }
     }
 }

@@ -72,6 +72,7 @@
             this.Controls.Add(this.clb_allPlayersToChoose);
             this.Controls.Add(this.lbl_chooseFavoritePlayers);
             this.Name = "ChooseFavoritePlayers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChooseFavoritePlayers";
             this.ResumeLayout(false);
             this.PerformLayout();

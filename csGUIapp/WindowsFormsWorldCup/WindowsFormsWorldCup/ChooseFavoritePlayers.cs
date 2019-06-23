@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,11 +32,10 @@ namespace WindowsFormsWorldCup
 
         private async void bnt_chooseFavoritePlayers_Click(object sender, EventArgs e)
         {
-            foreach(var p in clb_allPlayersToChoose.CheckedItems.Cast<object>().Select(x=>clb_allPlayersToChoose.GetItemText(x)))
+            foreach (var p in clb_allPlayersToChoose.CheckedItems.Cast<object>().Select(x => clb_allPlayersToChoose.GetItemText(x)))
             {
                 f.team.players[p].favorite = true;
             }
-
             Hide();
             f.prepareMain();
             f.showMain();

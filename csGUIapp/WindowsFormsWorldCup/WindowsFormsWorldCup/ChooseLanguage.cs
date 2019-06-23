@@ -33,8 +33,7 @@ namespace WindowsFormsWorldCup
             if (first)
             {
                 f.img_loading.Visible = true;
-                await Task.Run(() => f.SetTeams());
-                f.showTeamChooser();
+                f.SetTeams();
                 first = false;
             }
         }
