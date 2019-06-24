@@ -119,7 +119,33 @@ namespace DataLayer
             throw new ArgumentException("Problems fetching first eleven, maybe your fifa_id is wrong?");
         }
 
+        /// <summary>
+        /// Reads config file, returns List<string> [0] language | [1] name | [2] fav players(split with ,)
+        /// </summary>
+        public static List<string> ReadConfigFile() => File.ReadAllText(@"..\..\..\config.txt").Split('|').ToList();
 
+        /// <summary>
+        /// Saves app data to config file
+        /// </summary>
+        public static void SaveDataToFile(Team t,string lng)
+        {
+            string favPlayers = "";
+            foreach (var p in t.players)
+            {
+                if (p.Value.favorite)
+                {
+                    favPlayers += p.Value.name + ",";
+                }
+            }
+            favPlayers = favPlayers.Remove(favPlayers.Length - 1);
 
+            FileStream fs = new FileStream(@"..\..\..\config.txt", FileMode.Create, FileAccess.Write, FileShare.Write);
+            fs.Close();
+            using (StreamWriter sw = new StreamWriter(@"..\..\..\config.txt", true, Encoding.ASCII))
+            {
+                sw.Write($"{lng}|{t.teamName}|{favPlayers}");
+            }
+            Console.WriteLine($"Wrote new config to config.txt\n{lng}|{t.teamName}|{favPlayers}");
+        }
     }
 }

@@ -5,8 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFWorldCup"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="725" Width="1200">
+    <Grid RenderTransformOrigin="0.501,0.491" Margin="0,0,2,2">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+        <Rectangle Fill="#FFB9DEFF" HorizontalAlignment="Left" Height="383" Margin="373,258,0,0" Stroke="Black" VerticalAlignment="Top" Width="772"/>
+        <Ellipse Fill="AliceBlue" HorizontalAlignment="Left" Height="100" Margin="448,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="70"/>
+        <Ellipse Fill="AliceBlue" HorizontalAlignment="Left" Height="100" Margin="1001,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="70"/>
+        <Rectangle Fill="#FFCCE7FF" HorizontalAlignment="Left" Height="245" Margin="373,328,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
+        <Rectangle Fill="#FFCCE7FF" HorizontalAlignment="Left" Height="245" Margin="1035,328,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
+        <Rectangle Fill="AliceBlue" HorizontalAlignment="Left" Height="135" Margin="1105,383,0,0" Stroke="Black" VerticalAlignment="Top" Width="40"/>
+        <Rectangle Fill="AliceBlue" HorizontalAlignment="Left" Height="135" Margin="373,383,0,0" Stroke="Black" VerticalAlignment="Top" Width="40"/>
+        <Ellipse Fill="White" HorizontalAlignment="Left" Height="100" Margin="698,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <Rectangle Fill="AliceBlue" HorizontalAlignment="Left" Height="383" Margin="747,258,0,55" Stroke="Black" VerticalAlignment="Center" Width="1"/>
+        <Label x:Name="lbl_goalieHome" Content="Label" HorizontalAlignment="Left" Margin="377,420,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderHome0" Content="Label" HorizontalAlignment="Left" Margin="547,275,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderHome1" Content="Label" HorizontalAlignment="Left" Margin="514,359,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderHome2" Content="Label" HorizontalAlignment="Left" Margin="514,479,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderHome3" Content="Label" HorizontalAlignment="Left" Margin="547,613,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_forwardHome" Content="Label" HorizontalAlignment="Left" Margin="671,427,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_forwardAway" Content="Label" HorizontalAlignment="Left" Margin="762,420,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldHome0" Content="Label" HorizontalAlignment="Left" Margin="662,298,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldHome1" Content="Label" HorizontalAlignment="Left" Margin="623,383,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldHome2" Content="Label" HorizontalAlignment="Left" Margin="623,495,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldHome3" Content="Label" HorizontalAlignment="Left" Margin="662,587,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderAway0" Content="Label" HorizontalAlignment="Left" Margin="931,275,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderAway1" Content="Label" HorizontalAlignment="Left" Margin="954,362,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderAway2" Content="Label" HorizontalAlignment="Left" Margin="960,520,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_defenderAway3" Content="Label" HorizontalAlignment="Left" Margin="931,610,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldAway0" Content="Label" HorizontalAlignment="Left" Margin="797,298,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldAway1" Content="Label" HorizontalAlignment="Left" Margin="837,383,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldAway2" Content="Label" HorizontalAlignment="Left" Margin="837,495,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_midfieldAway3" Content="Label" HorizontalAlignment="Left" Margin="797,587,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_goalieAway" Content="Label" HorizontalAlignment="Left" Margin="1105,420,0,0" VerticalAlignment="Top"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="377,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="662,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="657,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,411,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,479,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,411,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,485,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="1128,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Label x:Name="lbl_favTeam" Content="Label" HorizontalAlignment="Left" Margin="547,200,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lbl_notFavTeam" Content="Label" HorizontalAlignment="Left" Margin="888,200,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label x:Name="lbl_favTeamScore" Content="Label" HorizontalAlignment="Left" Margin="697,207,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lbl_notFavTeamScore" Content="Label" HorizontalAlignment="Left" Margin="762,207,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="4" Margin="747,218,0,0" Stroke="Black" VerticalAlignment="Top" Width="4"/>
+        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="4" Margin="747,225,0,0" Stroke="Black" VerticalAlignment="Top" Width="4"/>
+
     </Grid>
 </Window>

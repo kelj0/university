@@ -103,7 +103,6 @@ namespace DataLayer
                     score = $"{match.home_team.goals}:{match.away_team.goals}",
                     winner = (string)match.winner
                 });
-
                 if (match.home_team.code == teamCode)
                 {
                     foreach (var ev in match.home_team_events)

@@ -46,9 +46,7 @@ namespace WindowsFormsWorldCup
 
             try
             {
-                string contents = File.ReadAllText(@"..\..\..\config.txt");
-                Console.WriteLine($"Found existing config\n{contents}");
-                List<string> config = contents.Split('|').ToList();
+                List<string> config = Data.ReadConfigFile(); 
                 //0 lng
                 //1 name
                 //2 fav players(split with ,)
@@ -248,7 +246,6 @@ namespace WindowsFormsWorldCup
             await Task.Run(()=>hideTeamChooser());
             await Task.Run(()=>showLoading());
 
-
             await Task.Run(()=>team.SetUp());
 
             favoritePlayersForm.populateCheckBox(team.players);
@@ -268,7 +265,11 @@ namespace WindowsFormsWorldCup
             rangLists.Show();
         }
 
-    
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Data.SaveDataToFile(team, lng);
+        }
+
         /* Drag n drop favorite players events */
         private void dgv_favPlayers_MouseDown(object sender, MouseEventArgs e)
         {
@@ -375,27 +376,6 @@ namespace WindowsFormsWorldCup
                 dgv_notFavPlayers.Rows.Add(rowToMove);
                 team.players[(string)rowToMove.Cells[1].Value].favorite = false;
             }
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            string favPlayers = "";
-            foreach (var p in team.players)
-            {
-                if (p.Value.favorite)
-                {
-                    favPlayers += p.Value.name + ",";
-                }
-            }
-            favPlayers = favPlayers.Remove(favPlayers.Length - 1);
-
-            FileStream fs = new FileStream(@"..\..\..\config.txt", FileMode.Create, FileAccess.Write, FileShare.Write);
-            fs.Close();
-            using (StreamWriter sw = new StreamWriter(@"..\..\..\config.txt", true, Encoding.ASCII))
-            {
-                sw.Write($"{lng}|{team.teamName}|{favPlayers}");
-            }
-            Console.WriteLine($"Wrote new config to config.txt\n{lng}|{team.teamName}|{favPlayers}");
         }
     }
 }

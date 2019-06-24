@@ -1,7 +1,7 @@
 ﻿WPFWorldCup
 
 
-winexe
+exe
 C#
 .cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\
@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\App.xaml
-11151548125
+62144248469
 
-9915362067
-131569487696
-MainWindow.xaml;
+102063336541
+14617080235
+ChooseLanguage.xaml;EnemyTeamChooser.xaml;Initialsettings.xaml;Loading.xaml;MainWindow.xaml;TeamChooser.xaml;
 
-True
+False
 
