@@ -33,14 +33,14 @@ namespace WPFWorldCup
         public async void FillComboBox()
         {
             f.ShowLoading();
-            List<string> teams = await Task.Run(() => Data.GetCountryNames());
+            f.teams = await Task.Run(() => Data.GetCountryNames());
 
             f.HideLoading();
-            foreach (var i in teams)
+            foreach (var i in f.teams)
             {
                 cb_teams.Items.Add(i);
             }
-                cb_teams.SelectedItem = teams[0];
+                cb_teams.SelectedItem = f.teams[0];
         }
 
         private async void Btn_applyFavoriteTeam_Click(object sender, RoutedEventArgs e)
@@ -49,9 +49,11 @@ namespace WPFWorldCup
             f.fifa_id = await Data.GetCountryCode(cb_teams.Text);
             f.HideLoading();
             f.favTeamName = cb_teams.Text;
-            await Task.Run(()=>f.CreateTeam(f.favTeamName));
+            await f.CreateTeam(f.favTeamName);
             Hide();
-            f.fillEnemyTeamChooser(f.team);
+            await f.teaminfo.SetUp();
+            f.teaminfo.Show();
+            await f.fillEnemyTeamChooser(f.team);
         }
     }
 }

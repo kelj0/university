@@ -26,17 +26,19 @@ namespace WPFWorldCup
             this.f = f;
         }
 
-        private void Btn_languageENG_Click(object sender, RoutedEventArgs e)
+        private async void Btn_languageENG_Click(object sender, RoutedEventArgs e)
         {
             f.lng ="ENG";
             Hide();
+            await f.changeLanguageToENG();
             f.initialSettingsForm.Show();
         }
 
-        private void Btn_languageCRO_Click(object sender, RoutedEventArgs e)
+        private async void Btn_languageCRO_Click(object sender, RoutedEventArgs e)
         {
             f.lng = "CRO";
             Hide();
+            await f.changeLanguageToCRO();
             f.initialSettingsForm.Show();
         }
 

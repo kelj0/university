@@ -14,7 +14,13 @@ namespace DataLayer
         public List<string> substitutions = new List<string>();
         public Dictionary<string, Player> players = new Dictionary<string, Player>();
         public List<Match> matches = new List<Match>();
- 
+        public string goals_for { get; set; }
+        public string goals_against { get; set; }
+        public string goals_difference { get; set; }
+        public string wins { get; set; }
+        public string draws { get; set; }
+        public string losses { get; set; }
+
 
         public Team(string tName,string tCode)
         {
@@ -33,7 +39,7 @@ namespace DataLayer
         public int GetPlayerCards(string p) => players[p].cards;
 
 
-        public async Task<bool> SetUp()
+        public async Task SetUp()
         {
             dynamic response = await Data.GetCountryMatches(teamCode);
 
@@ -92,48 +98,62 @@ namespace DataLayer
                     });
                 }
             }
-            
-            foreach (var match in response)
+            try
             {
-                matches.Add(new Match() {
-                    attendance = (string)match.attendance,
-                    away_team = (string)match.away_team.country,
-                    home_team = (string)match.home_team.country,
-                    location = (string)match.location,
-                    score = $"{match.home_team.goals}:{match.away_team.goals}",
-                    winner = (string)match.winner
-                });
-                if (match.home_team.code == teamCode)
+                foreach (var match in response)
                 {
-                    foreach (var ev in match.home_team_events)
+                    matches.Add(new Match()
                     {
-                        if (ev.type_of_event == "goal")
+                        attendance = (string)match.attendance,
+                        away_team = (string)match.away_team.country,
+                        home_team = (string)match.home_team.country,
+                        location = (string)match.location,
+                        score = $"{match.home_team.goals}:{match.away_team.goals}",
+                        winner = (string)match.winner,
+                        id = (string)match.fifa_id
+                    });
+                    if (match.home_team.code == teamCode)
+                    {
+                        foreach (var ev in match.home_team_events)
                         {
-                            players[(string)ev.player].goals++;
-                        }
-                        if (ev.type_of_event == "yellow-card")
-                        {
+                            if (ev.type_of_event == "goal")
+                            {
+                                players[(string)ev.player].goals++;
+                            }
+                            if (ev.type_of_event == "yellow-card")
+                            {
 
-                            players[(string)ev.player].cards++;
+                                players[(string)ev.player].cards++;
+                            }
                         }
                     }
-                }
-                else
-                {
-                    foreach (var ev in match.away_team_events)
+                    else
                     {
-                        if (ev.type_of_event == "goal")
+                        foreach (var ev in match.away_team_events)
                         {
-                            players[(string)ev.player].goals++;
-                        }
-                        if (ev.type_of_event == "yellow-card")
-                        {
-                            players[(string)ev.player].cards++;
+                            if (ev.type_of_event == "goal")
+                            {
+                                players[(string)ev.player].goals++;
+                            }
+                            if (ev.type_of_event == "yellow-card")
+                            {
+                                players[(string)ev.player].cards++;
+                            }
                         }
                     }
                 }
+            }catch(KeyNotFoundException)
+            {
+                Console.WriteLine("Typo in api..");
             }
-            return true;
+            dynamic results = await Data.GetCountryResults(teamName);
+
+            goals_against =    results.goals_against;
+            goals_difference = results.goal_differential;
+            goals_for =        results.goals_for;
+            wins =             results.wins;
+            losses =           results.losses;
+            draws =            results.draws;
         }
     }
 }

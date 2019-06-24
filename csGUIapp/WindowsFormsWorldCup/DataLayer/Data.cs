@@ -71,15 +71,14 @@ namespace DataLayer
         ///<summary>
         /// Returns number of wins, or -100 if no id was found
         ///</summary
-        public static async Task<int> GetCountryWins(int id)
+        public static async Task<dynamic> GetCountryResults(string countryName)
         {
             dynamic response = JsonConvert.DeserializeObject(await Task.Run(() => GetUrl(ResultsUrl)));
             foreach (var s in response)
             {
-                if (s.id == id)
-                    return s.wins;
+                if (s.country == countryName) return s;
             }
-            return -100;
+            throw new ArgumentException($"Cant find {countryName} results");
         }
 
         /// <summary>
@@ -117,6 +116,19 @@ namespace DataLayer
                 }
             }
             throw new ArgumentException("Problems fetching first eleven, maybe your fifa_id is wrong?");
+        }
+
+        /// <summary>
+        /// Gets match id from 2 team, if they didnt play returns 0
+        /// </summary>
+        public static Match GetMatch(Team t1, string t2)
+        {
+            foreach (Match match in t1.matches)
+            {
+                if (match.home_team == t2) return match;
+                if (match.away_team == t2) return match;
+            }
+            throw new ArgumentException($"Match {t1.teamName} vs {t2} doesnt exist!");
         }
 
         /// <summary>

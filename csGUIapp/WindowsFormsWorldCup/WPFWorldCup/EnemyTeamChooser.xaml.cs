@@ -36,6 +36,7 @@ namespace WPFWorldCup
             f.enemyTeamName = cb_enemyTeamChooser.Text;
 
             await f.CreateEnemyTeam(f.enemyTeamName);
+            await f.SetAwayTeamLabels(f.awayTeam);
             Hide();
         }
     }

@@ -14,5 +14,6 @@ namespace DataLayer
         public string away_team { get; set; }
         public string winner { get; set; }
         public string score { get; set; }
+        public string id { get; set; }
     }
 }

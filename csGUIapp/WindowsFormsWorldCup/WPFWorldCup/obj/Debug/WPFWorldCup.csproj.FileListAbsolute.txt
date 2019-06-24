@@ -10,7 +10,6 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup_Ma
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\MainWindow.baml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Initialsettings.baml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.g.resources
-C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.Properties.Resources.resources
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.csproj.GenerateResource.cache
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.csproj.CoreCompileInputs.cache
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.exe
@@ -30,3 +29,11 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\TeamChooser.ba
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.csproj.CopyComplete
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\EnemyTeamChooser.g.cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\EnemyTeamChooser.baml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\TeamInfo.g.cs
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\TeamInfo.baml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\en\WPFWorldCup.resources.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\hr-HR\WPFWorldCup.resources.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.Properties.Resources.en.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.Properties.Resources.hr-HR.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\en\WPFWorldCup.resources.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\hr-HR\WPFWorldCup.resources.dll
