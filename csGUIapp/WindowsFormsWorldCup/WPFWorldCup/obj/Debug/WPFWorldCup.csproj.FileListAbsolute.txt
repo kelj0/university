@@ -37,3 +37,5 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.Pr
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.Properties.Resources.hr-HR.resources
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\en\WPFWorldCup.resources.dll
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\hr-HR\WPFWorldCup.resources.dll
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\AdditionalPlayerinfo.g.cs
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\AdditionalPlayerinfo.baml

@@ -114,16 +114,24 @@ namespace DataLayer
                     });
                     if (match.home_team.code == teamCode)
                     {
-                        foreach (var ev in match.home_team_events)
-                        {
-                            if (ev.type_of_event == "goal")
-                            {
+                        foreach (var ev in match.home_team_events){
+                            if (ev.type_of_event == "goal"){
                                 players[(string)ev.player].goals++;
+                                if(matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
+                                    matches[matches.Count - 1].players[(string)ev.player].goals++;
+                                }
+                                else{
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals= 0,cards=0,name=ev.player});
+                                }
                             }
-                            if (ev.type_of_event == "yellow-card")
-                            {
-
+                            if (ev.type_of_event == "yellow-card"){
                                 players[(string)ev.player].cards++;
+                                if (matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
+                                    matches[matches.Count - 1].players[(string)ev.player].cards++;
+                                }
+                                else{
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = (string)ev.player });
+                                }
                             }
                         }
                     }
@@ -131,13 +139,24 @@ namespace DataLayer
                     {
                         foreach (var ev in match.away_team_events)
                         {
-                            if (ev.type_of_event == "goal")
-                            {
+                            if (ev.type_of_event == "goal"){
                                 players[(string)ev.player].goals++;
+                                if (matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
+                                    matches[matches.Count - 1].players[(string)ev.player].goals++;
+                                }
+                                else{
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = (string)ev.player });
+                                }
                             }
                             if (ev.type_of_event == "yellow-card")
                             {
                                 players[(string)ev.player].cards++;
+                                if (matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
+                                    matches[matches.Count - 1].players[(string)ev.player].cards++;
+                                }
+                                else{
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = ev.player });
+                                }
                             }
                         }
                     }

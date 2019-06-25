@@ -1,5 +1,6 @@
 ﻿using DataLayer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -31,14 +32,18 @@ namespace WPFWorldCup
         public string enemyTeamName;
         public Team team;
         public Team awayTeam;
+        public Match match = new Match();
+        public string windowsState = "";
+        public List<string> teams = new List<string>();
+        
+        /*forms*/
         public ChooseLanguage chooseLanguageForm;
         public Initialsettings initialSettingsForm;
         public TeamChooser teamChooser;
         public EnemyTeamChooser enemyTeamChooser;
         public Loading loading = new Loading();
-        public string windowsState = "";
-        public List<string> teams = new List<string>();
         public TeamInfo teaminfo;
+        public AdditionalPlayerinfo additionalPlayerinfo = new AdditionalPlayerinfo();
         public MainWindow()
         {
             InitializeComponent();
@@ -55,7 +60,6 @@ namespace WPFWorldCup
             teamChooser = new TeamChooser(this);
             enemyTeamChooser = new EnemyTeamChooser(this);
             teaminfo = new TeamInfo(this);
-
 
             //put loading
             try
@@ -110,6 +114,12 @@ namespace WPFWorldCup
             teaminfo.lbl_losses.Content = "Losses";
             teaminfo.lbl_played.Content = "Played";
             teaminfo.lbl_wins.Content = "Wins";
+            additionalPlayerinfo.lbl_captain.Content = "Captain(C-yes,X-no):";
+            additionalPlayerinfo.lbl_cards.Content = "Cards:";
+            additionalPlayerinfo.lbl_goals.Content = "Goals:";
+            additionalPlayerinfo.lbl_position.Content = "Position:";
+            additionalPlayerinfo.lbl_shirtNumber.Content = "Shirt number:";
+
         }
 
         public async Task changeLanguageToCRO()
@@ -127,6 +137,11 @@ namespace WPFWorldCup
             teaminfo.lbl_losses.Content = "Izgubljene";
             teaminfo.lbl_played.Content = "Odigrane";
             teaminfo.lbl_wins.Content = "Pobjede";
+            additionalPlayerinfo.lbl_captain.Content = "Kapetan(C-da,X-ne):";
+            additionalPlayerinfo.lbl_cards.Content = "Kartoni:";
+            additionalPlayerinfo.lbl_goals.Content = "Golovi:";
+            additionalPlayerinfo.lbl_position.Content = "Pozicija:";
+            additionalPlayerinfo.lbl_shirtNumber.Content = "Broj:";
         }
 
         /* Team methods */
@@ -521,7 +536,7 @@ namespace WPFWorldCup
 
         public async Task SetMatchLabels()
         {
-            Match match = Data.GetMatch(team, awayTeam.teamName);
+            match = Data.GetMatch(team, awayTeam.teamName);
             if (match.home_team == team.teamName){
                 lbl_homeTeam.Content = match.home_team;
                 lbl_homeTeamScore.Content = match.score.Split(':')[0];
@@ -619,5 +634,99 @@ namespace WPFWorldCup
             loading.Visibility = Visibility.Hidden;
         }
 
+
+        /* https://stackoverflow.com/a/7153739 */
+        /* ================================== */
+        public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
+        {
+            List<T> logicalCollection = new List<T>();
+            GetLogicalChildCollection(parent as DependencyObject, logicalCollection);
+            return logicalCollection;
+        }
+        private static void GetLogicalChildCollection<T>(DependencyObject parent, List<T> logicalCollection) where T : DependencyObject
+        {
+            IEnumerable children = LogicalTreeHelper.GetChildren(parent);
+            foreach (object child in children)
+            {
+                if (child is DependencyObject)
+                {
+                    DependencyObject depChild = child as DependencyObject;
+                    if (child is T)
+                    {
+                        logicalCollection.Add(child as T);
+                    }
+                    GetLogicalChildCollection(depChild, logicalCollection);
+                }
+            }
+        }
+        /* ================================== */
+
+        /* hanlde on player click */
+        private async Task showMorePlayerInfo(string name,string h)
+        {
+            Player p = new Player();
+            try
+            {
+                foreach (Match m in (h == "home" ? team.matches : awayTeam.matches))
+                {
+                    if (m.id == match.id)
+                    {
+                        p.cards = m.players[name].cards;
+                        p.name = m.players[name].name;
+                        p.goals = m.players[name].goals;
+                    }
+                }
+            }
+            catch (KeyNotFoundException)
+            {
+                p = new Player{goals = 0,cards=0,name=name };
+            }
+
+            additionalPlayerinfo.lbl_captainV.Content = (h=="home"?(team.players[name].captain ? "C" : "X"):(awayTeam.players[name].captain ? "C" : "X"));
+            additionalPlayerinfo.lbl_cardsV.Content = p.cards;
+            additionalPlayerinfo.lbl_goalsV.Content = p.goals;
+            additionalPlayerinfo.lbl_playerName.Content = name;
+            additionalPlayerinfo.lbl_positionV.Content = (h == "home" ? team.players[name].position : awayTeam.players[name].position);
+            additionalPlayerinfo.lbl_shirtNumberV.Content = (h == "home" ? team.players[name].shirt_number : awayTeam.players[name].shirt_number);
+
+            additionalPlayerinfo.Show();
+
+        }
+
+        /*eh..tnx python <3*/
+        private async void Box_homeGoalie_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_goalieHome.Content,"home"); }
+        private async void Box_homeDefender0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderHome0.Content,"home"); }
+        private async void Box_homeDefender1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderHome1.Content,"home"); }
+        private async void Box_homeDefender2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderHome2.Content,"home"); }
+        private async void Box_homeDefender3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderHome3.Content,"home"); }
+        private async void Box_homeDefender4_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderHome4.Content,"home"); }
+        private async void Box_homeMidfield0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome0.Content,"home"); }
+        private async void Box_homeMidfield1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome1.Content,"home"); }
+        private async void Box_homeMidfield2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome2.Content,"home"); }
+        private async void Box_homeMidfield3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome3.Content,"home"); }
+        private async void Box_homeMidfield4_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome4.Content,"home"); }
+        private async void Box_homeMidfield5_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldHome5.Content,"home"); }
+        private async void Box_homeForward0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardHome0.Content,"home"); }
+        private async void Box_homeForward1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardHome1.Content,"home"); }
+        private async void Box_homeForward2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardHome2.Content,"home"); }
+        private async void Box_homeForward3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardHome3.Content,"home"); }
+        private async void Box_goalieAway_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_goalieAway.Content,"away"); }
+        private async void Box_awayDefender0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderAway0.Content,"away"); }
+        private async void Box_awayDefender1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderAway1.Content,"away"); }
+        private async void Box_awayDefender2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderAway2.Content,"away"); }
+        private async void Box_awayDefender3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderAway3.Content,"away"); }
+        private async void Box_awayDefender4_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_defenderAway4.Content,"away"); }
+        private async void Box_awayMidfield0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway0.Content,"away"); }
+        private async void Box_awayMidfield1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway1.Content,"away"); }
+        private async void Box_awayMidfield2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway2.Content,"away"); }
+        private async void Box_awayMidfield3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway3.Content,"away"); }
+        private async void Box_awayMidfield4_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway4.Content,"away"); }
+        private async void Box_awayMidfield5_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_midfieldAway5.Content,"away"); }
+        private async void Box_awayForward0_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway0.Content,"away"); }
+        private async void Box_awayForward1_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway1.Content,"away"); }
+        private async void Box_awayForward2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway2.Content,"away"); }
+        private async void Box_awayForward3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway3.Content,"away"); }
+
+        
     }
 }

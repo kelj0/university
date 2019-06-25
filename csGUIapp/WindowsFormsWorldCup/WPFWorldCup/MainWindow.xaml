@@ -14,7 +14,7 @@
                 <TranslateTransform/>
             </TransformGroup>
         </Grid.RenderTransform>
-        <Rectangle Fill="#FFB9DEFF" HorizontalAlignment="Left" Height="383" Margin="373,258,0,0" Stroke="Black" VerticalAlignment="Top" Width="772"/>
+        <Rectangle x:Name="sql_mainField" Fill="#FFB9DEFF" HorizontalAlignment="Left" Height="383" Margin="373,258,0,0" Stroke="Black" VerticalAlignment="Top" Width="772"/>
         <Ellipse Fill="AliceBlue" HorizontalAlignment="Left" Height="100" Margin="448,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="70"/>
         <Ellipse Fill="AliceBlue" HorizontalAlignment="Left" Height="100" Margin="1001,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="70"/>
         <Rectangle Fill="#FFCCE7FF" HorizontalAlignment="Left" Height="245" Margin="373,328,0,0" Stroke="Black" VerticalAlignment="Top" Width="110"/>
@@ -43,55 +43,55 @@
         <Label x:Name="lbl_midfieldAway2" Content="Label" HorizontalAlignment="Left" Margin="837,499,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_midfieldAway3" Content="Label" HorizontalAlignment="Left" Margin="797,587,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_goalieAway" Content="Label" HorizontalAlignment="Left" Margin="1071,420,0,0" VerticalAlignment="Top"/>
-        <Rectangle Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="377,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeDefender1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeDefender2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeDefender3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeMidfield3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="662,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeDefender0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeMidfield0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="657,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeMidfield1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeMidfield2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,489,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeForward0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayForward0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayMidfield1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayMidfield2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,489,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayMidfield0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayMidfield3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayDefender1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayDefender2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayDefender0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayDefender3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="13" Margin="1128,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_homeGoalie" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="377,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeGoalie_MouseDown"/>
+        <Rectangle x:Name="box_homeDefender1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeDefender1_MouseDown"/>
+        <Rectangle x:Name="box_homeDefender2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeDefender2_MouseDown"/>
+        <Rectangle x:Name="box_homeDefender3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeDefender3_MouseDown"/>
+        <Rectangle x:Name="box_homeMidfield3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="662,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield3_MouseDown"/>
+        <Rectangle x:Name="box_homeDefender0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="547,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeDefender0_MouseDown"/>
+        <Rectangle x:Name="box_homeMidfield0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="657,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield0_MouseDown"/>
+        <Rectangle x:Name="box_homeMidfield1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield1_MouseDown"/>
+        <Rectangle x:Name="box_homeMidfield2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="623,489,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield2_MouseDown"/>
+        <Rectangle x:Name="box_homeForward0" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeForward0_MouseDown"/>
+        <Rectangle x:Name="box_awayForward0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayForward0_MouseDown"/>
+        <Rectangle x:Name="box_awayMidfield1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield1_MouseDown"/>
+        <Rectangle x:Name="box_awayMidfield2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="860,489,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield2_MouseDown"/>
+        <Rectangle x:Name="box_awayMidfield0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield0_MouseDown"/>
+        <Rectangle x:Name="box_awayMidfield3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="820,574,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield3_MouseDown"/>
+        <Rectangle x:Name="box_awayDefender1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayDefender1_MouseDown"/>
+        <Rectangle x:Name="box_awayDefender2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,502,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayDefender2_MouseDown"/>
+        <Rectangle x:Name="box_awayDefender0" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,298,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayDefender0_MouseDown"/>
+        <Rectangle x:Name="box_awayDefender3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="954,595,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayDefender3_MouseDown"/>
+        <Rectangle x:Name="box_awayGoalie" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="1128,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_goalieAway_MouseDown"/>
         <Label x:Name="lbl_homeTeam" Content="Favorite Team" HorizontalAlignment="Left" Margin="590,190,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="lbl_awayTeam" Content="Not Favorite team" HorizontalAlignment="Left" Margin="837,190,0,0" VerticalAlignment="Top" FontSize="18"/>
         <Label x:Name="lbl_homeTeamScore" Content="0" HorizontalAlignment="Left" Margin="725,211,0,0" VerticalAlignment="Top" FontSize="14" Width="18" Height="26"/>
         <Label x:Name="lbl_awayTeamScore" Content="0" HorizontalAlignment="Left" Margin="754,211,0,0" VerticalAlignment="Top" FontSize="14" Width="19"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="3" Margin="746,221,0,0" Stroke="Black" VerticalAlignment="Top" Width="3"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="3" Margin="746,227,0,0" Stroke="Black" VerticalAlignment="Top" Width="3"/>
-        <Rectangle x:Name="box_homeForward1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeForward2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,485,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_homeForward1" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeForward1_MouseDown"/>
+        <Rectangle x:Name="box_homeForward2" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,485,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeForward2_MouseDown"/>
         <Label x:Name="lbl_forwardHome1" Content="Label" HorizontalAlignment="Left" Margin="690,370,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_forwardHome2" Content="Label" HorizontalAlignment="Left" Margin="690,463,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_homeDefender4" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_homeMidfield4" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="640,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_homeDefender4" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="518,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeDefender4_MouseDown"/>
+        <Rectangle x:Name="box_homeMidfield4" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="640,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield4_MouseDown"/>
         <Label x:Name="lbl_midfieldHome4" Content="Label" HorizontalAlignment="Left" Margin="623,451,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_defenderHome4" Content="Label" HorizontalAlignment="Left" Margin="495,420,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_awayForward1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
-        <Rectangle x:Name="box_awayForward2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,485,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_awayForward1" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,398,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayForward1_MouseDown"/>
+        <Rectangle x:Name="box_awayForward2" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,485,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayForward2_MouseDown"/>
         <Label x:Name="lbl_forwardAway1" Content="Label" HorizontalAlignment="Left" Margin="762,404,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_forwardAway2" Content="Label" HorizontalAlignment="Left" Margin="753,492,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_awayMidfield4" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="837,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_awayMidfield4" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="837,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield4_MouseDown"/>
         <Label x:Name="lbl_midfieldAway4" Content="Label" HorizontalAlignment="Left" Margin="837,451,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_awayDefender4" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_awayDefender4" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="983,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayDefender4_MouseDown"/>
         <Label x:Name="lbl_defenderAway4" Content="Label" HorizontalAlignment="Left" Margin="970,456,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_homeForward3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,352,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_homeForward3" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="720,352,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeForward3_MouseDown"/>
         <Label x:Name="lbl_forwardHome3" Content="Label" HorizontalAlignment="Left" Margin="711,328,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_awayForward3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,530,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_awayForward3" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="762,530,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayForward3_MouseDown"/>
         <Label x:Name="lbl_forwardAway3" Content="Label" HorizontalAlignment="Left" Margin="753,537,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_awayMidfield5" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="888,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_awayMidfield5" Fill="Red" HorizontalAlignment="Left" Height="13" Margin="888,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_awayMidfield5_MouseDown"/>
         <Label x:Name="lbl_midfieldAway5" Content="Label" HorizontalAlignment="Left" Margin="879,420,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="box_homeMidfield5" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="600,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13"/>
+        <Rectangle x:Name="box_homeMidfield5" Fill="Blue" HorizontalAlignment="Left" Height="13" Margin="600,443,0,0" Stroke="Black" VerticalAlignment="Top" Width="13" MouseDown="Box_homeMidfield5_MouseDown"/>
         <Label x:Name="lbl_midfieldHome5" Content="Label" HorizontalAlignment="Left" Margin="590,423,0,0" VerticalAlignment="Top"/>
         <Ellipse Fill="#FF0017FF" HorizontalAlignment="Left" Height="32" Margin="698,210,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Opacity="0.103"/>
 

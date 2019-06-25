@@ -15,5 +15,6 @@ namespace DataLayer
         public string winner { get; set; }
         public string score { get; set; }
         public string id { get; set; }
+        public Dictionary<string, Player> players = new Dictionary<string, Player>();
     }
 }

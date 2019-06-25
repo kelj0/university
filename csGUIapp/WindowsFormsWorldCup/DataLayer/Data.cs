@@ -68,6 +68,56 @@ namespace DataLayer
 
         }
 
+        public static async Task<int> GetPlayerYellowCardsForMatch(string playerName,string matchID,string teamCode)
+        {
+            dynamic response = await GetCountryMatches(teamCode);
+            int cards = 0;
+            foreach (var match in response)
+            {
+                if (match.home_team.code == teamCode) {
+                    foreach (var ev in match.home_team_events){
+                        if(ev.type_of_event == "yellow-card" && ev.player == playerName) { ++cards; }
+                    }
+                    return cards;
+                }
+                else
+                {
+                    foreach (var ev in match.away_team_events){
+                        if (ev.type_of_event == "yellow-card" && ev.player == playerName) { ++cards; }
+                    }
+                    return cards;
+                }
+            }
+            return -100;
+        }
+
+        public static async Task<int> GetPlayergoalsForMatch(string playerName, string matchID, string teamCode)
+        {
+            dynamic response = await GetCountryMatches(teamCode);
+            int goals = 0;
+            foreach (var match in response)
+            {
+                if (match.home_team.code == teamCode)
+                {
+                    foreach (var ev in match.home_team_events)
+                    {
+                        if (ev.type_of_event == "goal" && ev.player == playerName) { ++goals; }
+                    }
+                    return goals;
+                }
+                else
+                {
+                    foreach (var ev in match.away_team_events)
+                    {
+                        if (ev.type_of_event == "goal" && ev.player == playerName) { ++goals; }
+                    }
+                    return goals;
+                }
+            }
+            return -100;
+        }
+
+
         ///<summary>
         /// Returns number of wins, or -100 if no id was found
         ///</summary
