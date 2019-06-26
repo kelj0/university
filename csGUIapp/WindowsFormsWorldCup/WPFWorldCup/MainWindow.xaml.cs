@@ -41,7 +41,8 @@ namespace WPFWorldCup
         public Initialsettings initialSettingsForm;
         public TeamChooser teamChooser;
         public EnemyTeamChooser enemyTeamChooser;
-        public Loading loading = new Loading();
+        public Loading0 loading0 = new Loading0();
+        public Loading1 loading1 = new Loading1();
         public TeamInfo teaminfo;
         public AdditionalPlayerinfo additionalPlayerinfo = new AdditionalPlayerinfo();
         public MainWindow()
@@ -107,19 +108,19 @@ namespace WPFWorldCup
             enemyTeamChooser.btn_chooseEnemyTeam.Content = "Apply";
             teamChooser.lbl_chooseTeam.Content = "Choose your favorite team";
             teamChooser.btn_applyFavoriteTeam.Content = "Apply";
-            teaminfo.lbl_diference.Content = "Difference";
-            teaminfo.lbl_draws.Content = "Draws";
-            teaminfo.lbl_goals.Content = "Goals";
-            teaminfo.lbl_goalsRecived.Content = "Recived goals";
-            teaminfo.lbl_losses.Content = "Losses";
-            teaminfo.lbl_played.Content = "Played";
-            teaminfo.lbl_wins.Content = "Wins";
+            teaminfo.lbl_diference.Content = "Difference:";
+            teaminfo.lbl_draws.Content = "Draws:";
+            teaminfo.lbl_goals.Content = "Goals:";
+            teaminfo.lbl_goalsRecived.Content = "Recived goals:";
+            teaminfo.lbl_losses.Content = "Losses:";
+            teaminfo.lbl_played.Content = "Played:";
+            teaminfo.lbl_wins.Content = "Wins:";
             additionalPlayerinfo.lbl_captain.Content = "Captain(C-yes,X-no):";
             additionalPlayerinfo.lbl_cards.Content = "Cards:";
             additionalPlayerinfo.lbl_goals.Content = "Goals:";
             additionalPlayerinfo.lbl_position.Content = "Position:";
             additionalPlayerinfo.lbl_shirtNumber.Content = "Shirt number:";
-
+            btn_changeLanguage.Content = "Settings";
         }
 
         public async Task changeLanguageToCRO()
@@ -129,20 +130,44 @@ namespace WPFWorldCup
             enemyTeamChooser.lbl_chooseEnemyTeam.Content = "Odaberite protivnicki tim";
             enemyTeamChooser.btn_chooseEnemyTeam.Content = "Odaberi";
             teamChooser.lbl_chooseTeam.Content = "Odaberite omiljeni tim";
-            teamChooser.btn_applyFavoriteTeam.Content = "Odaberi";
-            teaminfo.lbl_diference.Content = "Razlika";
-            teaminfo.lbl_draws.Content = "Nerjeseno";
-            teaminfo.lbl_goals.Content = "Golovi";
-            teaminfo.lbl_goalsRecived.Content = "Primljeni golovi";
-            teaminfo.lbl_losses.Content = "Izgubljene";
-            teaminfo.lbl_played.Content = "Odigrane";
-            teaminfo.lbl_wins.Content = "Pobjede";
+            teamChooser.btn_applyFavoriteTeam.Content = "Odaberi:";
+            teaminfo.lbl_diference.Content = "Razlika:";
+            teaminfo.lbl_draws.Content = "Nerjeseno:";
+            teaminfo.lbl_goals.Content = "Golovi:";
+            teaminfo.lbl_goalsRecived.Content = "Primljeni golovi:";
+            teaminfo.lbl_losses.Content = "Izgubljene:";
+            teaminfo.lbl_played.Content = "Odigrane:";
+            teaminfo.lbl_wins.Content = "Pobjede:";
             additionalPlayerinfo.lbl_captain.Content = "Kapetan(C-da,X-ne):";
             additionalPlayerinfo.lbl_cards.Content = "Kartoni:";
             additionalPlayerinfo.lbl_goals.Content = "Golovi:";
             additionalPlayerinfo.lbl_position.Content = "Pozicija:";
             additionalPlayerinfo.lbl_shirtNumber.Content = "Broj:";
+            btn_changeLanguage.Content = "Postavke";
         }
+
+
+        public async void fillComboBox()
+        {
+            foreach (var i in teams)
+            {
+                cb_teams.Items.Add(i);
+            }
+            cb_teams.SelectedItem = favTeamName;
+        }
+
+        private async void Btn_applyFavoriteTeam_Click(object sender, RoutedEventArgs e)
+        {
+            await ShowLoading();
+            fifa_id = await Data.GetCountryCode(cb_teams.Text);
+            
+            favTeamName = cb_teams.Text;
+            await CreateTeam(favTeamName);
+            await teaminfo.SetUp();
+            await HideLoading();
+            await fillEnemyTeamChooser(team);
+        }
+
 
         /* Team methods */
         public async Task fillEnemyTeamChooser(Team t)
@@ -187,6 +212,12 @@ namespace WPFWorldCup
             await awayTeam.SetUp();
             await SetAwayTeamLabels(awayTeam);
             await SetMatchLabels();
+
+            await ShowLoading1();
+            Thread.Sleep(500);
+            await HideLoading1();
+            teaminfo.Show();
+            fillComboBox();
             Show();
         }
 
@@ -625,19 +656,29 @@ namespace WPFWorldCup
         
 
         /* Loading methods */
-        public async void ShowLoading()
+        public async Task ShowLoading()
         {
-            loading.Visibility = Visibility.Visible;
+            loading1.Show();
         }
-        public async void HideLoading()
+        public async Task HideLoading()
         {
-            loading.Visibility = Visibility.Hidden;
+            loading1.Hide();
+        }
+
+        public async Task ShowLoading1()
+        {
+            loading0.Show();
+            
+        }
+        public async Task HideLoading1()
+        {
+            loading0.Hide();
         }
 
 
-        /* https://stackoverflow.com/a/7153739 */
-        /* ================================== */
-        public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
+            /* https://stackoverflow.com/a/7153739 */
+            /* ================================== */
+            public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
         {
             List<T> logicalCollection = new List<T>();
             GetLogicalChildCollection(parent as DependencyObject, logicalCollection);
@@ -664,6 +705,7 @@ namespace WPFWorldCup
         /* hanlde on player click */
         private async Task showMorePlayerInfo(string name,string h)
         {
+            await ShowLoading();
             Player p = new Player();
             try
             {
@@ -688,6 +730,9 @@ namespace WPFWorldCup
             additionalPlayerinfo.lbl_playerName.Content = name;
             additionalPlayerinfo.lbl_positionV.Content = (h == "home" ? team.players[name].position : awayTeam.players[name].position);
             additionalPlayerinfo.lbl_shirtNumberV.Content = (h == "home" ? team.players[name].shirt_number : awayTeam.players[name].shirt_number);
+
+            Thread.Sleep(300);
+            await HideLoading();
 
             additionalPlayerinfo.Show();
 
@@ -727,6 +772,16 @@ namespace WPFWorldCup
         private async void Box_awayForward2_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway2.Content,"away"); }
         private async void Box_awayForward3_MouseDown(object sender, MouseButtonEventArgs e) { await showMorePlayerInfo((string)lbl_forwardAway3.Content,"away"); }
 
-        
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if(Width < 880){Width = 880;}
+            if(Height < 677){ Height = 677; }
+        }
+
+        private void Lbl_changeLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            chooseLanguageForm.Show();
+            chooseLanguageForm.BringIntoView();
+        }
     }
 }

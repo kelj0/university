@@ -15,7 +15,6 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.exe
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.pdb
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\ChooseLanguage.g.cs
-C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading.g.cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\TeamChooser.g.cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\DataLayer.dll
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\RestSharp.dll
@@ -24,7 +23,6 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\DataLayer.pdb
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\RestSharp.xml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\bin\Debug\Newtonsoft.Json.xml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\ChooseLanguage.baml
-C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading.baml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\TeamChooser.baml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\WPFWorldCup.csproj.CopyComplete
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\EnemyTeamChooser.g.cs
@@ -39,3 +37,7 @@ C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\en\WPFWorldCup
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\hr-HR\WPFWorldCup.resources.dll
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\AdditionalPlayerinfo.g.cs
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\AdditionalPlayerinfo.baml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading0.g.cs
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading0.baml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading1.g.cs
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\WPFWorldCup\obj\Debug\Loading1.baml

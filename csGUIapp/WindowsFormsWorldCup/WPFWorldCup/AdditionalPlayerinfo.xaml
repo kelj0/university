@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="lbl_playerName" Content="Name" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" FontSize="22"/>
         <Label x:Name="lbl_goals" Content="Goals" HorizontalAlignment="Left" Margin="85,58,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_shirtNumber" Content="Shirt Number" HorizontalAlignment="Left" Margin="48,86,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_shirtNumber" Content="Shirt Number" HorizontalAlignment="Left" Margin="58,86,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_position" Content="Position" HorizontalAlignment="Left" Margin="74,114,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_cards" Content="Cards" HorizontalAlignment="Left" Margin="85,142,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_captain" Content="Captain(C-yes,X-no)" HorizontalAlignment="Left" Margin="19,170,0,0" VerticalAlignment="Top" Width="114"/>

@@ -20,6 +20,7 @@ namespace WPFWorldCup
     public partial class ChooseLanguage : Window
     {
         private MainWindow f;
+        private bool first = true;
         public ChooseLanguage(MainWindow f)
         {
             InitializeComponent();
@@ -31,7 +32,11 @@ namespace WPFWorldCup
             f.lng ="ENG";
             Hide();
             await f.changeLanguageToENG();
-            f.initialSettingsForm.Show();
+            if (first)
+            {
+                f.initialSettingsForm.Show();
+                first = false;
+            }
         }
 
         private async void Btn_languageCRO_Click(object sender, RoutedEventArgs e)
@@ -39,7 +44,11 @@ namespace WPFWorldCup
             f.lng = "CRO";
             Hide();
             await f.changeLanguageToCRO();
-            f.initialSettingsForm.Show();
+            if (first)
+            {
+                f.initialSettingsForm.Show();
+                first = false;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -16,6 +16,13 @@
         <Label x:Name="lbl_goalsRecived" Content="Recived goals" HorizontalAlignment="Left" Margin="261,126,0,0" VerticalAlignment="Top" Height="27"/>
         <Label x:Name="lbl_diference" Content="Difference" HorizontalAlignment="Left" Margin="277,158,0,0" VerticalAlignment="Top" Height="27"/>
         <Label x:Name="lbl_teamTag" Content="TAG" HorizontalAlignment="Left" Margin="245,10,0,0" VerticalAlignment="Top" Height="25" Width="35" Foreground="Black" FontSize="12"/>
+        <Label x:Name="lbl_playedV" Content="Played" HorizontalAlignment="Left" Margin="125,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_winsV" Content="Wins" HorizontalAlignment="Left" Margin="125,126,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_drawsV" Content="draws" HorizontalAlignment="Left" Margin="125,154,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_lossesV" Content="losses" HorizontalAlignment="Left" Margin="125,182,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_goalsV" Content="Goals" HorizontalAlignment="Left" Margin="348,94,0,0" VerticalAlignment="Top" Height="27"/>
+        <Label x:Name="lbl_goalsRecivedV" Content="Recived goals" HorizontalAlignment="Left" Margin="348,126,0,0" VerticalAlignment="Top" Height="27"/>
+        <Label x:Name="lbl_diferenceV" Content="Difference" HorizontalAlignment="Left" Margin="348,158,0,0" VerticalAlignment="Top" Height="27"/>
 
     </Grid>
 </Window>

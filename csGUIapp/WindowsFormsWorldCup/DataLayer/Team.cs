@@ -121,16 +121,16 @@ namespace DataLayer
                                     matches[matches.Count - 1].players[(string)ev.player].goals++;
                                 }
                                 else{
-                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals= 0,cards=0,name=ev.player});
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 1,cards=0,name=ev.player});
                                 }
                             }
-                            if (ev.type_of_event == "yellow-card"){
+                            else if (ev.type_of_event == "yellow-card"){
                                 players[(string)ev.player].cards++;
                                 if (matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
                                     matches[matches.Count - 1].players[(string)ev.player].cards++;
                                 }
                                 else{
-                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = (string)ev.player });
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 1, name = (string)ev.player });
                                 }
                             }
                         }
@@ -145,17 +145,17 @@ namespace DataLayer
                                     matches[matches.Count - 1].players[(string)ev.player].goals++;
                                 }
                                 else{
-                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = (string)ev.player });
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 1, cards = 0, name = (string)ev.player });
                                 }
                             }
-                            if (ev.type_of_event == "yellow-card")
+                            else if (ev.type_of_event == "yellow-card")
                             {
                                 players[(string)ev.player].cards++;
                                 if (matches[matches.Count - 1].players.ContainsKey((string)ev.player)){
                                     matches[matches.Count - 1].players[(string)ev.player].cards++;
                                 }
                                 else{
-                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 0, name = ev.player });
+                                    matches[matches.Count - 1].players.Add((string)ev.player, new Player { goals = 0, cards = 1, name = ev.player });
                                 }
                             }
                         }

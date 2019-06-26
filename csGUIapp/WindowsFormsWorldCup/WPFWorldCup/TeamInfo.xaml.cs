@@ -31,13 +31,13 @@ namespace WPFWorldCup
             lbl_teamName.Content = f.team.teamName;
             lbl_teamTag.Content = f.team.teamCode;
 
-            lbl_draws.Content += ": " + f.team.draws;
-            lbl_goals.Content += ": " + f.team.goals_for;
-            lbl_goalsRecived.Content += ": " + f.team.goals_against;
-            lbl_diference.Content += ": " + f.team.goals_difference;
-            lbl_losses.Content += ": " + f.team.losses;
-            lbl_played.Content += ": " + (int.Parse(f.team.losses)+ int.Parse(f.team.wins) + int.Parse(f.team.draws));
-            lbl_wins.Content += ": " + f.team.wins;
+            lbl_drawsV.Content = f.team.draws;
+            lbl_goalsV.Content = f.team.goals_for;
+            lbl_goalsRecivedV.Content = f.team.goals_against;
+            lbl_diferenceV.Content = f.team.goals_difference;
+            lbl_lossesV.Content = f.team.losses;
+            lbl_playedV.Content = (int.Parse(f.team.losses)+ int.Parse(f.team.wins) + int.Parse(f.team.draws));
+            lbl_winsV.Content = f.team.wins;
         }
 
 

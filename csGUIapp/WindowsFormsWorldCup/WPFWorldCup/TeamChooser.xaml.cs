@@ -52,7 +52,6 @@ namespace WPFWorldCup
             await f.CreateTeam(f.favTeamName);
             Hide();
             await f.teaminfo.SetUp();
-            f.teaminfo.Show();
             await f.fillEnemyTeamChooser(f.team);
         }
     }
