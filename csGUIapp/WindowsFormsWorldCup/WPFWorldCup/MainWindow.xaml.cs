@@ -65,35 +65,26 @@ namespace WPFWorldCup
             //put loading
             try
             {
-                throw  new FileNotFoundException();
                 //[0] language
                 //[1] name 
                 //[2] fav players(split with,)
                 List<string> config = Data.ReadConfigFile();
                 lng = config[0];
                 favTeamName = config[1];
-                Task.Run(() => CreateTeam(favTeamName));
+                fifa_id = await Data.GetCountryCode(favTeamName);
+
+                if (lng == "ENG") { await changeLanguageToENG(); }
+                else { await changeLanguageToCRO(); }
+                chooseLanguageForm.first = false;
+                await CreateTeam(favTeamName);
+                await teaminfo.SetUp();
+                await fillEnemyTeamChooser(team);
             }
             catch (FileNotFoundException)
             {
-                //show form to choose language
                 chooseLanguageForm.Show();
-                
-                //show form to choose app window style
-                //show form to choose your favorite team
-
             }
-
-            //show form to choose team against yours
-
-           
-            //CreateOtherTeam();
-            //end loading
-            //ShowMain();
-
         }
-
-
 
         public async void ShowMain()
         {
@@ -121,6 +112,7 @@ namespace WPFWorldCup
             additionalPlayerinfo.lbl_position.Content = "Position:";
             additionalPlayerinfo.lbl_shirtNumber.Content = "Shirt number:";
             btn_changeLanguage.Content = "Settings";
+            btn_applyFavoriteTeam.Content = "Change";
         }
 
         public async Task changeLanguageToCRO()
@@ -144,6 +136,7 @@ namespace WPFWorldCup
             additionalPlayerinfo.lbl_position.Content = "Pozicija:";
             additionalPlayerinfo.lbl_shirtNumber.Content = "Broj:";
             btn_changeLanguage.Content = "Postavke";
+            btn_applyFavoriteTeam.Content = "Promjeni";
         }
 
 
@@ -160,9 +153,10 @@ namespace WPFWorldCup
         {
             await ShowLoading();
             fifa_id = await Data.GetCountryCode(cb_teams.Text);
-            
+
             favTeamName = cb_teams.Text;
             await CreateTeam(favTeamName);
+            Thread.Sleep(1000);
             await teaminfo.SetUp();
             await HideLoading();
             await fillEnemyTeamChooser(team);
@@ -172,6 +166,7 @@ namespace WPFWorldCup
         /* Team methods */
         public async Task fillEnemyTeamChooser(Team t)
         {
+            enemyTeamChooser.cb_enemyTeamChooser.Items.Clear();
             string n="";
             foreach (var m in t.matches)
             {    
@@ -676,9 +671,9 @@ namespace WPFWorldCup
         }
 
 
-            /* https://stackoverflow.com/a/7153739 */
-            /* ================================== */
-            public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
+        /* https://stackoverflow.com/a/7153739 */
+        /* ================================== */
+        public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
         {
             List<T> logicalCollection = new List<T>();
             GetLogicalChildCollection(parent as DependencyObject, logicalCollection);
@@ -782,6 +777,12 @@ namespace WPFWorldCup
         {
             chooseLanguageForm.Show();
             chooseLanguageForm.BringIntoView();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Data.SaveDataToFile(team, lng);
+            e.Cancel = false;
         }
     }
 }

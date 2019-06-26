@@ -68,6 +68,9 @@ namespace DataLayer
 
         }
 
+        /// <summary>
+        /// Returns number of cards player got for given match
+        /// </summary>
         public static async Task<int> GetPlayerYellowCardsForMatch(string playerName,string matchID,string teamCode)
         {
             dynamic response = await GetCountryMatches(teamCode);
@@ -91,6 +94,10 @@ namespace DataLayer
             return -100;
         }
 
+
+        /// <summary>
+        /// Returns number of player goals for given matchID
+        /// </summary>
         public static async Task<int> GetPlayergoalsForMatch(string playerName, string matchID, string teamCode)
         {
             dynamic response = await GetCountryMatches(teamCode);
@@ -184,7 +191,12 @@ namespace DataLayer
         /// <summary>
         /// Reads config file, returns List<string> [0] language | [1] name | [2] fav players(split with ,)
         /// </summary>
-        public static List<string> ReadConfigFile() => File.ReadAllText(@"..\..\..\config.txt").Split('|').ToList();
+        public static List<string> ReadConfigFile()
+        {
+            List<string> r = File.ReadAllText(@"..\..\..\config.txt").Split('|').ToList();
+            Console.WriteLine($"Found existing config file\n Language: {r[0]}\n Team: {r[1]} \nFavorite players: {r[2]}\n");
+            return r;
+        }
 
         /// <summary>
         /// Saves app data to config file

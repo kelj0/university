@@ -20,7 +20,7 @@ namespace WPFWorldCup
     public partial class ChooseLanguage : Window
     {
         private MainWindow f;
-        private bool first = true;
+        public bool first = true;
         public ChooseLanguage(MainWindow f)
         {
             InitializeComponent();
