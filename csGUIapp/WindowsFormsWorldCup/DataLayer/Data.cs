@@ -31,9 +31,10 @@ namespace DataLayer
             {
                 Console.WriteLine($"Cant fetch url.. Response code: {response.StatusCode}. Fetching again..");
                 response = client.Execute(new RestRequest());
-
+                
                 if (!response.IsSuccessful)
                 {
+                    System.Diagnostics.Process.Start("https://http.cat/"+response.StatusCode);
                     throw new WebException("Problems with fetching url, please check your network connection");
                 }
             }

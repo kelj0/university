@@ -27,3 +27,5 @@ C:\Users\keljo\Desktop\as\WindowsFormsWorldCup\DataLayer\bin\Debug\Newtonsoft.Js
 C:\Users\keljo\Desktop\as\WindowsFormsWorldCup\DataLayer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\DataLayer\bin\Debug\Newtonsoft.Json.dll
 C:\Users\keljo\Desktop\WindowsFormsWorldCup\DataLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\DataLayer\obj\Debug\DataLayer.Properties.Resources.resources
+C:\Users\keljo\Desktop\WindowsFormsWorldCup\DataLayer\obj\Debug\DataLayer.csproj.GenerateResource.cache
