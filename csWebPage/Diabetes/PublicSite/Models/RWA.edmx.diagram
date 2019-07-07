@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff5f31eacc1c4dc7b8f6376cd8a992b8" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="RWAModel.Admin" Width="1.5" PointX="11.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Aktivnost" Width="1.5" PointX="11.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Jedinica" Width="1.5" PointX="6.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Kombinacija" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.KombinacijaDetalji" Width="1.5" PointX="0.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Korisnik" Width="1.5" PointX="9.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Meni" Width="1.5" PointX="7.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Namirnica" Width="1.5" PointX="4.375" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.NazivObroka" Width="1.5" PointX="2" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Obrok" Width="1.5" PointX="4.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.Spol" Width="1.5" PointX="11.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RWAModel.TipNamirnice" Width="1.5" PointX="6.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="RWAModel.PK_Korisnik_Aktivnost" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Namirnica_Jedinica" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_KombinacijaDetalji_Kombinacija" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_KombinacijaDetalji_NazivObroka" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Korisnik_Spol" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Meni_Korisnik" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Obrok_Meni" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Namirnica_TipNamirnice" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Obrok_Namirnica" ManuallyRouted="false" />
+        <AssociationConnector Association="RWAModel.PK_Obrok_NazivObroka" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

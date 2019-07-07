@@ -1,0 +1,1493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RWAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IDAdmin" />
+          </Key>
+          <Property Name="IDAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ulogiran" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Aktivnost">
+          <Key>
+            <PropertyRef Name="IDAktivnost" />
+          </Key>
+          <Property Name="IDAktivnost" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Razina" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Jedinica">
+          <Key>
+            <PropertyRef Name="IDJedinica" />
+          </Key>
+          <Property Name="IDJedinica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jedinica" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kombinacija">
+          <Key>
+            <PropertyRef Name="IDKombinacija" />
+          </Key>
+          <Property Name="IDKombinacija" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BrojObroka" Type="int" Nullable="false" />
+          <Property Name="DatumKreiranja" Type="date" Nullable="false" />
+          <Property Name="VrijediDo" Type="date" />
+        </EntityType>
+        <EntityType Name="KombinacijaDetalji">
+          <Key>
+            <PropertyRef Name="IDKombinacijaDetalji" />
+          </Key>
+          <Property Name="IDKombinacijaDetalji" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivObrokaID" Type="int" />
+          <Property Name="PostotakUgljikohidrata" Type="int" Nullable="false" />
+          <Property Name="PostotakMasti" Type="int" Nullable="false" />
+          <Property Name="PostotakProteina" Type="int" Nullable="false" />
+          <Property Name="PostotakUkupno" Type="int" Nullable="false" />
+          <Property Name="KombinacijaID" Type="int" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="IDKorisnik" />
+          </Key>
+          <Property Name="IDKorisnik" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatumRodenja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Visina" Type="int" Nullable="false" />
+          <Property Name="Tezina" Type="int" Nullable="false" />
+          <Property Name="AktivnostID" Type="int" />
+          <Property Name="TipDia" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SpolID" Type="int" />
+          <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Lozinka" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Ulogiran" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Meni">
+          <Key>
+            <PropertyRef Name="IDMeni" />
+          </Key>
+          <Property Name="IDMeni" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatumKreiranja" Type="date" Nullable="false" />
+          <Property Name="BrojObroka" Type="int" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" />
+        </EntityType>
+        <EntityType Name="Namirnica">
+          <Key>
+            <PropertyRef Name="IDNamirnica" />
+          </Key>
+          <Property Name="IDNamirnica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Energija_kcal" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Energija_kJ" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TipNamirniceID" Type="int" />
+          <Property Name="JedinicaID" Type="int" />
+          <Property Name="Kolicina" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NazivObroka">
+          <Key>
+            <PropertyRef Name="IDNazivObroka" />
+          </Key>
+          <Property Name="IDNazivObroka" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obrok">
+          <Key>
+            <PropertyRef Name="IDObrok" />
+          </Key>
+          <Property Name="IDObrok" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeniID" Type="int" />
+          <Property Name="NazivObrokaID" Type="int" />
+          <Property Name="NamirnicaID" Type="int" />
+        </EntityType>
+        <EntityType Name="Spol">
+          <Key>
+            <PropertyRef Name="IDSpol" />
+          </Key>
+          <Property Name="IDSpol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Spol" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipNamirnice">
+          <Key>
+            <PropertyRef Name="IDTipNamirnice" />
+          </Key>
+          <Property Name="IDTipNamirnice" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tip" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="PK_KombinacijaDetalji_Kombinacija">
+          <End Role="Kombinacija" Type="Self.Kombinacija" Multiplicity="0..1" />
+          <End Role="KombinacijaDetalji" Type="Self.KombinacijaDetalji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kombinacija">
+              <PropertyRef Name="IDKombinacija" />
+            </Principal>
+            <Dependent Role="KombinacijaDetalji">
+              <PropertyRef Name="KombinacijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_KombinacijaDetalji_NazivObroka">
+          <End Role="NazivObroka" Type="Self.NazivObroka" Multiplicity="0..1" />
+          <End Role="KombinacijaDetalji" Type="Self.KombinacijaDetalji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NazivObroka">
+              <PropertyRef Name="IDNazivObroka" />
+            </Principal>
+            <Dependent Role="KombinacijaDetalji">
+              <PropertyRef Name="NazivObrokaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Korisnik_Aktivnost">
+          <End Role="Aktivnost" Type="Self.Aktivnost" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aktivnost">
+              <PropertyRef Name="IDAktivnost" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="AktivnostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Korisnik_Spol">
+          <End Role="Spol" Type="Self.Spol" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spol">
+              <PropertyRef Name="IDSpol" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="SpolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Meni_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="Meni" Type="Self.Meni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="IDKorisnik" />
+            </Principal>
+            <Dependent Role="Meni">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Namirnica_Jedinica">
+          <End Role="Jedinica" Type="Self.Jedinica" Multiplicity="0..1" />
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jedinica">
+              <PropertyRef Name="IDJedinica" />
+            </Principal>
+            <Dependent Role="Namirnica">
+              <PropertyRef Name="JedinicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Namirnica_TipNamirnice">
+          <End Role="TipNamirnice" Type="Self.TipNamirnice" Multiplicity="0..1" />
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipNamirnice">
+              <PropertyRef Name="IDTipNamirnice" />
+            </Principal>
+            <Dependent Role="Namirnica">
+              <PropertyRef Name="TipNamirniceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_Meni">
+          <End Role="Meni" Type="Self.Meni" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meni">
+              <PropertyRef Name="IDMeni" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="MeniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_Namirnica">
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namirnica">
+              <PropertyRef Name="IDNamirnica" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="NamirnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_NazivObroka">
+          <End Role="NazivObroka" Type="Self.NazivObroka" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NazivObroka">
+              <PropertyRef Name="IDNazivObroka" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="NazivObrokaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Dodaj_Jedinicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImeJedinice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_KombinacijaDetalji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivObrokaID" Type="int" Mode="In" />
+          <Parameter Name="Uglj" Type="int" Mode="In" />
+          <Parameter Name="Mast" Type="int" Mode="In" />
+          <Parameter Name="Prot" Type="int" Mode="In" />
+          <Parameter Name="Ukup" Type="int" Mode="In" />
+          <Parameter Name="KombinacijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_Kombinaciju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BrojObroka" Type="int" Mode="In" />
+          <Parameter Name="DatumKreiranja" Type="date" Mode="In" />
+          <Parameter Name="VrijediDo" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_Korisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Korisnicko_ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lozinka" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="DatumRodenja" Type="date" Mode="In" />
+          <Parameter Name="Visina" Type="int" Mode="In" />
+          <Parameter Name="Tezina" Type="int" Mode="In" />
+          <Parameter Name="IDAktivnost" Type="int" Mode="In" />
+          <Parameter Name="TipDia" Type="int" Mode="In" />
+          <Parameter Name="IDSpol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_Namirnicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="Energija_kcal" Type="int" Mode="In" />
+          <Parameter Name="Energija_kJ" Type="int" Mode="In" />
+          <Parameter Name="TipNamirniceID" Type="int" Mode="In" />
+          <Parameter Name="JedinicaID" Type="int" Mode="In" />
+          <Parameter Name="Kolicina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_NazivObroka" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivObroka" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dodaj_TipNamirnice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipNamirnice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Admina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Jedinice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Jedinicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImeJedinice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_KombinacijaDetalji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaDetaljiID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Kombinaciju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Korisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnikID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Namirnice_Koristene_U_Meniju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MeniID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Namirnicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_NazivObroka" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivObrokaID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Dohvati_Sve_Jedinice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_Kombinacije" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_KombinacijeDetalji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_Korisnike" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_Namirnice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_Nazive_Obroka" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_Sve_Obroke" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Dohvati_TipNamirnice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipNamirnice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Izmjeni_Jedinicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JedinicaID" Type="int" Mode="In" />
+          <Parameter Name="NovoImeJedinice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_KombinacijaDetalji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaDetaljiID" Type="int" Mode="In" />
+          <Parameter Name="NazivObrokaID" Type="int" Mode="In" />
+          <Parameter Name="Uglj" Type="int" Mode="In" />
+          <Parameter Name="Mast" Type="int" Mode="In" />
+          <Parameter Name="Prot" Type="int" Mode="In" />
+          <Parameter Name="Ukup" Type="int" Mode="In" />
+          <Parameter Name="KombinacijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_Kombinaciju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaID" Type="int" Mode="In" />
+          <Parameter Name="BrojObroka" Type="int" Mode="In" />
+          <Parameter Name="DatumKreiranja" Type="date" Mode="In" />
+          <Parameter Name="VrijediDo" Type="date" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_Korisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Korisnicko_ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoKorisnicko_ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoLozinka" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="NovoEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoPrezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoDatumRodenja" Type="date" Mode="In" />
+          <Parameter Name="NovoVisina" Type="int" Mode="In" />
+          <Parameter Name="NovoTezina" Type="int" Mode="In" />
+          <Parameter Name="NovoIDAktivnost" Type="int" Mode="In" />
+          <Parameter Name="NovoTipDia" Type="int" Mode="In" />
+          <Parameter Name="NovoIDSpol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_Namirnicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDNamirnica" Type="int" Mode="In" />
+          <Parameter Name="NovoNaziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoEnergija_kcal" Type="int" Mode="In" />
+          <Parameter Name="NovoEnergija_kJ" Type="int" Mode="In" />
+          <Parameter Name="NovoTipNamirniceID" Type="int" Mode="In" />
+          <Parameter Name="NovoJedinicaID" Type="int" Mode="In" />
+          <Parameter Name="NovoKolicina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_NazivObroka" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivObroka" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoNazivObroka" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Izmjeni_TipNamirnice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipNamirnice" Type="nvarchar" Mode="In" />
+          <Parameter Name="NovoTipNamirnice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_Jedinicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JedinicaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_KombinacijaDetalji" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaDetaljiID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_Kombinaciju" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KombinacijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_Korisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDKorisnik" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_Namirnicu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDNamirnica" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_NazivObroka" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NazivObroka" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Obrisi_TipNamirnice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TipNamirnice" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Odjavi_Admina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Prijavi_Admina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Provjeri_Admina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lozinka" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Provjeri_Korisnika" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="Lozinka" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="RWAModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Aktivnost" EntityType="Self.Aktivnost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Jedinica" EntityType="Self.Jedinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kombinacija" EntityType="Self.Kombinacija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KombinacijaDetalji" EntityType="Self.KombinacijaDetalji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnik" EntityType="Self.Korisnik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meni" EntityType="Self.Meni" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Namirnica" EntityType="Self.Namirnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NazivObroka" EntityType="Self.NazivObroka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obrok" EntityType="Self.Obrok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spol" EntityType="Self.Spol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipNamirnice" EntityType="Self.TipNamirnice" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="PK_KombinacijaDetalji_Kombinacija" Association="Self.PK_KombinacijaDetalji_Kombinacija">
+            <End Role="Kombinacija" EntitySet="Kombinacija" />
+            <End Role="KombinacijaDetalji" EntitySet="KombinacijaDetalji" />
+          </AssociationSet>
+          <AssociationSet Name="PK_KombinacijaDetalji_NazivObroka" Association="Self.PK_KombinacijaDetalji_NazivObroka">
+            <End Role="NazivObroka" EntitySet="NazivObroka" />
+            <End Role="KombinacijaDetalji" EntitySet="KombinacijaDetalji" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Korisnik_Aktivnost" Association="Self.PK_Korisnik_Aktivnost">
+            <End Role="Aktivnost" EntitySet="Aktivnost" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Korisnik_Spol" Association="Self.PK_Korisnik_Spol">
+            <End Role="Spol" EntitySet="Spol" />
+            <End Role="Korisnik" EntitySet="Korisnik" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Meni_Korisnik" Association="Self.PK_Meni_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisnik" />
+            <End Role="Meni" EntitySet="Meni" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Namirnica_Jedinica" Association="Self.PK_Namirnica_Jedinica">
+            <End Role="Jedinica" EntitySet="Jedinica" />
+            <End Role="Namirnica" EntitySet="Namirnica" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Namirnica_TipNamirnice" Association="Self.PK_Namirnica_TipNamirnice">
+            <End Role="TipNamirnice" EntitySet="TipNamirnice" />
+            <End Role="Namirnica" EntitySet="Namirnica" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_Meni" Association="Self.PK_Obrok_Meni">
+            <End Role="Meni" EntitySet="Meni" />
+            <End Role="Obrok" EntitySet="Obrok" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_Namirnica" Association="Self.PK_Obrok_Namirnica">
+            <End Role="Namirnica" EntitySet="Namirnica" />
+            <End Role="Obrok" EntitySet="Obrok" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_NazivObroka" Association="Self.PK_Obrok_NazivObroka">
+            <End Role="NazivObroka" EntitySet="NazivObroka" />
+            <End Role="Obrok" EntitySet="Obrok" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RWAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="IDAdmin" />
+          </Key>
+          <Property Name="IDAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lozinka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ulogiran" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Aktivnost">
+          <Key>
+            <PropertyRef Name="IDAktivnost" />
+          </Key>
+          <Property Name="IDAktivnost" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Razina" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Korisniks" Relationship="Self.PK_Korisnik_Aktivnost" FromRole="Aktivnost" ToRole="Korisnik" />
+        </EntityType>
+        <EntityType Name="Jedinica">
+          <Key>
+            <PropertyRef Name="IDJedinica" />
+          </Key>
+          <Property Name="IDJedinica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jedinica1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Namirnicas" Relationship="Self.PK_Namirnica_Jedinica" FromRole="Jedinica" ToRole="Namirnica" />
+        </EntityType>
+        <EntityType Name="Kombinacija">
+          <Key>
+            <PropertyRef Name="IDKombinacija" />
+          </Key>
+          <Property Name="IDKombinacija" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BrojObroka" Type="Int32" Nullable="false" />
+          <Property Name="DatumKreiranja" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VrijediDo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="KombinacijaDetaljis" Relationship="Self.PK_KombinacijaDetalji_Kombinacija" FromRole="Kombinacija" ToRole="KombinacijaDetalji" />
+        </EntityType>
+        <EntityType Name="KombinacijaDetalji">
+          <Key>
+            <PropertyRef Name="IDKombinacijaDetalji" />
+          </Key>
+          <Property Name="IDKombinacijaDetalji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivObrokaID" Type="Int32" />
+          <Property Name="PostotakUgljikohidrata" Type="Int32" Nullable="false" />
+          <Property Name="PostotakMasti" Type="Int32" Nullable="false" />
+          <Property Name="PostotakProteina" Type="Int32" Nullable="false" />
+          <Property Name="PostotakUkupno" Type="Int32" Nullable="false" />
+          <Property Name="KombinacijaID" Type="Int32" />
+          <NavigationProperty Name="Kombinacija" Relationship="Self.PK_KombinacijaDetalji_Kombinacija" FromRole="KombinacijaDetalji" ToRole="Kombinacija" />
+          <NavigationProperty Name="NazivObroka" Relationship="Self.PK_KombinacijaDetalji_NazivObroka" FromRole="KombinacijaDetalji" ToRole="NazivObroka" />
+        </EntityType>
+        <EntityType Name="Korisnik">
+          <Key>
+            <PropertyRef Name="IDKorisnik" />
+          </Key>
+          <Property Name="IDKorisnik" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatumRodenja" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Visina" Type="Int32" Nullable="false" />
+          <Property Name="Tezina" Type="Int32" Nullable="false" />
+          <Property Name="AktivnostID" Type="Int32" />
+          <Property Name="TipDia" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpolID" Type="Int32" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lozinka" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ulogiran" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Aktivnost" Relationship="Self.PK_Korisnik_Aktivnost" FromRole="Korisnik" ToRole="Aktivnost" />
+          <NavigationProperty Name="Spol" Relationship="Self.PK_Korisnik_Spol" FromRole="Korisnik" ToRole="Spol" />
+          <NavigationProperty Name="Menis" Relationship="Self.PK_Meni_Korisnik" FromRole="Korisnik" ToRole="Meni" />
+        </EntityType>
+        <EntityType Name="Meni">
+          <Key>
+            <PropertyRef Name="IDMeni" />
+          </Key>
+          <Property Name="IDMeni" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatumKreiranja" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BrojObroka" Type="Int32" Nullable="false" />
+          <Property Name="KorisnikID" Type="Int32" />
+          <NavigationProperty Name="Korisnik" Relationship="Self.PK_Meni_Korisnik" FromRole="Meni" ToRole="Korisnik" />
+          <NavigationProperty Name="Obroks" Relationship="Self.PK_Obrok_Meni" FromRole="Meni" ToRole="Obrok" />
+        </EntityType>
+        <EntityType Name="Namirnica">
+          <Key>
+            <PropertyRef Name="IDNamirnica" />
+          </Key>
+          <Property Name="IDNamirnica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Energija_kcal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Energija_kJ" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TipNamirniceID" Type="Int32" />
+          <Property Name="JedinicaID" Type="Int32" />
+          <Property Name="Kolicina" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Jedinica" Relationship="Self.PK_Namirnica_Jedinica" FromRole="Namirnica" ToRole="Jedinica" />
+          <NavigationProperty Name="TipNamirnice" Relationship="Self.PK_Namirnica_TipNamirnice" FromRole="Namirnica" ToRole="TipNamirnice" />
+          <NavigationProperty Name="Obroks" Relationship="Self.PK_Obrok_Namirnica" FromRole="Namirnica" ToRole="Obrok" />
+        </EntityType>
+        <EntityType Name="NazivObroka">
+          <Key>
+            <PropertyRef Name="IDNazivObroka" />
+          </Key>
+          <Property Name="IDNazivObroka" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KombinacijaDetaljis" Relationship="Self.PK_KombinacijaDetalji_NazivObroka" FromRole="NazivObroka" ToRole="KombinacijaDetalji" />
+          <NavigationProperty Name="Obroks" Relationship="Self.PK_Obrok_NazivObroka" FromRole="NazivObroka" ToRole="Obrok" />
+        </EntityType>
+        <EntityType Name="Obrok">
+          <Key>
+            <PropertyRef Name="IDObrok" />
+          </Key>
+          <Property Name="IDObrok" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeniID" Type="Int32" />
+          <Property Name="NazivObrokaID" Type="Int32" />
+          <Property Name="NamirnicaID" Type="Int32" />
+          <NavigationProperty Name="Meni" Relationship="Self.PK_Obrok_Meni" FromRole="Obrok" ToRole="Meni" />
+          <NavigationProperty Name="Namirnica" Relationship="Self.PK_Obrok_Namirnica" FromRole="Obrok" ToRole="Namirnica" />
+          <NavigationProperty Name="NazivObroka" Relationship="Self.PK_Obrok_NazivObroka" FromRole="Obrok" ToRole="NazivObroka" />
+        </EntityType>
+        <EntityType Name="Spol">
+          <Key>
+            <PropertyRef Name="IDSpol" />
+          </Key>
+          <Property Name="IDSpol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Spol1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Korisniks" Relationship="Self.PK_Korisnik_Spol" FromRole="Spol" ToRole="Korisnik" />
+        </EntityType>
+        <EntityType Name="TipNamirnice">
+          <Key>
+            <PropertyRef Name="IDTipNamirnice" />
+          </Key>
+          <Property Name="IDTipNamirnice" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Namirnicas" Relationship="Self.PK_Namirnica_TipNamirnice" FromRole="TipNamirnice" ToRole="Namirnica" />
+        </EntityType>
+        <Association Name="PK_Korisnik_Aktivnost">
+          <End Role="Aktivnost" Type="Self.Aktivnost" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aktivnost">
+              <PropertyRef Name="IDAktivnost" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="AktivnostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Namirnica_Jedinica">
+          <End Role="Jedinica" Type="Self.Jedinica" Multiplicity="0..1" />
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jedinica">
+              <PropertyRef Name="IDJedinica" />
+            </Principal>
+            <Dependent Role="Namirnica">
+              <PropertyRef Name="JedinicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_KombinacijaDetalji_Kombinacija">
+          <End Role="Kombinacija" Type="Self.Kombinacija" Multiplicity="0..1" />
+          <End Role="KombinacijaDetalji" Type="Self.KombinacijaDetalji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kombinacija">
+              <PropertyRef Name="IDKombinacija" />
+            </Principal>
+            <Dependent Role="KombinacijaDetalji">
+              <PropertyRef Name="KombinacijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_KombinacijaDetalji_NazivObroka">
+          <End Role="NazivObroka" Type="Self.NazivObroka" Multiplicity="0..1" />
+          <End Role="KombinacijaDetalji" Type="Self.KombinacijaDetalji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NazivObroka">
+              <PropertyRef Name="IDNazivObroka" />
+            </Principal>
+            <Dependent Role="KombinacijaDetalji">
+              <PropertyRef Name="NazivObrokaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Korisnik_Spol">
+          <End Role="Spol" Type="Self.Spol" Multiplicity="0..1" />
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Spol">
+              <PropertyRef Name="IDSpol" />
+            </Principal>
+            <Dependent Role="Korisnik">
+              <PropertyRef Name="SpolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Meni_Korisnik">
+          <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="0..1" />
+          <End Role="Meni" Type="Self.Meni" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnik">
+              <PropertyRef Name="IDKorisnik" />
+            </Principal>
+            <Dependent Role="Meni">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_Meni">
+          <End Role="Meni" Type="Self.Meni" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meni">
+              <PropertyRef Name="IDMeni" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="MeniID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Namirnica_TipNamirnice">
+          <End Role="TipNamirnice" Type="Self.TipNamirnice" Multiplicity="0..1" />
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipNamirnice">
+              <PropertyRef Name="IDTipNamirnice" />
+            </Principal>
+            <Dependent Role="Namirnica">
+              <PropertyRef Name="TipNamirniceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_Namirnica">
+          <End Role="Namirnica" Type="Self.Namirnica" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Namirnica">
+              <PropertyRef Name="IDNamirnica" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="NamirnicaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PK_Obrok_NazivObroka">
+          <End Role="NazivObroka" Type="Self.NazivObroka" Multiplicity="0..1" />
+          <End Role="Obrok" Type="Self.Obrok" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NazivObroka">
+              <PropertyRef Name="IDNazivObroka" />
+            </Principal>
+            <Dependent Role="Obrok">
+              <PropertyRef Name="NazivObrokaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RWAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Aktivnosts" EntityType="Self.Aktivnost" />
+          <EntitySet Name="Jedinicas" EntityType="Self.Jedinica" />
+          <EntitySet Name="Kombinacijas" EntityType="Self.Kombinacija" />
+          <EntitySet Name="KombinacijaDetaljis" EntityType="Self.KombinacijaDetalji" />
+          <EntitySet Name="Korisniks" EntityType="Self.Korisnik" />
+          <EntitySet Name="Menis" EntityType="Self.Meni" />
+          <EntitySet Name="Namirnicas" EntityType="Self.Namirnica" />
+          <EntitySet Name="NazivObrokas" EntityType="Self.NazivObroka" />
+          <EntitySet Name="Obroks" EntityType="Self.Obrok" />
+          <EntitySet Name="Spols" EntityType="Self.Spol" />
+          <EntitySet Name="TipNamirnices" EntityType="Self.TipNamirnice" />
+          <AssociationSet Name="PK_Korisnik_Aktivnost" Association="Self.PK_Korisnik_Aktivnost">
+            <End Role="Aktivnost" EntitySet="Aktivnosts" />
+            <End Role="Korisnik" EntitySet="Korisniks" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Namirnica_Jedinica" Association="Self.PK_Namirnica_Jedinica">
+            <End Role="Jedinica" EntitySet="Jedinicas" />
+            <End Role="Namirnica" EntitySet="Namirnicas" />
+          </AssociationSet>
+          <AssociationSet Name="PK_KombinacijaDetalji_Kombinacija" Association="Self.PK_KombinacijaDetalji_Kombinacija">
+            <End Role="Kombinacija" EntitySet="Kombinacijas" />
+            <End Role="KombinacijaDetalji" EntitySet="KombinacijaDetaljis" />
+          </AssociationSet>
+          <AssociationSet Name="PK_KombinacijaDetalji_NazivObroka" Association="Self.PK_KombinacijaDetalji_NazivObroka">
+            <End Role="NazivObroka" EntitySet="NazivObrokas" />
+            <End Role="KombinacijaDetalji" EntitySet="KombinacijaDetaljis" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Korisnik_Spol" Association="Self.PK_Korisnik_Spol">
+            <End Role="Spol" EntitySet="Spols" />
+            <End Role="Korisnik" EntitySet="Korisniks" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Meni_Korisnik" Association="Self.PK_Meni_Korisnik">
+            <End Role="Korisnik" EntitySet="Korisniks" />
+            <End Role="Meni" EntitySet="Menis" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_Meni" Association="Self.PK_Obrok_Meni">
+            <End Role="Meni" EntitySet="Menis" />
+            <End Role="Obrok" EntitySet="Obroks" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Namirnica_TipNamirnice" Association="Self.PK_Namirnica_TipNamirnice">
+            <End Role="TipNamirnice" EntitySet="TipNamirnices" />
+            <End Role="Namirnica" EntitySet="Namirnicas" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_Namirnica" Association="Self.PK_Obrok_Namirnica">
+            <End Role="Namirnica" EntitySet="Namirnicas" />
+            <End Role="Obrok" EntitySet="Obroks" />
+          </AssociationSet>
+          <AssociationSet Name="PK_Obrok_NazivObroka" Association="Self.PK_Obrok_NazivObroka">
+            <End Role="NazivObroka" EntitySet="NazivObrokas" />
+            <End Role="Obrok" EntitySet="Obroks" />
+          </AssociationSet>
+          <FunctionImport Name="Dodaj_Jedinicu" ReturnType="Collection(String)">
+            <Parameter Name="ImeJedinice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_KombinacijaDetalji" ReturnType="Collection(Decimal)">
+            <Parameter Name="NazivObrokaID" Mode="In" Type="Int32" />
+            <Parameter Name="Uglj" Mode="In" Type="Int32" />
+            <Parameter Name="Mast" Mode="In" Type="Int32" />
+            <Parameter Name="Prot" Mode="In" Type="Int32" />
+            <Parameter Name="Ukup" Mode="In" Type="Int32" />
+            <Parameter Name="KombinacijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_Kombinaciju" ReturnType="Collection(Decimal)">
+            <Parameter Name="BrojObroka" Mode="In" Type="Int32" />
+            <Parameter Name="DatumKreiranja" Mode="In" Type="DateTime" />
+            <Parameter Name="VrijediDo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_Korisnika" ReturnType="Collection(String)">
+            <Parameter Name="Korisnicko_ime" Mode="In" Type="String" />
+            <Parameter Name="Lozinka" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="DatumRodenja" Mode="In" Type="DateTime" />
+            <Parameter Name="Visina" Mode="In" Type="Int32" />
+            <Parameter Name="Tezina" Mode="In" Type="Int32" />
+            <Parameter Name="IDAktivnost" Mode="In" Type="Int32" />
+            <Parameter Name="TipDia" Mode="In" Type="Int32" />
+            <Parameter Name="IDSpol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_Namirnicu" ReturnType="Collection(String)">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="Energija_kcal" Mode="In" Type="Int32" />
+            <Parameter Name="Energija_kJ" Mode="In" Type="Int32" />
+            <Parameter Name="TipNamirniceID" Mode="In" Type="Int32" />
+            <Parameter Name="JedinicaID" Mode="In" Type="Int32" />
+            <Parameter Name="Kolicina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_NazivObroka" ReturnType="Collection(String)">
+            <Parameter Name="NazivObroka" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dodaj_TipNamirnice" ReturnType="Collection(String)">
+            <Parameter Name="TipNamirnice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Admina" ReturnType="Collection(RWAModel.Dohvati_Admina_Result)">
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Jedinice" ReturnType="Collection(RWAModel.Dohvati_Jedinice_Result)" />
+          <FunctionImport Name="Dohvati_Jedinicu" ReturnType="Collection(RWAModel.Dohvati_Jedinicu_Result)">
+            <Parameter Name="ImeJedinice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_KombinacijaDetalji" ReturnType="Collection(RWAModel.Dohvati_KombinacijaDetalji_Result)">
+            <Parameter Name="KombinacijaDetaljiID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Kombinaciju" ReturnType="Collection(RWAModel.Dohvati_Kombinaciju_Result)">
+            <Parameter Name="KombinacijaID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Korisnika" ReturnType="Collection(RWAModel.Dohvati_Korisnika_Result)">
+            <Parameter Name="KorisnikID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Namirnice_Koristene_U_Meniju" ReturnType="Collection(String)">
+            <Parameter Name="MeniID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Namirnicu" ReturnType="Collection(RWAModel.Dohvati_Namirnicu_Result)">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_NazivObroka" ReturnType="Collection(RWAModel.Dohvati_NazivObroka_Result)">
+            <Parameter Name="NazivObrokaID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Dohvati_Sve_Jedinice" ReturnType="Collection(RWAModel.Dohvati_Sve_Jedinice_Result)" />
+          <FunctionImport Name="Dohvati_Sve_Kombinacije" ReturnType="Collection(RWAModel.Dohvati_Sve_Kombinacije_Result)" />
+          <FunctionImport Name="Dohvati_Sve_KombinacijeDetalji" ReturnType="Collection(RWAModel.Dohvati_Sve_KombinacijeDetalji_Result)" />
+          <FunctionImport Name="Dohvati_Sve_Korisnike" ReturnType="Collection(RWAModel.Dohvati_Sve_Korisnike_Result)" />
+          <FunctionImport Name="Dohvati_Sve_Namirnice" ReturnType="Collection(RWAModel.Dohvati_Sve_Namirnice_Result)" />
+          <FunctionImport Name="Dohvati_Sve_Nazive_Obroka" ReturnType="Collection(RWAModel.Dohvati_Sve_Nazive_Obroka_Result)" />
+          <FunctionImport Name="Dohvati_Sve_Obroke" ReturnType="Collection(RWAModel.Dohvati_Sve_Obroke_Result)" />
+          <FunctionImport Name="Dohvati_TipNamirnice" ReturnType="Collection(RWAModel.Dohvati_TipNamirnice_Result)">
+            <Parameter Name="TipNamirnice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_Jedinicu" ReturnType="Collection(String)">
+            <Parameter Name="JedinicaID" Mode="In" Type="Int32" />
+            <Parameter Name="NovoImeJedinice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_KombinacijaDetalji" ReturnType="Collection(Int32)">
+            <Parameter Name="KombinacijaDetaljiID" Mode="In" Type="Int32" />
+            <Parameter Name="NazivObrokaID" Mode="In" Type="Int32" />
+            <Parameter Name="Uglj" Mode="In" Type="Int32" />
+            <Parameter Name="Mast" Mode="In" Type="Int32" />
+            <Parameter Name="Prot" Mode="In" Type="Int32" />
+            <Parameter Name="Ukup" Mode="In" Type="Int32" />
+            <Parameter Name="KombinacijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_Kombinaciju" ReturnType="Collection(Int32)">
+            <Parameter Name="KombinacijaID" Mode="In" Type="Int32" />
+            <Parameter Name="BrojObroka" Mode="In" Type="Int32" />
+            <Parameter Name="DatumKreiranja" Mode="In" Type="DateTime" />
+            <Parameter Name="VrijediDo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_Korisnika" ReturnType="Collection(String)">
+            <Parameter Name="Korisnicko_ime" Mode="In" Type="String" />
+            <Parameter Name="NovoKorisnicko_ime" Mode="In" Type="String" />
+            <Parameter Name="NovoLozinka" Mode="In" Type="String" />
+            <Parameter Name="NovoEmail" Mode="In" Type="String" />
+            <Parameter Name="NovoIme" Mode="In" Type="String" />
+            <Parameter Name="NovoPrezime" Mode="In" Type="String" />
+            <Parameter Name="NovoDatumRodenja" Mode="In" Type="DateTime" />
+            <Parameter Name="NovoVisina" Mode="In" Type="Int32" />
+            <Parameter Name="NovoTezina" Mode="In" Type="Int32" />
+            <Parameter Name="NovoIDAktivnost" Mode="In" Type="Int32" />
+            <Parameter Name="NovoTipDia" Mode="In" Type="Int32" />
+            <Parameter Name="NovoIDSpol" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_Namirnicu" ReturnType="Collection(String)">
+            <Parameter Name="IDNamirnica" Mode="In" Type="Int32" />
+            <Parameter Name="NovoNaziv" Mode="In" Type="String" />
+            <Parameter Name="NovoEnergija_kcal" Mode="In" Type="Int32" />
+            <Parameter Name="NovoEnergija_kJ" Mode="In" Type="Int32" />
+            <Parameter Name="NovoTipNamirniceID" Mode="In" Type="Int32" />
+            <Parameter Name="NovoJedinicaID" Mode="In" Type="Int32" />
+            <Parameter Name="NovoKolicina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_NazivObroka" ReturnType="Collection(String)">
+            <Parameter Name="NazivObroka" Mode="In" Type="String" />
+            <Parameter Name="NovoNazivObroka" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Izmjeni_TipNamirnice" ReturnType="Collection(Decimal)">
+            <Parameter Name="TipNamirnice" Mode="In" Type="String" />
+            <Parameter Name="NovoTipNamirnice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_Jedinicu" ReturnType="Collection(String)">
+            <Parameter Name="JedinicaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_KombinacijaDetalji" ReturnType="Collection(Int32)">
+            <Parameter Name="KombinacijaDetaljiID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_Kombinaciju" ReturnType="Collection(String)">
+            <Parameter Name="KombinacijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_Korisnika" ReturnType="Collection(String)">
+            <Parameter Name="IDKorisnik" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_Namirnicu" ReturnType="Collection(String)">
+            <Parameter Name="IDNamirnica" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_NazivObroka" ReturnType="Collection(String)">
+            <Parameter Name="NazivObroka" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Obrisi_TipNamirnice" ReturnType="Collection(String)">
+            <Parameter Name="TipNamirnice" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Odjavi_Admina">
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Prijavi_Admina">
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Provjeri_Admina" ReturnType="Collection(Int32)">
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="Lozinka" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Provjeri_Korisnika" ReturnType="Collection(Int32)">
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="Lozinka" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(RWAModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(RWAModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="Dohvati_Admina_Result">
+          <Property Type="Int32" Name="IDAdmin" Nullable="false" />
+          <Property Type="String" Name="KorisnickoIme" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Lozinka" Nullable="false" />
+          <Property Type="String" Name="Ulogiran" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Jedinice_Result">
+          <Property Type="Int32" Name="IDJedinica" Nullable="false" />
+          <Property Type="String" Name="Jedinica" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Jedinicu_Result">
+          <Property Type="Int32" Name="IDJedinica" Nullable="false" />
+          <Property Type="String" Name="Jedinica" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_KombinacijaDetalji_Result">
+          <Property Type="Int32" Name="IDKombinacijaDetalji" Nullable="false" />
+          <Property Type="Int32" Name="NazivObrokaID" Nullable="true" />
+          <Property Type="Int32" Name="PostotakUgljikohidrata" Nullable="false" />
+          <Property Type="Int32" Name="PostotakMasti" Nullable="false" />
+          <Property Type="Int32" Name="PostotakProteina" Nullable="false" />
+          <Property Type="Int32" Name="PostotakUkupno" Nullable="false" />
+          <Property Type="Int32" Name="KombinacijaID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Kombinaciju_Result">
+          <Property Type="Int32" Name="IDKombinacija" Nullable="false" />
+          <Property Type="Int32" Name="BrojObroka" Nullable="false" />
+          <Property Type="DateTime" Name="DatumKreiranja" Nullable="false" />
+          <Property Type="DateTime" Name="VrijediDo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Korisnika_Result">
+          <Property Type="Int32" Name="IDKorisnik" Nullable="false" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Prezime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DatumRodenja" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Visina" Nullable="false" />
+          <Property Type="Int32" Name="Tezina" Nullable="false" />
+          <Property Type="String" Name="Razina" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Spol" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="KorisnickoIme" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Lozinka" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Namirnicu_Result">
+          <Property Type="Int32" Name="IDNamirnica" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Energija_kcal" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Energija_kJ" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Tip" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Jedinica" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Kolicina" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_NazivObroka_Result">
+          <Property Type="Int32" Name="IDNazivObroka" Nullable="false" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Jedinice_Result">
+          <Property Type="Int32" Name="IDJedinica" Nullable="false" />
+          <Property Type="String" Name="Jedinica" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Kombinacije_Result">
+          <Property Type="Int32" Name="IDKombinacija" Nullable="false" />
+          <Property Type="Int32" Name="BrojObroka" Nullable="false" />
+          <Property Type="DateTime" Name="DatumKreiranja" Nullable="false" />
+          <Property Type="DateTime" Name="VrijediDo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_KombinacijeDetalji_Result">
+          <Property Type="Int32" Name="IDKombinacijaDetalji" Nullable="false" />
+          <Property Type="Int32" Name="NazivObrokaID" Nullable="true" />
+          <Property Type="Int32" Name="PostotakUgljikohidrata" Nullable="false" />
+          <Property Type="Int32" Name="PostotakMasti" Nullable="false" />
+          <Property Type="Int32" Name="PostotakProteina" Nullable="false" />
+          <Property Type="Int32" Name="PostotakUkupno" Nullable="false" />
+          <Property Type="Int32" Name="KombinacijaID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Korisnike_Result">
+          <Property Type="Int32" Name="IDKorisnik" Nullable="false" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Prezime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DatumRodenja" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Visina" Nullable="false" />
+          <Property Type="Int32" Name="Tezina" Nullable="false" />
+          <Property Type="String" Name="Razina_aktivnosti" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Spol" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="KorisnickoIme" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Lozinka" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Namirnice_Result">
+          <Property Type="Int32" Name="IDNamirnica" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="Energija_kcal" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Energija_kJ" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Tip" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Jedinica" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Kolicina" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Nazive_Obroka_Result">
+          <Property Type="Int32" Name="IDNazivObroka" Nullable="false" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_Sve_Obroke_Result">
+          <Property Type="Int32" Name="IDObrok" Nullable="false" />
+          <Property Type="Int32" Name="MeniID" Nullable="true" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="Dohvati_TipNamirnice_Result">
+          <Property Type="Int32" Name="IDTipNamirnice" Nullable="false" />
+          <Property Type="String" Name="Tip" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RWAModelStoreContainer" CdmEntityContainer="RWAEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="RWAModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="Ulogiran" ColumnName="Ulogiran" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aktivnosts">
+            <EntityTypeMapping TypeName="RWAModel.Aktivnost">
+              <MappingFragment StoreEntitySet="Aktivnost">
+                <ScalarProperty Name="IDAktivnost" ColumnName="IDAktivnost" />
+                <ScalarProperty Name="Razina" ColumnName="Razina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jedinicas">
+            <EntityTypeMapping TypeName="RWAModel.Jedinica">
+              <MappingFragment StoreEntitySet="Jedinica">
+                <ScalarProperty Name="IDJedinica" ColumnName="IDJedinica" />
+                <ScalarProperty Name="Jedinica1" ColumnName="Jedinica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kombinacijas">
+            <EntityTypeMapping TypeName="RWAModel.Kombinacija">
+              <MappingFragment StoreEntitySet="Kombinacija">
+                <ScalarProperty Name="IDKombinacija" ColumnName="IDKombinacija" />
+                <ScalarProperty Name="BrojObroka" ColumnName="BrojObroka" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="VrijediDo" ColumnName="VrijediDo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KombinacijaDetaljis">
+            <EntityTypeMapping TypeName="RWAModel.KombinacijaDetalji">
+              <MappingFragment StoreEntitySet="KombinacijaDetalji">
+                <ScalarProperty Name="IDKombinacijaDetalji" ColumnName="IDKombinacijaDetalji" />
+                <ScalarProperty Name="NazivObrokaID" ColumnName="NazivObrokaID" />
+                <ScalarProperty Name="PostotakUgljikohidrata" ColumnName="PostotakUgljikohidrata" />
+                <ScalarProperty Name="PostotakMasti" ColumnName="PostotakMasti" />
+                <ScalarProperty Name="PostotakProteina" ColumnName="PostotakProteina" />
+                <ScalarProperty Name="PostotakUkupno" ColumnName="PostotakUkupno" />
+                <ScalarProperty Name="KombinacijaID" ColumnName="KombinacijaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisniks">
+            <EntityTypeMapping TypeName="RWAModel.Korisnik">
+              <MappingFragment StoreEntitySet="Korisnik">
+                <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="DatumRodenja" ColumnName="DatumRodenja" />
+                <ScalarProperty Name="Visina" ColumnName="Visina" />
+                <ScalarProperty Name="Tezina" ColumnName="Tezina" />
+                <ScalarProperty Name="AktivnostID" ColumnName="AktivnostID" />
+                <ScalarProperty Name="TipDia" ColumnName="TipDia" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SpolID" ColumnName="SpolID" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="Ulogiran" ColumnName="Ulogiran" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menis">
+            <EntityTypeMapping TypeName="RWAModel.Meni">
+              <MappingFragment StoreEntitySet="Meni">
+                <ScalarProperty Name="IDMeni" ColumnName="IDMeni" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="BrojObroka" ColumnName="BrojObroka" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Namirnicas">
+            <EntityTypeMapping TypeName="RWAModel.Namirnica">
+              <MappingFragment StoreEntitySet="Namirnica">
+                <ScalarProperty Name="IDNamirnica" ColumnName="IDNamirnica" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Energija_kcal" ColumnName="Energija_kcal" />
+                <ScalarProperty Name="Energija_kJ" ColumnName="Energija_kJ" />
+                <ScalarProperty Name="TipNamirniceID" ColumnName="TipNamirniceID" />
+                <ScalarProperty Name="JedinicaID" ColumnName="JedinicaID" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NazivObrokas">
+            <EntityTypeMapping TypeName="RWAModel.NazivObroka">
+              <MappingFragment StoreEntitySet="NazivObroka">
+                <ScalarProperty Name="IDNazivObroka" ColumnName="IDNazivObroka" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obroks">
+            <EntityTypeMapping TypeName="RWAModel.Obrok">
+              <MappingFragment StoreEntitySet="Obrok">
+                <ScalarProperty Name="IDObrok" ColumnName="IDObrok" />
+                <ScalarProperty Name="MeniID" ColumnName="MeniID" />
+                <ScalarProperty Name="NazivObrokaID" ColumnName="NazivObrokaID" />
+                <ScalarProperty Name="NamirnicaID" ColumnName="NamirnicaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spols">
+            <EntityTypeMapping TypeName="RWAModel.Spol">
+              <MappingFragment StoreEntitySet="Spol">
+                <ScalarProperty Name="IDSpol" ColumnName="IDSpol" />
+                <ScalarProperty Name="Spol1" ColumnName="Spol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipNamirnices">
+            <EntityTypeMapping TypeName="RWAModel.TipNamirnice">
+              <MappingFragment StoreEntitySet="TipNamirnice">
+                <ScalarProperty Name="IDTipNamirnice" ColumnName="IDTipNamirnice" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Dodaj_Jedinicu" FunctionName="RWAModel.Store.Dodaj_Jedinicu" />
+          <FunctionImportMapping FunctionImportName="Dodaj_KombinacijaDetalji" FunctionName="RWAModel.Store.Dodaj_KombinacijaDetalji" />
+          <FunctionImportMapping FunctionImportName="Dodaj_Kombinaciju" FunctionName="RWAModel.Store.Dodaj_Kombinaciju" />
+          <FunctionImportMapping FunctionImportName="Dodaj_Korisnika" FunctionName="RWAModel.Store.Dodaj_Korisnika" />
+          <FunctionImportMapping FunctionImportName="Dodaj_Namirnicu" FunctionName="RWAModel.Store.Dodaj_Namirnicu" />
+          <FunctionImportMapping FunctionImportName="Dodaj_NazivObroka" FunctionName="RWAModel.Store.Dodaj_NazivObroka" />
+          <FunctionImportMapping FunctionImportName="Dodaj_TipNamirnice" FunctionName="RWAModel.Store.Dodaj_TipNamirnice" />
+          <FunctionImportMapping FunctionImportName="Dohvati_Admina" FunctionName="RWAModel.Store.Dohvati_Admina">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Admina_Result">
+                <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+                <ScalarProperty Name="Ulogiran" ColumnName="Ulogiran" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Jedinice" FunctionName="RWAModel.Store.Dohvati_Jedinice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Jedinice_Result">
+                <ScalarProperty Name="IDJedinica" ColumnName="IDJedinica" />
+                <ScalarProperty Name="Jedinica" ColumnName="Jedinica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Jedinicu" FunctionName="RWAModel.Store.Dohvati_Jedinicu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Jedinicu_Result">
+                <ScalarProperty Name="IDJedinica" ColumnName="IDJedinica" />
+                <ScalarProperty Name="Jedinica" ColumnName="Jedinica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_KombinacijaDetalji" FunctionName="RWAModel.Store.Dohvati_KombinacijaDetalji">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_KombinacijaDetalji_Result">
+                <ScalarProperty Name="IDKombinacijaDetalji" ColumnName="IDKombinacijaDetalji" />
+                <ScalarProperty Name="NazivObrokaID" ColumnName="NazivObrokaID" />
+                <ScalarProperty Name="PostotakUgljikohidrata" ColumnName="PostotakUgljikohidrata" />
+                <ScalarProperty Name="PostotakMasti" ColumnName="PostotakMasti" />
+                <ScalarProperty Name="PostotakProteina" ColumnName="PostotakProteina" />
+                <ScalarProperty Name="PostotakUkupno" ColumnName="PostotakUkupno" />
+                <ScalarProperty Name="KombinacijaID" ColumnName="KombinacijaID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Kombinaciju" FunctionName="RWAModel.Store.Dohvati_Kombinaciju">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Kombinaciju_Result">
+                <ScalarProperty Name="IDKombinacija" ColumnName="IDKombinacija" />
+                <ScalarProperty Name="BrojObroka" ColumnName="BrojObroka" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="VrijediDo" ColumnName="VrijediDo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Korisnika" FunctionName="RWAModel.Store.Dohvati_Korisnika">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Korisnika_Result">
+                <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="DatumRodenja" ColumnName="DatumRodenja" />
+                <ScalarProperty Name="Visina" ColumnName="Visina" />
+                <ScalarProperty Name="Tezina" ColumnName="Tezina" />
+                <ScalarProperty Name="Razina" ColumnName="Razina" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Spol" ColumnName="Spol" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Namirnice_Koristene_U_Meniju" FunctionName="RWAModel.Store.Dohvati_Namirnice_Koristene_U_Meniju" />
+          <FunctionImportMapping FunctionImportName="Dohvati_Namirnicu" FunctionName="RWAModel.Store.Dohvati_Namirnicu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Namirnicu_Result">
+                <ScalarProperty Name="IDNamirnica" ColumnName="IDNamirnica" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Energija_kcal" ColumnName="Energija_kcal" />
+                <ScalarProperty Name="Energija_kJ" ColumnName="Energija_kJ" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Jedinica" ColumnName="Jedinica" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_NazivObroka" FunctionName="RWAModel.Store.Dohvati_NazivObroka">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_NazivObroka_Result">
+                <ScalarProperty Name="IDNazivObroka" ColumnName="IDNazivObroka" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Jedinice" FunctionName="RWAModel.Store.Dohvati_Sve_Jedinice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Jedinice_Result">
+                <ScalarProperty Name="IDJedinica" ColumnName="IDJedinica" />
+                <ScalarProperty Name="Jedinica" ColumnName="Jedinica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Kombinacije" FunctionName="RWAModel.Store.Dohvati_Sve_Kombinacije">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Kombinacije_Result">
+                <ScalarProperty Name="IDKombinacija" ColumnName="IDKombinacija" />
+                <ScalarProperty Name="BrojObroka" ColumnName="BrojObroka" />
+                <ScalarProperty Name="DatumKreiranja" ColumnName="DatumKreiranja" />
+                <ScalarProperty Name="VrijediDo" ColumnName="VrijediDo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_KombinacijeDetalji" FunctionName="RWAModel.Store.Dohvati_Sve_KombinacijeDetalji">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_KombinacijeDetalji_Result">
+                <ScalarProperty Name="IDKombinacijaDetalji" ColumnName="IDKombinacijaDetalji" />
+                <ScalarProperty Name="NazivObrokaID" ColumnName="NazivObrokaID" />
+                <ScalarProperty Name="PostotakUgljikohidrata" ColumnName="PostotakUgljikohidrata" />
+                <ScalarProperty Name="PostotakMasti" ColumnName="PostotakMasti" />
+                <ScalarProperty Name="PostotakProteina" ColumnName="PostotakProteina" />
+                <ScalarProperty Name="PostotakUkupno" ColumnName="PostotakUkupno" />
+                <ScalarProperty Name="KombinacijaID" ColumnName="KombinacijaID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Korisnike" FunctionName="RWAModel.Store.Dohvati_Sve_Korisnike">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Korisnike_Result">
+                <ScalarProperty Name="IDKorisnik" ColumnName="IDKorisnik" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="DatumRodenja" ColumnName="DatumRodenja" />
+                <ScalarProperty Name="Visina" ColumnName="Visina" />
+                <ScalarProperty Name="Tezina" ColumnName="Tezina" />
+                <ScalarProperty Name="Razina_aktivnosti" ColumnName="Razina aktivnosti" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Spol" ColumnName="Spol" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Lozinka" ColumnName="Lozinka" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Namirnice" FunctionName="RWAModel.Store.Dohvati_Sve_Namirnice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Namirnice_Result">
+                <ScalarProperty Name="IDNamirnica" ColumnName="IDNamirnica" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Energija_kcal" ColumnName="Energija_kcal" />
+                <ScalarProperty Name="Energija_kJ" ColumnName="Energija_kJ" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+                <ScalarProperty Name="Jedinica" ColumnName="Jedinica" />
+                <ScalarProperty Name="Kolicina" ColumnName="Kolicina" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Nazive_Obroka" FunctionName="RWAModel.Store.Dohvati_Sve_Nazive_Obroka">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Nazive_Obroka_Result">
+                <ScalarProperty Name="IDNazivObroka" ColumnName="IDNazivObroka" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_Sve_Obroke" FunctionName="RWAModel.Store.Dohvati_Sve_Obroke">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_Sve_Obroke_Result">
+                <ScalarProperty Name="IDObrok" ColumnName="IDObrok" />
+                <ScalarProperty Name="MeniID" ColumnName="MeniID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Dohvati_TipNamirnice" FunctionName="RWAModel.Store.Dohvati_TipNamirnice">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.Dohvati_TipNamirnice_Result">
+                <ScalarProperty Name="IDTipNamirnice" ColumnName="IDTipNamirnice" />
+                <ScalarProperty Name="Tip" ColumnName="Tip" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Izmjeni_Jedinicu" FunctionName="RWAModel.Store.Izmjeni_Jedinicu" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_KombinacijaDetalji" FunctionName="RWAModel.Store.Izmjeni_KombinacijaDetalji" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_Kombinaciju" FunctionName="RWAModel.Store.Izmjeni_Kombinaciju" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_Korisnika" FunctionName="RWAModel.Store.Izmjeni_Korisnika" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_Namirnicu" FunctionName="RWAModel.Store.Izmjeni_Namirnicu" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_NazivObroka" FunctionName="RWAModel.Store.Izmjeni_NazivObroka" />
+          <FunctionImportMapping FunctionImportName="Izmjeni_TipNamirnice" FunctionName="RWAModel.Store.Izmjeni_TipNamirnice" />
+          <FunctionImportMapping FunctionImportName="Obrisi_Jedinicu" FunctionName="RWAModel.Store.Obrisi_Jedinicu" />
+          <FunctionImportMapping FunctionImportName="Obrisi_KombinacijaDetalji" FunctionName="RWAModel.Store.Obrisi_KombinacijaDetalji" />
+          <FunctionImportMapping FunctionImportName="Obrisi_Kombinaciju" FunctionName="RWAModel.Store.Obrisi_Kombinaciju" />
+          <FunctionImportMapping FunctionImportName="Obrisi_Korisnika" FunctionName="RWAModel.Store.Obrisi_Korisnika" />
+          <FunctionImportMapping FunctionImportName="Obrisi_Namirnicu" FunctionName="RWAModel.Store.Obrisi_Namirnicu" />
+          <FunctionImportMapping FunctionImportName="Obrisi_NazivObroka" FunctionName="RWAModel.Store.Obrisi_NazivObroka" />
+          <FunctionImportMapping FunctionImportName="Obrisi_TipNamirnice" FunctionName="RWAModel.Store.Obrisi_TipNamirnice" />
+          <FunctionImportMapping FunctionImportName="Odjavi_Admina" FunctionName="RWAModel.Store.Odjavi_Admina" />
+          <FunctionImportMapping FunctionImportName="Prijavi_Admina" FunctionName="RWAModel.Store.Prijavi_Admina" />
+          <FunctionImportMapping FunctionImportName="Provjeri_Admina" FunctionName="RWAModel.Store.Provjeri_Admina" />
+          <FunctionImportMapping FunctionImportName="Provjeri_Korisnika" FunctionName="RWAModel.Store.Provjeri_Korisnika" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="RWAModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="RWAModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="RWAModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="RWAModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="RWAModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RWAModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="RWAModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="RWAModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
