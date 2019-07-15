@@ -36,23 +36,7 @@ namespace AdminPage
                 }
             }
         }
-
-        protected void BindGridDetalji()
-        {
-            using (SqlConnection con = new SqlConnection(Helper.CONNECTION_STRING))
-            {
-                using (SqlDataAdapter sda = new SqlDataAdapter("exec Dohvati_Sve_KombinacijeDetalji", con))
-                {
-                    using (DataTable dt = new DataTable())
-                    {
-                        sda.Fill(dt);
-                        //GridView2.DataSource = dt;
-                        //GridView2.DataBind();
-                    }
-                }
-            }
-        }
-
+        
         protected void Insert(object sender, EventArgs e)
         {
             int BrojObroka;

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Generate menu";
+}
+
+<h2>Index</h2>
+
+<h1>Hello @Session["name"]</h1>
+
+
+@model PublicSite.Models.ViewModels
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Generate menu</title>
+
+</head>
+<body>
+    @using (Html.BeginForm("GenerateMenu", "Home", FormMethod.Post))
+    {
+        <p>Number Of Meals: </p> @Html.TextBox("NumberOfMeals") <input id="generate" type="submit" value="Generate Menu" />
+        <label class="alert-danger">@Html.DisplayFor(model => model.ErrorMessage)</label>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name Of Meal</th>
+                    <th scope="col">Good Name</th>
+                    @*<th scope="col">Energy In kcal</th>*@
+                    <th scope="col">Measuring Unit</th>
+                </tr>
+            </thead>
+            @if (Model.ErrorMessage == null){
+                for (int i = 0; i < Model.NumberOfMeals; i++)
+                {
+                    <tr>
+                        <td scope="row">@Model.MealNames[i].Ime</td>
+                        <td scope="row">
+                            Carbs: @Model.Carbs[i].Naziv
+                            <br />
+                            Fats: @Model.Fats[i].Naziv
+                            <br />
+                            Proteins: @Model.Proteins[i].Naziv
+                        </td>
+                        @*<td scope="row">@Model.Goods[i].Energy_kcal</td>*@
+                        <td scope="row">
+                            @Model.MeasuringUnits[i].Jedinica1
+                            <br />
+                            @Model.MeasuringUnits[i].Jedinica1
+                            <br />
+                            @Model.MeasuringUnits[i].Jedinica1
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    }
+
+</body>
+</html>
+
+<div>
+    @Html.ActionLink("Logout", "Logout")
+</div>

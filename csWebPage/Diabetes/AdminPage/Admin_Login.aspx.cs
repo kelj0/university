@@ -7,6 +7,7 @@ using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using HashHelper;
 
 namespace AdminPage
 {
@@ -29,8 +30,18 @@ namespace AdminPage
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    string p;
+                    using (SqlCommand c = new SqlCommand("select Lozinka from [Admin]"))
+                    {
+                        c.Connection = con;
+                        con.Open();
+                        p = c.ExecuteScalar().ToString();
+                        con.Close();
+                    }
+                    string pass  = HashingHelper.GetHash(password.Text,HashingHelper.GetSaltFromPassword(p));
+                    
                     cmd.Parameters.Add("@KorisnickoIme", SqlDbType.NVarChar).Value = username.Text;
-                    cmd.Parameters.Add("@Lozinka", SqlDbType.NVarChar).Value = password.Text;
+                    cmd.Parameters.Add("@Lozinka", SqlDbType.NVarChar).Value = pass;
 
                     con.Open();
                     var r = cmd.ExecuteScalar();

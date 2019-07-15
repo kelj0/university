@@ -128,6 +128,19 @@ as
 	where (select IDMeni from Meni)=@MeniID
 go
 
+create proc [dbo].[Dohvati_Sve_Menije_Od_Korisnika]
+	@KorisnikID int
+as
+	select m.IDMeni,m.DatumKreiranja,[no].Ime as 'Obrok', n.Naziv as 'Namirnica' from Meni as m 
+	inner join Obrok as o on o.MeniID = m.IDMeni
+	inner join NazivObroka as [no] on [no].IDNazivObroka=o.NazivObrokaID
+	inner join Namirnica as n on o.NamirnicaID = n.IDNamirnica
+	where m.KorisnikID = @KorisnikID
+go
+
+select * from Meni
+select * from Obrok
+
 create proc [dbo].[Dohvati_Sve_Jedinice]
 as
 	select * from [Jedinica]
@@ -224,12 +237,46 @@ as
 	end
 go	
 
+create proc [dbo].[Dohvati_Korisnik_ID]
+	@KorisnickoIme nvarchar(50)
+as
+	if exists(select IDKorisnik from [Korisnik] where KorisnickoIme = @KorisnickoIme) begin
+		select IDKorisnik from [Korisnik] where KorisnickoIme = @KorisnickoIme
+	end
+	else begin
+		select -1
+	end
+go
+	
+
+create proc [dbo].[Prijavi_Korisnika]
+	@KorisnickoIme nvarchar(50)
+as
+	if exists(select IDKorisnik from [Korisnik] where KorisnickoIme = @KorisnickoIme) begin
+		update [dbo].[Korisnik]
+		set
+			Ulogiran = 'd'
+		where KorisnickoIme = @KorisnickoIme
+	end
+go
+
+create proc [dbo].[Odjavi_Korisnika]
+	@KorisnickoIme nvarchar(50)
+as
+	if exists(select IDKorisnik from [Korisnik] where KorisnickoIme = @KorisnickoIme) begin
+		update [dbo].[Korisnik]
+		set
+			Ulogiran = 'n'
+		where KorisnickoIme = @KorisnickoIme
+	end
+go
+
 -- Korisnik CRUD
 create proc [dbo].[Dohvati_Korisnika]
 	@KorisnikID int
 as
 	if exists(select IDKorisnik from [Korisnik] where IDKorisnik = @KorisnikID) begin
-		select k.IDKorisnik, k.Ime,k.Prezime,k.DatumRodenja,k.Visina,k.Tezina,a.Razina,k.Email,sp.Spol,k.KorisnickoIme,k.Lozinka from Korisnik as k 
+		select k.IDKorisnik, k.Ime,k.Prezime,k.DatumRodenja,k.Visina,k.Tezina,a.Razina,k.Email,sp.Spol,k.KorisnickoIme,k.Lozinka,k.Ulogiran from Korisnik as k 
 		inner join Aktivnost as a on a.IDAktivnost = k.AktivnostID
 		inner join Spol as sp on sp.IDSpol=k.SpolID
 		where k.IDKorisnik = @KorisnikID
@@ -254,14 +301,14 @@ create proc [dbo].[Dodaj_Korisnika]
 	@IDSpol int
 as
 	if exists(select IDKorisnik from Korisnik where [KorisnickoIme] = @Korisnicko_ime) begin
-		select 'Korisnik vec postoji'
+		select -1
 	end
 	else if exists(select IDKorisnik from Korisnik where [Email] = @Email) begin
-		select 'Korisnik sa tim emailom vec postoji'
+		select -2
 	end
 	else begin
 		insert into [dbo].[Korisnik] values(@Ime,@Prezime,@DatumRodenja,@Visina,@Tezina,@IDAktivnost,@TipDia,@Email,@IDSpol,@Korisnicko_ime,@Lozinka,'n')
-		select 'Korisnik uspjesno registriran'
+		select 1
 	end
 go
 
@@ -660,15 +707,15 @@ values ('Muskarac'),('Zena')
 go
 
 insert into [dbo].[Aktivnost]
-values ('Umjerena'),('Intenzivna'),('Nikakva')
+values ('Nikakva'),('Umjerena'),('Intenzivna')
 go
 
 insert into [dbo].[Korisnik]
-values ('TestIme','TestPrezime','1.1.1970',150,50,1,1,'test@testmail.com',1,'test','test','n')
+values ('TestIme','TestPrezime','1.1.1999',150,50,1,1,'test@testmail.com',1,'test','UjyVAQyYuP7b0BuvvPvdivLx1cb+imw1nq5+5q97rK4e65Sn','n')
 go
 
 insert into [dbo].[Admin] 
-values ('admin','admin','n')
+values ('admin','TgLXfRGBx4LgnJtgB4Umu0yZ/G/n1hcI8u+2PJHE/WmYPQkx','n')
 go
 
 insert into [NazivObroka] 
@@ -678,6 +725,7 @@ go
 insert into [TipNamirnice]
 values ('Ugljikohidrati'),('Bjelancevine'),('Masti')
 go
+
 
 insert into [Jedinica]
 values ('g'),('kom'),('salica'),('zlica')

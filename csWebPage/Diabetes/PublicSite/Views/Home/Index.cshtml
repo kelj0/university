@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@model PublicSite.Models.ViewModels
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+</head>
+<body>
+        <h1>Hello @Session["name"]</h1>
+    
+        @Html.ActionLink("Generate new menu","GenerateMenu")
+</body>
+</html>
+
+
+<div>
+    @Html.ActionLink("Logout", "Logout")
+</div>
