@@ -5,6 +5,7 @@
  */
 package com.kkeglje.hospitalsystem;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.MessageFormat;
 
 /**
  *
@@ -29,32 +31,72 @@ public class DatabaseHandler {
     
     private DatabaseHandler(String url) throws ClassNotFoundException{
         Class.forName(url);
-        OpenConnection();
-        ExecuteScript(PROJECT_DIRECTORY + "/databse/build-db.sql");
-        CloseConnection();
+        if(!new File(PROJECT_DIRECTORY + "/MAIN_DATABASE.db").exists()){
+            ExecuteScript(PROJECT_DIRECTORY + "/database/build-db.sql");
+        }
     }
+    public void test(){System.out.println("test");}
     
-    public static DatabaseHandler getInstance() throws ClassNotFoundException{
+    public static DatabaseHandler getInstance(){
         if(instance == null){
-            instance = new DatabaseHandler(DEFAULT_JAVA_CLASS);
+            try {
+                instance = new DatabaseHandler(DEFAULT_JAVA_CLASS);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return instance;
     }
     
-    public static void ExecuteScript(String path){
+    public void ExecuteScript(String path){
+        System.out.println("Executing script " + path);
+        OpenConnection();
+        String content = "";
         try {
-            String content = new String(Files.readAllBytes(Paths.get(path)));
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);
-            for(String query : content.split(";")){
-                ResultSet rs = statement.executeQuery(query);
-            }
-        } catch (IOException | SQLException ex) {
+            content = new String(Files.readAllBytes(Paths.get(path)));
+        }catch (IOException ex) {
+            Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(String query : content.split(";")){
+            ExecuteUpdate(query);
+        }
+        CloseConnection();
+        System.out.println("Done");
+    }
+    
+    public void ExecuteUpdate(String query){
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException ex) {
             Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public ResultSet ExecuteQuery(String query){
+        Statement statement = null;
+        ResultSet rs = null;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(query);            
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
     
-    public static void OpenConnection(){
+    public void InsertMiniForm(String name,String sex, String date, String briefStatement, String tel1, String tel2, String relativeName, String relationRelative){
+        //ExecuteQuery(MessageFormat.format("{0} {1} {2} {3} {4} {5} {6}", name,sex,date,briefStatement,tel1,tel2,relativeName,relationRelative));
+        System.out.println(
+                MessageFormat.format(
+                        "name:{0} sex:{1} date:{2} brief:{3} tel1:{4} tel2:{5} name:{6} relation:{7}", 
+                        name,sex,date,briefStatement,tel1,tel2,relativeName,relationRelative
+                )
+        );
+    }
+    
+    public void OpenConnection(){
         try {
             connection = DriverManager.getConnection(URL_FORMAT);
         } catch (SQLException e) {
@@ -64,7 +106,7 @@ public class DatabaseHandler {
         
     }
     
-    public static void CloseConnection(){
+    public void CloseConnection(){
         try{
             connection.close();
         }catch(SQLException e){ 
