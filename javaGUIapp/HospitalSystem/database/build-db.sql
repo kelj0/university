@@ -52,10 +52,10 @@ CREATE TABLE PERSON(
 	DateOfBirth date,
 	Telephone_1 text,
 	Telephone_2 text,
-	NextOfKinName text
+	NextOfKinName text,
 	NextOfKinRelationshipWithPatient text,
-	NextOfKintegerelephone_1 text,
-	NextOfKintegerelephone_2 text,
+	NextOfKintelephone_1 text,
+	NextOfKintelephone_2 text,
 	NextOfKinCityID integer,
 	NextOfKinStateID integer,
 	NextOfKinStreetID integer,
@@ -77,7 +77,7 @@ CREATE TABLE PERSON(
 	Weight integer,
 	BloodTypeID integer,
 	Occupation text,
-	GorssAnualIncome integer,
+	GrossAnualIncome integer,
 	Vegetarian text,
 	Smoker text,
 	AvgNumberOfCigarettesPerDay integer,
@@ -171,5 +171,5 @@ INSERT INTO DIABETICTYPE VALUES(null,'Type 2');
 INSERT INTO SEX VALUES(null,'Male');
 INSERT INTO SEX VALUES(null,'Female');
 
-INSERT INTO PERSON VALUES(null,'Peric Middle Pero','My leg hurts',1,'1990-01-01 10:00:00','123456789','987654321','Mother1','Mother','120948213','102948123',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,170,70,1,'Student',30,'n','n',0,'y',5,'n',null,2,1,'y',1,'Broken leg','n','y','n',null,'n','n','n','n','n','n','n',null,null);
-INSERT INTO PERSON VALUES(null,'Ana Middle Anic','My arm hurts',2,'1970-01-01 10:00:00','123456789','987654321','Husband1','Husband','120948213','102948123',3,2,3,3,3,3,2,3,3,3,3,2,3,3,3,1,1,160,50,2,'Seller',70,'n','n',0,'n',null,'n',null,5,1,'y',1,'Broken leg','n','y','n',null,'n','n','n','n','n','n','n',null,null);
+INSERT INTO PERSON VALUES(null,'Peric Middle Pero','My leg hurts',1,'1990-01-01 10:00:00','123456789','987654321','Jasenka','Mother','120948213','102948123',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,170,70,1,'Student',30,'n','n',0,'y',5,'n',null,2,1,'y',1,'Broken leg','n','y','n',null,'n','n','n','n','n','n','n','n',null,null);
+INSERT INTO PERSON VALUES(null,'Ana Middle Anic','My arm hurts',2,'1970-01-01 10:00:00','123456789','987654321','Sinisa','Husband','120948213','102948123',3,2,3,3,3,3,2,3,3,3,3,2,3,3,3,1,1,160,50,2,'Seller',70,'n','n',0,'n',null,'n',null,5,1,'y',1,'Broken leg','n','y','n',null,'n','n','n','n','n','n','n','n',null,null);
