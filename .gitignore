@@ -1,5 +1,7 @@
 .vs
-bin/
-target/
-obj/
-
+[Bb]in/
+[Tt]arget/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
