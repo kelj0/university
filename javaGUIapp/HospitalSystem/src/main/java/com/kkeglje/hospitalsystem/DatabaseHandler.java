@@ -73,7 +73,7 @@ public class DatabaseHandler {
             statement = connection.createStatement();
             statement.executeUpdate(query);
         } catch (SQLException ex) {
-            System.out.println("Why you do this?");
+            ex.printStackTrace();
         }
     }
 
