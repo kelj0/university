@@ -1,5 +1,5 @@
 class Server():
-    users = {'admin@admin':{'name':'admin','password':'pass'}}
+    _users = {'admin@admin':{'name':'admin','password':'pass'}}
     def __init__(self):
         pass
 
