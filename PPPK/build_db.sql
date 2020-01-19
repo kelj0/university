@@ -7,7 +7,6 @@ go
 use PPPK_DATABASE
 go
 
-
 -----------------------------------------------------------------
 --TABLES
 -----------------------------------------------------------------
@@ -30,8 +29,8 @@ go
 
 create table [vozac]
 (
-    [id]	        int constraint PK_vozac primary key identity,
-    [ime]	        nvarchar(128) not null,
+    [id]            int constraint PK_vozac primary key identity,
+    [ime]           nvarchar(128) not null,
     [prezime]       nvarchar(128) not null,
     [broj_mobitela] nvarchar(32) not null,
     [broj_vozacke]  nvarchar(16) not null
@@ -74,7 +73,7 @@ create table [servis]
     [datum_servisa] date not null,
     [naziv_servisa] nvarchar(128),
     [cijena]        decimal(10,2) not null,
-    [info]	        nvarchar(512) not null
+    [info]          nvarchar(512) not null
 )
 go
 
