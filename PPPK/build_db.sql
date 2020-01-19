@@ -13,90 +13,90 @@ go
 -----------------------------------------------------------------
 create table [tip_vozila]
 (
-	[id]  int constraint PK_tip_vozila primary key identity,
-	[tip] nvarchar(32) not null
+    [id]  int constraint PK_tip_vozila primary key identity,
+    [tip] nvarchar(32) not null
 )
 create table [mjesto]
 (
-	[id]    int constraint PK_mjesto primary key identity,
-	[naziv] nvarchar(128) not null
+    [id]    int constraint PK_mjesto primary key identity,
+    [naziv] nvarchar(128) not null
 )
 create table [status]
 (
-	[id]     int constraint PK_status primary key identity,
-	[status] nvarchar(32) not null
+    [id]     int constraint PK_status primary key identity,
+    [status] nvarchar(32) not null
 )
 go
 
 create table [vozac]
 (
-	[id]			int constraint PK_vozac primary key identity,
-	[ime]			nvarchar(128) not null,
-	[prezime]		nvarchar(128) not null,
-	[broj_mobitela] nvarchar(32) not null,
-	[broj_vozacke]  nvarchar(16) not null
+    [id]	        int constraint PK_vozac primary key identity,
+    [ime]	        nvarchar(128) not null,
+    [prezime]       nvarchar(128) not null,
+    [broj_mobitela] nvarchar(32) not null,
+    [broj_vozacke]  nvarchar(16) not null
 )
 create table [vozilo]
 (
-	[id]				 int constraint PK_vozilo primary key identity,
-	[tip_vozila_id]		 int constraint FK__tip_vozila__vozilo foreign key references [dbo].[tip_vozila](id),
-	[marka]				 nvarchar(128) not null,
-	[godina_proizvodnje] int not null,
-	[pocetni_km]		 decimal(10,1) not null,
-	[trenutni_km]		 decimal(10,1) not null
+    [id]                 int constraint PK_vozilo primary key identity,
+    [tip_vozila_id]      int constraint FK__tip_vozila__vozilo foreign key references [dbo].[tip_vozila](id),
+    [marka]              nvarchar(128) not null,
+    [godina_proizvodnje] int not null,
+    [pocetni_km]         decimal(10,1) not null,
+    [trenutni_km]        decimal(10,1) not null
 )
 go
 
 create table [putni_nalog]
 (
-	[id]		   int constraint PK_putni_nalog primary key identity,
-	[vozac_id]     int constraint FK__vozac__putni_nalog foreign key references [dbo].[vozac](id),
-	[vozilo_id]    int constraint FK__vozilo__putni_nalog foreign key references [dbo].[vozilo](id),
-	[status_id]    int constraint FK__status__putni_nalog foreign key references [dbo].[status](id),
-	[datum_izrade] date not null
+    [id]           int constraint PK_putni_nalog primary key identity,
+    [vozac_id]     int constraint FK__vozac__putni_nalog foreign key references [dbo].[vozac](id),
+    [vozilo_id]    int constraint FK__vozilo__putni_nalog foreign key references [dbo].[vozilo](id),
+    [status_id]    int constraint FK__status__putni_nalog foreign key references [dbo].[status](id),
+    [datum_izrade] date not null
 )
 create table [zauzece_vozilo]
 (
-	id			int constraint PK_zauzece_vozilo primary key identity,
-	[vozilo_id] int constraint FK__vozilo__zauzece_vozilo foreign key references [dbo].[vozilo](id),
-	[datum]		date not null
+    id	        int constraint PK_zauzece_vozilo primary key identity,
+    [vozilo_id] int constraint FK__vozilo__zauzece_vozilo foreign key references [dbo].[vozilo](id),
+    [datum]     date not null
 )
 create table [zauzece_vozac]
 (
-	id			int constraint PK_zauzece_vozac primary key identity,
-	[vozilo_id] int constraint FK__vozilo__zauzece_vozac foreign key references [dbo].[vozilo](id),
-	[datum]		date not null
+    id	        int constraint PK_zauzece_vozac primary key identity,
+    [vozilo_id] int constraint FK__vozilo__zauzece_vozac foreign key references [dbo].[vozilo](id),
+    [datum]     date not null
 )
 create table [servis]
 (
-	id				int constraint PK_servis primary key identity,
-	[vozilo_id]		int constraint FK__vozilo__servis foreign key references [dbo].[vozilo](id),
-	[datum_servisa] date not null,
-	[naziv_servisa] nvarchar(128),
-	[cijena]		decimal(10,2) not null,
-	[info]			nvarchar(512) not null
+    id	            int constraint PK_servis primary key identity,
+    [vozilo_id]	    int constraint FK__vozilo__servis foreign key references [dbo].[vozilo](id),
+    [datum_servisa] date not null,
+    [naziv_servisa] nvarchar(128),
+    [cijena]        decimal(10,2) not null,
+    [info]	        nvarchar(512) not null
 )
 go
 
 create table [kupnja_goriva]
 (
-	id				 int constraint PK_kupnja_goriva primary key identity,
-	[putni_nalog_id] int constraint FK__putni_nalog__kupnja_goriva foreign key references [dbo].[putni_nalog](id),
-	[mjesto_id]		 int constraint FK__mjesto__kupnja_goriva foreign key references [dbo].[mjesto](id),
-	[cijena]		 decimal(10,2) not null,
-	[kolicina]		 decimal(10,2) not null,
-	[datum]		     date not null
+    id	             int constraint PK_kupnja_goriva primary key identity,
+    [putni_nalog_id] int constraint FK__putni_nalog__kupnja_goriva foreign key references [dbo].[putni_nalog](id),
+    [mjesto_id]      int constraint FK__mjesto__kupnja_goriva foreign key references [dbo].[mjesto](id),
+    [cijena]         decimal(10,2) not null,
+    [kolicina]       decimal(10,2) not null,
+    [datum]	         date not null
 )
 create table [ruta]
 (
-	id 			       int constraint PK_ruta primary key identity,
-	[putni_nalog_id]   int constraint FK__putni_nalog__ruta foreign key references [dbo].[putni_nalog](id),
-	[x_koordinata_a]   decimal(20,10) not null,
-	[y_koordinata_a]   decimal(20,10) not null,
-	[x_koordinata_b]   decimal(20,10) not null,
-	[y_koordinata_b]   decimal(20,10) not null,
-	[km_izmedu_a_b]    decimal(10,2) not null,
-	[prosjecna_brzina] decimal(6,2) not null
+    id                 int constraint PK_ruta primary key identity,
+    [putni_nalog_id]   int constraint FK__putni_nalog__ruta foreign key references [dbo].[putni_nalog](id),
+    [x_koordinata_a]   decimal(20,10) not null,
+    [y_koordinata_a]   decimal(20,10) not null,
+    [x_koordinata_b]   decimal(20,10) not null,
+    [y_koordinata_b]   decimal(20,10) not null,
+    [km_izmedu_a_b]    decimal(10,2) not null,
+    [prosjecna_brzina] decimal(6,2) not null
 )
 go
 -----------------------------------------------------------------
