@@ -84,7 +84,7 @@ create table [kupnja_goriva]
     [mjesto_id]      int constraint FK__mjesto__kupnja_goriva foreign key references [dbo].[mjesto](id),
     [cijena]         decimal(10,2) not null,
     [kolicina]       decimal(10,2) not null,
-    [datum]	         date not null
+    [datum]          date not null
 )
 create table [ruta]
 (
