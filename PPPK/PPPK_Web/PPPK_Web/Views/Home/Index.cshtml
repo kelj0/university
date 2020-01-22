@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .wrapper {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
+    ul {
+        list-style: none
+    }
+    li{
+        padding-top: 4%;
+    }
+</style>
+
+<div class="wrapper">
+    <ul>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Index","Vozaci")'" class="btn btn-default">Vozaci</div>
+        </li>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Index","Vozila")'" class="btn btn-default">Vozila</div>
+        </li>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Index","PutniNalozi")'" class="btn btn-default">Putni nalozi</div>
+        </li>
+    </ul>
+</div>

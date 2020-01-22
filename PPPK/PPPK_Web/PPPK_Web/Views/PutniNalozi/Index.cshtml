@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Putni nalozi";
+}
+
+<h2>List putni nalozi</h2>
+<ul>
+    <li>
+        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 1 })'" class="btn btn-default">Putni nalog 1</div>
+    </li>
+    <li>
+        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 2 })'" class="btn btn-default">Putni nalog 2</div>
+    </li>
+    <li>
+        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 3 })'" class="btn btn-default">Putni nalog 3</div>
+    </li>
+    <li>
+        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 4 })'" class="btn btn-default">Putni nalog 4</div>
+    </li>
+</ul>
+

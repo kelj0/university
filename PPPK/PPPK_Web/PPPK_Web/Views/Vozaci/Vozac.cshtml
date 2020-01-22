@@ -1,0 +1,13 @@
+﻿@model int
+@if (Model == 0)
+{
+    Response.Redirect(Url.Action("Index", "Vozaci"));
+}
+
+
+@{
+    ViewBag.Title = "Vozac";
+}
+
+<h2>CRUD Vozac ID: @Model  </h2>
+
