@@ -17,7 +17,7 @@
     }
 </style>
 
-<div onclick="window.location.href= '@Url.Action("Index", "Vozila")'" class="btn btn-default">Nazad na popis vozila</div>
+<div onclick="window.location.href= '@Url.Action("Index", "Vozila")'" class="btn btn-primary">Natrag na popis vozila</div>
 @if (Model == null)
 {
     <h2>ID nije poslan u url-u</h2>
@@ -28,6 +28,7 @@ else if (Model.vozilo == null)
 }
 else
 {
+
     <div>
         <ul>
             <li>Marka: @Model.vozilo.marka</li>

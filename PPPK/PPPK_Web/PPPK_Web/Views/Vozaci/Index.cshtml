@@ -1,4 +1,5 @@
-﻿
+﻿@model List<vozac>
+
 @{
     ViewBag.Title = "Vozaci";
 }
@@ -6,7 +7,6 @@
 <style>
     .center {
         margin: auto;
-        width: 50%;
         padding-top: 5%;
         text-align: center;
     }
@@ -14,22 +14,52 @@
     ul {
         list-style: none
     }
+    li{
+        margin-bottom: 2%;
+    }
+    .vozac_container {
+        border: 3px lightblue solid;
+        padding: 10px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .vozac_item {
+        padding: 1%;
+    }
 </style>
 <div class="center">
 
     <h2>List Vozaci</h2>
     <ul>
+        @foreach (vozac v in @Model)
+        {
         <li>
-            <div onclick="window.location.href= '@Url.Action("Vozac","Vozaci", new { id = 1 })'" class="btn btn-default">Vozac 1</div>
+            <div class="vozac_container">
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col vozac_item">
+                                Ime: @v.ime
+                            </div>
+                            <div class="col vozac_item">
+                                Prezime: @v.prezime
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col vozac_item">
+                                Br. mobitela: @v.broj_mobitela
+                            </div>
+                            <div class="col vozac_item">
+                                Br. vozacke: @v.broj_vozacke
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center align-self-center">
+                        <div onclick="window.location.href= '@Url.Action("Vozac", "Vozaci", new { id = v.id })'" class="btn btn-success">Uredi</div>
+                    </div>
+                </div>
+            </div>
         </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozac","Vozaci", new { id = 2 })'" class="btn btn-default">Vozac 2</div>
-        </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozac","Vozaci", new { id = 3 })'" class="btn btn-default">Vozac 3</div>
-        </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozac","Vozaci", new { id = 4 })'" class="btn btn-default">Vozac 4</div>
-        </li>
+        }
     </ul>
 </div>

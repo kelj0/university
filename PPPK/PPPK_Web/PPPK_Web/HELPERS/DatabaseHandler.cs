@@ -12,7 +12,6 @@ namespace PPPK_Web.HELPERS
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
 
-
         /// <summary>
         /// Provjerava valjanost ID-a 
         /// </summary>
@@ -66,6 +65,46 @@ namespace PPPK_Web.HELPERS
             }
         }
 
+
+        /// <summary>
+        /// Dohvaca sve vozace
+        /// </summary>
+        /// /// <returns>
+        /// List<vozac> or null
+        /// </returns>
+        public static List<vozac> getAllVozaci()
+        {
+            List<vozac> filler = new List<vozac>();
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from vozac", c))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    if (t.Rows.Count > 0)
+                    {
+                        foreach(DataRow dr in t.Rows)
+                        { 
+                            vozac v = new vozac
+                            {
+                                id = Convert.ToInt16(dr["id"]),
+                                broj_mobitela = Convert.ToString(dr["broj_mobitela"]),
+                                broj_vozacke = Convert.ToString(dr["broj_vozacke"]),
+                                ime = Convert.ToString(dr["ime"]),
+                                prezime = Convert.ToString(dr["prezime"])
+                            };
+                            filler.Add(v);
+                        }
+                        return filler;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Dohvaca vozilo

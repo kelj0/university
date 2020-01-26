@@ -165,7 +165,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\VoziloServisiModel.cs" />
+    <Compile Include="Models\VoziloVIEW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="putni_nalog.cs">
       <DependentUpon>Models.tt</DependentUpon>

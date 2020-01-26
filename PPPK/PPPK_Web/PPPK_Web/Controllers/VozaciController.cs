@@ -12,7 +12,7 @@ namespace PPPK_Web.Controllers
         // GET: Vozaci
         public ActionResult Index()
         {
-            return View();
+            return View((object)DatabaseHandler.getAllVozaci());
         }
 
         public ActionResult Vozac(int? id)
