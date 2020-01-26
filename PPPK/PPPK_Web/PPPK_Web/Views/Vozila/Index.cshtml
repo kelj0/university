@@ -1,4 +1,5 @@
-﻿
+﻿@model PPPK_Web.Models.VozilaVIEW
+
 @{
     ViewBag.Title = "Vozila";
 }
@@ -6,7 +7,6 @@
 <style>
     .center {
         margin: auto;
-        width: 50%;
         padding-top: 5%;
         text-align: center;
     }
@@ -14,21 +14,58 @@
     ul {
         list-style: none
     }
+
+    li {
+        margin-bottom: 2%;
+    }
+
+    .vozilo_container {
+        border: 3px lightblue solid;
+        padding: 10px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .vozilo_item {
+        padding: 1%;
+    }
 </style>
 <div class="center">
-    <h2>List Vozila</h2>
+    <h2>Pregled Vozila</h2>
     <ul>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 1 })'" class="btn btn-default">Vozilo 1</div>
-        </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 2 })'" class="btn btn-default">Vozilo 2</div>
-        </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 3 })'" class="btn btn-default">Vozilo 3</div>
-        </li>
-        <li>
-            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 4 })'" class="btn btn-default">Vozilo 4</div>
-        </li>
+        @for (int i=0; i<Model.vozila_tipovi.Count; ++i)
+        {
+            <li>
+                <div class="vozilo_container">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col vozilo_item">
+                                    Marka/Tip: @Model.vozila_tipovi[i].Vozilo.marka / @Model.vozila_tipovi[i].Tip_vozila.tip
+                                </div>
+                                <div class="col vozilo_item">
+                                    Godina proizvodnje: @Model.vozila_tipovi[i].Vozilo.godina_proizvodnje
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col vozilo_item">
+                                    Pocetni km: @Model.vozila_tipovi[i].Vozilo.pocetni_km
+                                </div>
+                                <div class="col vozilo_item">
+                                    Trenutni km: @Model.vozila_tipovi[i].Vozilo.trenutni_km
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center align-self-center">
+                            <div 
+                                 onclick="window.location.href= 
+                                     '@Url.Action("Vozilo", "Vozila", new { id = Model.vozila_tipovi[i].Vozilo.id })'" 
+                                 class="btn btn-success">
+                                    Uredi
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
     </ul>
 </div>

@@ -12,6 +12,7 @@ namespace PPPK_Web.HELPERS
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
 
+
         /// <summary>
         /// Provjerava valjanost ID-a 
         /// </summary>
@@ -145,6 +146,46 @@ namespace PPPK_Web.HELPERS
         }
 
         /// <summary>
+        /// Dohvaca sva vozila
+        /// /// <returns>
+        /// List<vozilo> or null
+        /// </returns>
+        public static List<vozilo> getAllVozila()
+        {
+            List<vozilo> filler = new List<vozilo>();
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from vozilo", c))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    if (t.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in t.Rows)
+                        {
+                            vozilo v = new vozilo
+                            {
+                                id = Convert.ToInt16(dr["id"]),
+                                tip_vozila_id = Convert.ToInt16(dr["tip_vozila_id"]),
+                                marka = Convert.ToString(dr["marka"]),
+                                pocetni_km = Convert.ToDecimal(dr["pocetni_km"]),
+                                trenutni_km = Convert.ToDecimal(dr["trenutni_km"]),
+                                godina_proizvodnje = Convert.ToInt16(dr["godina_proizvodnje"])
+                            };
+                            filler.Add(v);
+                        }
+                        return filler;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Dohvaca sve servise napravljene na vozilu
         /// </summary>
         /// <param int="ID">Vozilo ID</param>
@@ -185,8 +226,7 @@ namespace PPPK_Web.HELPERS
                 }
             }
         }
-
-
+        
         /// <summary>
         /// Dohvaca tip vozila
         /// </summary>

@@ -29,7 +29,7 @@ else if (Model.vozilo == null)
 else
 {
 
-    <div>
+    <div class="center">
         <ul>
             <li>Marka: @Model.vozilo.marka</li>
             <li>Tip: @Model.tip_vozila.tip </li>
@@ -37,11 +37,9 @@ else
             <li>Pocetni km: @Model.vozilo.pocetni_km</li>
             <li>Trenutni km: @Model.vozilo.trenutni_km</li>
         </ul>
-    </div>
+        @if (Model.servisi != null)
+        {
 
-    if (Model.servisi != null)
-    {
-        <div class="center">
             <h4>Servisi:</h4>
             <ul>
                 @foreach (servi s in Model.servisi)
@@ -52,10 +50,11 @@ else
                     <li>Info: @s.info</li>
                 }
             </ul>
-        </div>
-    }
-    else
-    {
-        <h4> Na ovom vozilu nisu radeni servisi</h4>
-    }
+
+        }
+        else
+        {
+            <h4> Na ovom vozilu nisu radeni servisi</h4>
+        }
+    </div>
 }
