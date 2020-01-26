@@ -63,7 +63,7 @@ create table [zauzece_vozilo]
 create table [zauzece_vozac]
 (
     id	        int constraint PK_zauzece_vozac primary key identity,
-    [vozilo_id] int constraint FK__vozilo__zauzece_vozac foreign key references [dbo].[vozilo](id),
+    [vozac_id]  int constraint FK__vozac__zauzece_vozac foreign key references [dbo].[vozac](id),
     [datum]     date not null
 )
 create table [servis]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPPK_Web.HELPERS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,11 +19,11 @@ namespace PPPK_Web.Controllers
         {
             if (id != null)
             {
-                return View((object)id);
+                return View((object)DatabaseHandler.getVozac(Convert.ToInt32(id)));
             }
             else
             {
-                return View((object)0);
+                return View((object)null);
             }
         }
     }

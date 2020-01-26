@@ -3,19 +3,32 @@
     ViewBag.Title = "Vozila";
 }
 
-<h2>List Vozila</h2>
-<ul>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 1 })'" class="btn btn-default">Vozilo 1</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 2 })'" class="btn btn-default">Vozilo 2</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 3 })'" class="btn btn-default">Vozilo 3</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 4 })'" class="btn btn-default">Vozilo 4</div>
-    </li>
-</ul>
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
 
+    ul {
+        list-style: none
+    }
+</style>
+<div class="center">
+    <h2>List Vozila</h2>
+    <ul>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 1 })'" class="btn btn-default">Vozilo 1</div>
+        </li>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 2 })'" class="btn btn-default">Vozilo 2</div>
+        </li>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 3 })'" class="btn btn-default">Vozilo 3</div>
+        </li>
+        <li>
+            <div onclick="window.location.href= '@Url.Action("Vozilo","Vozila", new { id = 4 })'" class="btn btn-default">Vozilo 4</div>
+        </li>
+    </ul>
+</div>

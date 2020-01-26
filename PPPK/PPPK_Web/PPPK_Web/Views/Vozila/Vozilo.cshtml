@@ -1,11 +1,60 @@
-﻿@model int
-@if (Model == 0)
-{
-    Response.Redirect(Url.Action("Index", "Vozila"));
-}
+﻿@model PPPK_Web.Models.VoziloVIEW
 
 @{
     ViewBag.Title = "Vozilo";
 }
 
-<h2>CRUD Vozilo ID: @Model</h2>
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
+
+    ul {
+        list-style: none
+    }
+</style>
+
+<div onclick="window.location.href= '@Url.Action("Index", "Vozila")'" class="btn btn-default">Nazad na popis vozila</div>
+@if (Model == null)
+{
+    <h2>ID nije poslan u url-u</h2>
+}
+else if (Model.vozilo == null)
+{
+    <h2>Ne postoji vozilo s tim ID-em</h2>
+}
+else
+{
+    <div>
+        <ul>
+            <li>Marka: @Model.vozilo.marka</li>
+            <li>Tip: @Model.tip_vozila.tip </li>
+            <li>Godina proizvodnje: @Model.vozilo.godina_proizvodnje</li>
+            <li>Pocetni km: @Model.vozilo.pocetni_km</li>
+            <li>Trenutni km: @Model.vozilo.trenutni_km</li>
+        </ul>
+    </div>
+
+    if (Model.servisi != null)
+    {
+        <div class="center">
+            <h4>Servisi:</h4>
+            <ul>
+                @foreach (servi s in Model.servisi)
+                {
+                    <li>Ime servis kuce: @s.naziv_servisa</li>
+                    <li>Datum servisa: @s.datum_servisa</li>
+                    <li>Cijena: @s.cijena</li>
+                    <li>Info: @s.info</li>
+                }
+            </ul>
+        </div>
+    }
+    else
+    {
+        <h4> Na ovom vozilu nisu radeni servisi</h4>
+    }
+}

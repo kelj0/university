@@ -22,7 +22,7 @@ namespace PPPK_Web.Controllers
             }
             else
             {
-                return View((object)0);
+                return View((object)null);
             }
         }
     }

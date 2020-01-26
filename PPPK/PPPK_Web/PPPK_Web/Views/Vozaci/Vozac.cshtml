@@ -1,13 +1,37 @@
-﻿@model int
-@if (Model == 0)
-{
-    Response.Redirect(Url.Action("Index", "Vozaci"));
-}
-
+﻿@model vozac
 
 @{
     ViewBag.Title = "Vozac";
 }
 
-<h2>CRUD Vozac ID: @Model  </h2>
 
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
+
+    ul {
+        list-style: none
+    }
+</style>
+
+<div onclick="window.location.href= '@Url.Action("Index","Vozaci")'" class="btn btn-default">Nazad na popis vozaca</div>
+@if (Model == null)
+{
+    <h2>Ne postoji vozac s tim ID-em!</h2>
+}
+else
+{
+    <div class="center">
+        <h2>CRUD Vozac ID: @Model.id  </h2>
+        <ul>
+            <li>Ime: @Model.ime</li>
+            <li>Prezime: @Model.prezime</li>
+            <li>Broj mobitela: @Model.broj_mobitela</li>
+            <li>Broj vozacke: @Model.broj_vozacke</li>
+        </ul>
+    </div>
+}
