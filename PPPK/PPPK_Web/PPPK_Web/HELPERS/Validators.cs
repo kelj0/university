@@ -55,7 +55,7 @@ namespace PPPK_Web.HELPERS
         /// /// <returns>
         /// true ako su kilometri valjani, inace false
         /// </returns>
-        public static bool validKilometar(double? km)
+        public static bool validKilometar(decimal? km)
             => km != null && (km > 0 && (km <= 3000000)) ? true : false; 
 
     }

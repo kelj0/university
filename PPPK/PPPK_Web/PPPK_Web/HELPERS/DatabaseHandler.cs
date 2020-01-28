@@ -14,6 +14,106 @@ namespace PPPK_Web.HELPERS
         /// <summary>
         /// Updatea vozaca
         /// </summary>
+        /// <param name="ID">Vozilo ID</param>
+        /// <param name="marka">Marka vozila</param>
+        /// <param name="tip_vozila_id">ID tip vozila</param>
+        /// <param name="pocetni_km">Pocetni km vozila</param>
+        /// <param name="trenutni_km">Trenutni km vozila</param>
+        /// <param name="godina_proizvodnje">Godina proizvodnje vozila</param>
+        /// /// <returns>
+        /// true ako je update uspio, false inace
+        /// </returns>
+        public static bool updateVozilo(int id, string marka, int tip_vozila_id, decimal pocetni_km, decimal trenutni_km, int godina_proizvodnje)
+        {
+            if (
+                !Validators.validID(id) ||
+                !Validators.validGodinaProizvodnje(godina_proizvodnje) ||
+                !Validators.validKilometar(pocetni_km) ||
+                !Validators.validKilometar(trenutni_km))
+             { return false; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("update vozilo set " +
+                    "marka=@marka, tip_vozila_id=@tip_vozila_id, godina_proizvodnje=@godina_proizvodnje, pocetni_km=@pocetni_km, trenutni_km=@trenutni_km" +
+                    " where id=@id", c))
+                {
+                    a.Parameters.AddWithValue("@id", id);
+                    a.Parameters.AddWithValue("@marka", marka);
+                    a.Parameters.AddWithValue("@tip_vozila_id", tip_vozila_id);
+                    a.Parameters.AddWithValue("@godina_proizvodnje", godina_proizvodnje);
+                    a.Parameters.AddWithValue("@pocetni_km", pocetni_km);
+                    a.Parameters.AddWithValue("@trenutni_km", trenutni_km);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Brise vozilo
+        /// </summary>
+        /// <param name="id">Vozilo id</param>
+        /// /// <returns>
+        /// True ako je obrisan, false inace
+        /// </returns>
+        public static bool deleteVozilo(int id)
+        {
+            if (!Validators.validID(id)) { return false; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_vozilo", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Inserta vozilo
+        /// </summary>
+        /// <param name="marka">Marka vozila</param>
+        /// <param name="tip_vozila_id">ID tip vozila</param>
+        /// <param name="pocetni_km">Pocetni km vozila</param>
+        /// <param name="trenutni_km">Trenutni km vozila</param>
+        /// <param name="godina_proizvodnje">Godina proizvodnje vozila</param>
+        /// /// <returns>
+        /// ID insertanog vozila, 0 ako faila
+        /// </returns>
+        public static int insertVozilo(string marka, int? tip_vozila_id, decimal trenutni_km, decimal pocetni_km, int godina_proizvodnje)
+        {
+            if (
+                !Validators.validGodinaProizvodnje(godina_proizvodnje) ||
+                !Validators.validKilometar(pocetni_km) ||
+                !Validators.validKilometar(trenutni_km))
+            { return 0; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("insert_vozilo", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@marka", marka);
+                    a.Parameters.AddWithValue("@tip_vozila_id", tip_vozila_id);
+                    a.Parameters.AddWithValue("@godina_proizvodnje", godina_proizvodnje);
+                    a.Parameters.AddWithValue("@pocetni_km", pocetni_km);
+                    a.Parameters.AddWithValue("@trenutni_km", trenutni_km);
+                    object result = a.ExecuteScalar();
+                    result = (result == DBNull.Value) ? 0 : result;
+                    int cc = Convert.ToInt32(result);
+                    return cc;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Updatea vozaca
+        /// </summary>
         /// <param name="ID">Vozac ID</param>
         /// <param name="ime">Ime vozaca</param>
         /// <param name="prezime">Prezime vozaca</param>
@@ -25,8 +125,8 @@ namespace PPPK_Web.HELPERS
         public static bool updateVozac(int id, string ime, string prezime, string broj_mobitela, string broj_vozacke)
         {
             if (
-                !Validators.validID(id) || 
-                !Validators.validBrojMobitela(broj_mobitela) || 
+                !Validators.validID(id) ||
+                !Validators.validBrojMobitela(broj_mobitela) ||
                 !Validators.validBrojVozacke(broj_vozacke))
             { return false; }
 
@@ -45,13 +145,6 @@ namespace PPPK_Web.HELPERS
                     return (a.ExecuteNonQuery() == 0) ? false : true;
                 }
             }
-
-        }
-
-   
-        public static bool insertVozilo(string marka, int? tip_vozila_id, decimal trenutni_km, decimal pocetni_km, int godina_proizvodnje)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -103,7 +196,9 @@ namespace PPPK_Web.HELPERS
                     a.Parameters.AddWithValue("@prezime", prezime);
                     a.Parameters.AddWithValue("@broj_mobitela", broj_mobitela);
                     a.Parameters.AddWithValue("@broj_vozacke", broj_vozacke);
-                    int cc = (int)a.ExecuteScalar();
+                    object result = a.ExecuteScalar();
+                    result = (result == DBNull.Value) ? 0 : result;
+                    int cc = Convert.ToInt32(result);
                     return cc;
                 }
             }

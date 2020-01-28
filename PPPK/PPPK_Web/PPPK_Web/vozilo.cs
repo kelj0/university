@@ -31,11 +31,9 @@ namespace PPPK_Web
         [Required(ErrorMessage = "Godina proizvodnje je obavezno polje!")]
         [GodinaProizvodnjeValidator(ErrorMessage = "Neispravna godinja proizvodnje!")]
         public int godina_proizvodnje { get; set; }
-        [Required(ErrorMessage = "Broj vozacke je obavezan")]
+        [Required(ErrorMessage = "Broj kilometara je obavezan")]
         [KilometriValidator(ErrorMessage = "Neispravan broj kilometara")]
         public decimal pocetni_km { get; set; }
-        [Required(ErrorMessage = "Broj vozacke je obavezan")]
-        [KilometriValidator(ErrorMessage = "Neispravan broj kilometara")]
         public decimal trenutni_km { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

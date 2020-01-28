@@ -19,7 +19,7 @@ namespace PPPK_Web.Controllers
                 vv.vozila_tipovi.Add(new Pair<vozilo, tip_vozila>
                 {
                     Vozilo = v,
-                    Tip_vozila = DatabaseHandler.getTipVozila(v.id)
+                    Tip_vozila = DatabaseHandler.getTipVozila((int)v.tip_vozila_id)
                 });
             }
 
@@ -36,7 +36,7 @@ namespace PPPK_Web.Controllers
                     vozilo = DatabaseHandler.getVozilo(Convert.ToInt16(id)),
                     tip_vozila = DatabaseHandler.getTipVozila(Convert.ToInt16(id))
                 };
-
+                ViewBag.tipovi_vozila = Other.getTipoviVozilaList();
                 return View((object)vsm);
             }
             else
@@ -58,8 +58,8 @@ namespace PPPK_Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                DatabaseHandler.insertVozilo(v.marka, v.tip_vozila_id, v.trenutni_km, v.pocetni_km, v.godina_proizvodnje);
-                RedirectToAction("Index");
+                DatabaseHandler.insertVozilo(v.marka, Convert.ToInt16(tipovi_vozila), v.pocetni_km, v.pocetni_km, v.godina_proizvodnje);
+                return RedirectToAction("Index");
             }
 
             ViewBag.tipovi_vozila = Other.getTipoviVozilaList();

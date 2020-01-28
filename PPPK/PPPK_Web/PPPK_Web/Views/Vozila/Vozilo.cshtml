@@ -30,16 +30,24 @@ else
 {
 
     <div class="center">
-        <ul>
-            <li>Marka: @Model.vozilo.marka</li>
-            <li>Tip: @Model.tip_vozila.tip </li>
-            <li>Godina proizvodnje: @Model.vozilo.godina_proizvodnje</li>
-            <li>Pocetni km: @Model.vozilo.pocetni_km</li>
-            <li>Trenutni km: @Model.vozilo.trenutni_km</li>
-        </ul>
+        <div class="center">
+            <h2>Vozilo ID: @Model.vozilo.id  </h2>
+            <form action="/api/v1/vozilo/@Model.vozilo.id" method="get" name="voz">
+                <ul>
+                    <li>Marka: <input class="inp" readonly value="@Model.vozilo.marka" name="marka"></li>
+                    <li>Godina proizvodnje: <input class="inp" readonly value="@Model.vozilo.godina_proizvodnje" name="godina_proizvodnje"></li>
+                    <li>Pocetni km: <input class="inp" readonly value="@Model.vozilo.pocetni_km" name="pocetni_km"></li>
+                    <li>Trenutni km: <input class="inp" readonly value="@Model.vozilo.trenutni_km" name="trenutni_km"></li>
+                    <li>Tip vozila: <fieldset id="inp2" disabled>@Html.DropDownList("tipovi_vozila","--Tip vozila--")</fieldset></li>
+                </ul>
+                <input hidden="hidden" id="check" readonly />
+                <div id="bt" onclick="edit()" class="btn btn-primary">Uredi</div>
+                <div id="bt_send" onclick="document.forms['voz'].submit();" class="btn btn-success" hidden>Spremi</div>
+            </form>
+        </div>
+
         @if (Model.servisi != null)
         {
-
             <h4>Servisi:</h4>
             <ul>
                 @foreach (servi s in Model.servisi)
@@ -57,4 +65,29 @@ else
             <h4> Na ovom vozilu nisu radeni servisi</h4>
         }
     </div>
+
+
+    <script>
+        function edit() {
+            if (document.getElementById('check').readOnly) {
+                document.getElementById('check').readOnly = false;
+                document.getElementById('bt_send').hidden = false;
+                Array.from(document.getElementsByClassName('inp'))
+                    .forEach(function (e) {
+                        e.readOnly = false
+                        e.style.border = "1px dotted green"
+                    });
+                document.getElementById("inp2").disabled = false;
+            } else {
+                document.getElementById('check').readOnly = true;
+                document.getElementById('bt_send').hidden = true;
+                Array.from(document.getElementsByClassName('inp'))
+                    .forEach(function (e) {
+                        e.readOnly = true
+                        e.style.border = "1px solid red"
+                    });
+                document.getElementById("inp2").disabled = true;
+            }
+        };
+    </script>
 }

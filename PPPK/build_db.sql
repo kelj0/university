@@ -144,7 +144,48 @@ as
     end
 go
 
+create proc [dbo].[insert_vozilo]
+    @marka nvarchar(128),
+    @tip_vozila_id int,
+    @pocetni_km decimal(10,1),
+    @trenutni_km decimal(10,1),
+    @godina_proizvodnje int
+as
+    insert into [dbo].[vozilo](marka,tip_vozila_id,pocetni_km,trenutni_km,godina_proizvodnje)
+    values(@marka, @tip_vozila_id,@pocetni_km,@trenutni_km,@godina_proizvodnje)
+    select SCOPE_IDENTITY()
+go
 
+create proc [dbo].[obrisi_vozilo]
+    @id int
+as
+     if exists(select id from [dbo].[vozilo] where id=@id) begin
+        begin try
+            begin transaction
+                delete from [dbo].[zauzece_vozilo] where vozilo_id=@id
+                delete from [dbo].[servis] where vozilo_id=@id
+                delete from [dbo].[ruta] where 
+                    putni_nalog_id in(
+                        select id from [dbo].[putni_nalog] where vozilo_id=@id
+                    )
+                delete from [dbo].[kupnja_goriva] where 
+                    putni_nalog_id in(
+                        select id from [dbo].[putni_nalog] where vozilo_id=@id
+                    )
+		        delete from [dbo].[putni_nalog] where vozilo_id=@id
+                delete from [dbo].[vozilo] where id=@id
+            commit tran
+        end try
+        begin catch
+            if @@TRANCOUNT > 0
+                rollback tran
+            select null;
+        end catch
+	end
+	else begin
+		select null
+    end
+go
 
 -----------------------------------------------------------------
 --DUMMY DATA

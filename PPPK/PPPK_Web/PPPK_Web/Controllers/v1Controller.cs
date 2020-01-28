@@ -12,19 +12,6 @@ namespace PPPK_Web.Controllers
     public class v1Controller : ApiController
     {
         [HttpGet]
-        public vozilo vozilo(int? id)
-        {
-            if (Validators.validID(id))
-            {
-                return new vozilo { marka = "test", godina_proizvodnje = (int)id };
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        [HttpGet]
         public HttpResponseMessage vozac(int? id, string ime, string prezime, string broj_mobitela, string broj_vozacke)
         {
             if (Validators.validID(id))
@@ -48,7 +35,21 @@ namespace PPPK_Web.Controllers
             {
                 DatabaseHandler.deleteVozac((int)id);
                 var response = Request.CreateResponse(HttpStatusCode.Moved);
-                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + $"/Vozaci";
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/Vozaci";
+                response.Headers.Location = new Uri(fullyQualifiedUrl);
+                return response;
+            }
+            else{ return null; }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage vozilo(int? id, string marka, int tipovi_vozila, decimal pocetni_km, decimal trenutni_km, int godina_proizvodnje)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.updateVozilo((int)id, marka, tipovi_vozila, pocetni_km, trenutni_km, godina_proizvodnje);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + $"/Vozila/Vozilo/{id}";
                 response.Headers.Location = new Uri(fullyQualifiedUrl);
                 return response;
             }
@@ -58,6 +59,19 @@ namespace PPPK_Web.Controllers
             }
         }
 
+        [HttpPost]
+        public HttpResponseMessage vozilo(int? id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.deleteVozilo((int)id);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/Vozila";
+                response.Headers.Location = new Uri(fullyQualifiedUrl);
+                return response;
+            }
+            else { return null; }
+        }
 
     }
 }

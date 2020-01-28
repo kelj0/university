@@ -56,11 +56,12 @@
                             </div>
                         </div>
                         <div class="col-2 text-center align-self-center">
-                            <div onclick="window.location.href=
-                                     '@Url.Action("Vozilo", "Vozila", new { id = Model.vozila_tipovi[i].Vozilo.id })'"
-                                 class="btn btn-success">
+                            <div onclick="window.location.href='@Url.Action("Vozilo", "Vozila", new { id = Model.vozila_tipovi[i].Vozilo.id })'"class="btn btn-success">
                                 Uredi
                             </div>
+                            <form name="f" method="post" action="/api/v1/vozilo/@Model.vozila_tipovi[i].Vozilo.id">
+                                <button type="submit" class="btn btn-danger">Obrisi</button>
+                            </form>
                         </div>
                     </div>
                 </div>

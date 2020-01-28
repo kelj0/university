@@ -19,7 +19,7 @@ namespace PPPK_Web.Controllers
         {
             if (Validators.validID(id))
             {
-                return View((object)DatabaseHandler.getVozac(Convert.ToInt32(id)));
+                return View((object)DatabaseHandler.getVozac((int)id));
             }
             else
             {
@@ -40,7 +40,7 @@ namespace PPPK_Web.Controllers
             if (ModelState.IsValid)
             {
                 DatabaseHandler.insertVozac(v.ime, v.prezime, v.broj_mobitela, v.broj_vozacke);
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View();
 
