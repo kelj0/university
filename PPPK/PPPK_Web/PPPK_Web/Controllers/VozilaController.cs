@@ -28,7 +28,7 @@ namespace PPPK_Web.Controllers
 
         public ActionResult Vozilo(int? id)
         {
-            if (Validator.validID(id))
+            if (Validators.validID(id))
             {
                 VoziloVIEW vsm = new VoziloVIEW
                 {
@@ -44,5 +44,28 @@ namespace PPPK_Web.Controllers
                 return View((object)null);
             }
         }
+
+        [HttpGet]
+        public ActionResult DodajVozilo()
+        {
+            ViewBag.tipovi_vozila = Other.getTipoviVozilaList();
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DodajVozilo(vozilo v, string tipovi_vozila)
+        {
+            if (ModelState.IsValid)
+            {
+                DatabaseHandler.insertVozilo(v.marka, v.tip_vozila_id, v.trenutni_km, v.pocetni_km, v.godina_proizvodnje);
+                RedirectToAction("Index");
+            }
+
+            ViewBag.tipovi_vozila = Other.getTipoviVozilaList();
+            return View();
+
+        }
+
     }
 }

@@ -33,7 +33,7 @@
 <div class="center">
     <h2>Pregled Vozila</h2>
     <ul>
-        @for (int i=0; i<Model.vozila_tipovi.Count; ++i)
+        @for (int i = 0; i < Model.vozila_tipovi.Count; ++i)
         {
             <li>
                 <div class="vozilo_container">
@@ -56,16 +56,16 @@
                             </div>
                         </div>
                         <div class="col-2 text-center align-self-center">
-                            <div 
-                                 onclick="window.location.href= 
-                                     '@Url.Action("Vozilo", "Vozila", new { id = Model.vozila_tipovi[i].Vozilo.id })'" 
+                            <div onclick="window.location.href=
+                                     '@Url.Action("Vozilo", "Vozila", new { id = Model.vozila_tipovi[i].Vozilo.id })'"
                                  class="btn btn-success">
-                                    Uredi
+                                Uredi
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
         }
+        <div onclick="window.location.href= '@Url.Action("DodajVozilo", "Vozila")'" class="btn btn-primary">Dodaj novo vozilo</div>
     </ul>
 </div>

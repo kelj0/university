@@ -9,9 +9,11 @@
 
 namespace PPPK_Web
 {
+    using PPPK_Web.CustomValidators;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class vozilo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,9 +26,16 @@ namespace PPPK_Web
     
         public int id { get; set; }
         public Nullable<int> tip_vozila_id { get; set; }
+        [Required(ErrorMessage = "Marka vozila je obavezno polje!")]
         public string marka { get; set; }
+        [Required(ErrorMessage = "Godina proizvodnje je obavezno polje!")]
+        [GodinaProizvodnjeValidator(ErrorMessage = "Neispravna godinja proizvodnje!")]
         public int godina_proizvodnje { get; set; }
+        [Required(ErrorMessage = "Broj vozacke je obavezan")]
+        [KilometriValidator(ErrorMessage = "Neispravan broj kilometara")]
         public decimal pocetni_km { get; set; }
+        [Required(ErrorMessage = "Broj vozacke je obavezan")]
+        [KilometriValidator(ErrorMessage = "Neispravan broj kilometara")]
         public decimal trenutni_km { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

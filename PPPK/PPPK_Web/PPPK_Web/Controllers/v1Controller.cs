@@ -14,7 +14,7 @@ namespace PPPK_Web.Controllers
         [HttpGet]
         public vozilo vozilo(int? id)
         {
-            if (Validator.validID(id))
+            if (Validators.validID(id))
             {
                 return new vozilo { marka = "test", godina_proizvodnje = (int)id };
             }
@@ -27,7 +27,7 @@ namespace PPPK_Web.Controllers
         [HttpGet]
         public HttpResponseMessage vozac(int? id, string ime, string prezime, string broj_mobitela, string broj_vozacke)
         {
-            if (Validator.validID(id))
+            if (Validators.validID(id))
             {
                 DatabaseHandler.updateVozac((int)id, ime, prezime, broj_mobitela, broj_vozacke);
                 var response = Request.CreateResponse(HttpStatusCode.Moved);
@@ -44,7 +44,7 @@ namespace PPPK_Web.Controllers
         [HttpPost]
         public HttpResponseMessage vozac(int? id)
         {
-            if (Validator.validID(id))
+            if (Validators.validID(id))
             {
                 DatabaseHandler.deleteVozac((int)id);
                 var response = Request.CreateResponse(HttpStatusCode.Moved);

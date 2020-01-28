@@ -144,11 +144,16 @@
     <Compile Include="Controllers\PutniNaloziController.cs" />
     <Compile Include="Controllers\VozaciController.cs" />
     <Compile Include="Controllers\VozilaController.cs" />
+    <Compile Include="CustomValidators\BrojMobitelaValidator.cs" />
+    <Compile Include="CustomValidators\BrojVozackeValidator.cs" />
+    <Compile Include="CustomValidators\GodinaProizvodnjeValidator.cs" />
+    <Compile Include="CustomValidators\KilometriValidator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HELPERS\DatabaseHandler.cs" />
-    <Compile Include="HELPERS\Validator.cs" />
+    <Compile Include="HELPERS\Other.cs" />
+    <Compile Include="HELPERS\Validators.cs" />
     <Compile Include="kupnja_goriva.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -213,6 +218,8 @@
     <None Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Vozaci\DodajVozaca.cshtml" />
+    <Content Include="Views\Vozila\DodajVozilo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -25,9 +25,9 @@ namespace PPPK_Web.HELPERS
         public static bool updateVozac(int id, string ime, string prezime, string broj_mobitela, string broj_vozacke)
         {
             if (
-                !Validator.validID(id) || 
-                !Validator.validBrojMobitela(broj_mobitela) || 
-                !Validator.validBrojVozacke(broj_vozacke))
+                !Validators.validID(id) || 
+                !Validators.validBrojMobitela(broj_mobitela) || 
+                !Validators.validBrojVozacke(broj_vozacke))
             { return false; }
 
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
@@ -42,32 +42,28 @@ namespace PPPK_Web.HELPERS
                     a.Parameters.AddWithValue("@broj_mobitela", broj_mobitela);
                     a.Parameters.AddWithValue("@broj_vozacke", broj_vozacke);
                     a.Parameters.AddWithValue("@id", id);
-                    if (a.ExecuteNonQuery() == 0)
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
                 }
             }
 
         }
 
+   
+        public static bool insertVozilo(string marka, int? tip_vozila_id, decimal trenutni_km, decimal pocetni_km, int godina_proizvodnje)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
-        /// Inserta vozaca
+        /// Brise vozaca
         /// </summary>
-        /// <param name="ime">Ime vozaca</param>
-        /// <param name="prezime">Prezime vozaca</param>
-        /// <param name="broj_mobitela">Broj mobitela</param>
-        /// <param name="broj_vozacke">Broj vozacke</param>
+        /// <param name="id">Vozac id</param>
         /// /// <returns>
-        /// ID insertanog vozaca, 0 ako nije insertao
+        /// True ako je obrisan, false inace
         /// </returns>
         public static bool deleteVozac(int id)
         {
-            if (!Validator.validID(id)){ return false; }
+            if (!Validators.validID(id)){ return false; }
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
@@ -80,11 +76,21 @@ namespace PPPK_Web.HELPERS
             }
         }
 
+        /// <summary>
+        /// Inserta vozaca
+        /// </summary>
+        /// <param name="ime">Ime vozaca</param>
+        /// <param name="prezime">Prezime vozaca</param>
+        /// <param name="broj_mobitela">Broj mobitela</param>
+        /// <param name="broj_vozacke">Broj vozacke</param>
+        /// /// <returns>
+        /// ID insertanog vozaca, 0 ako nije insertao
+        /// </returns>
         public static int insertVozac(string ime, string prezime, string broj_mobitela, string broj_vozacke)
         {
             if (
-                !Validator.validBrojMobitela(broj_mobitela) ||
-                !Validator.validBrojVozacke(broj_vozacke))
+                !Validators.validBrojMobitela(broj_mobitela) ||
+                !Validators.validBrojVozacke(broj_vozacke))
             { return 0; }
 
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
@@ -112,7 +118,7 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static vozac getVozac(int ID)
         {
-            if (!Validator.validID(ID)) { return null; }
+            if (!Validators.validID(ID)) { return null; }
             using(SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
@@ -196,7 +202,7 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static vozilo getVozilo(int ID)
         {
-            if (!Validator.validID(ID)) { return null; }
+            if (!Validators.validID(ID)) { return null; }
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
@@ -280,7 +286,7 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static List<servi> getServisi(int ID)
         {
-            if (!Validator.validID(ID)) { return null; }
+            if (!Validators.validID(ID)) { return null; }
             List<servi> filler = new List<servi>();
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
@@ -328,7 +334,7 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static tip_vozila getTipVozila(int ID)
         {
-            if (!Validator.validID(ID)) { return null; }
+            if (!Validators.validID(ID)) { return null; }
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
@@ -359,6 +365,43 @@ namespace PPPK_Web.HELPERS
             }
         }
 
+
+        /// <summary>
+        /// Dohvaca sve tipove vozila
+        /// </summary>
+        /// /// <returns>
+        /// List<tip_vozila> ili null
+        /// </returns>
+        public static List<tip_vozila> getAllTipVozila()
+        {
+            List<tip_vozila> filler = new List<tip_vozila>();
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from tip_vozila", c))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    if (t.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in t.Rows)
+                        {
+                            tip_vozila tv = new tip_vozila
+                            {
+                                id = Convert.ToInt16(dr["id"]),
+                                tip = Convert.ToString(dr["tip"])
+                            };
+                            filler.Add(tv);
+                        }
+                        return filler;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
 
     }
 }

@@ -9,9 +9,11 @@
 
 namespace PPPK_Web
 {
+    using PPPK_Web.CustomValidators;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class vozac
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +24,15 @@ namespace PPPK_Web
         }
     
         public int id { get; set; }
+        [Required(ErrorMessage = "Ime je obavezno")]
         public string ime { get; set; }
+        [Required(ErrorMessage = "Prezime je obavezno")]
         public string prezime { get; set; }
+        [Required(ErrorMessage = "Broj mobitela je obavezan")]
+        [BrojMobitelaValidator(ErrorMessage = "Neispravan broj mobitela! (Vazeci brojevi su +385922345678,385912345678 ili 0922345678)")]
         public string broj_mobitela { get; set; }
+        [Required(ErrorMessage = "Broj vozacke je obavezan")]
+        [BrojVozackeValidator(ErrorMessage = "Neispravan broj vozacke! (Vazece vozacke su izmedu 7 i 14 znakova)")]
         public string broj_vozacke { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

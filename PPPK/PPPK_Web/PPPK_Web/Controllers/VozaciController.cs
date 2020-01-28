@@ -17,7 +17,7 @@ namespace PPPK_Web.Controllers
 
         public ActionResult Vozac(int? id)
         {
-            if (Validator.validID(id))
+            if (Validators.validID(id))
             {
                 return View((object)DatabaseHandler.getVozac(Convert.ToInt32(id)));
             }
@@ -25,6 +25,25 @@ namespace PPPK_Web.Controllers
             {
                 return View((object)null);
             }
+        }
+
+        [HttpGet]
+        public ActionResult DodajVozaca()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DodajVozaca(vozac v)
+        {
+            if (ModelState.IsValid)
+            {
+                DatabaseHandler.insertVozac(v.ime, v.prezime, v.broj_mobitela, v.broj_vozacke);
+                RedirectToAction("Index");
+            }
+            return View();
+
         }
     }
 }
