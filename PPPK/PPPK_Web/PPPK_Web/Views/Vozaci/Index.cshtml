@@ -56,6 +56,9 @@
                     </div>
                     <div class="col-2 text-center align-self-center">
                         <div onclick="window.location.href= '@Url.Action("Vozac", "Vozaci", new { id = v.id })'" class="btn btn-success">Uredi</div>
+                        <form name="f" method="post" action="/api/v1/vozac/@v.id">
+                            <button type="submit" class="btn btn-danger">Obrisi</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -148,6 +148,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HELPERS\DatabaseHandler.cs" />
+    <Compile Include="HELPERS\Validator.cs" />
     <Compile Include="kupnja_goriva.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 
 namespace PPPK_Web.HELPERS
@@ -12,20 +11,95 @@ namespace PPPK_Web.HELPERS
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
 
+        /// <summary>
+        /// Updatea vozaca
+        /// </summary>
+        /// <param name="ID">Vozac ID</param>
+        /// <param name="ime">Ime vozaca</param>
+        /// <param name="prezime">Prezime vozaca</param>
+        /// <param name="broj_mobitela">Broj mobitela</param>
+        /// <param name="broj_vozacke">Broj vozacke</param>
+        /// /// <returns>
+        /// true ako je update uspio, false inace
+        /// </returns>
+        public static bool updateVozac(int id, string ime, string prezime, string broj_mobitela, string broj_vozacke)
+        {
+            if (
+                !Validator.validID(id) || 
+                !Validator.validBrojMobitela(broj_mobitela) || 
+                !Validator.validBrojVozacke(broj_vozacke))
+            { return false; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("update vozac set " +
+                    "ime=@ime, prezime=@prezime, broj_mobitela=@broj_mobitela, broj_vozacke=@broj_vozacke" +
+                    " where id=@id", c))
+                {
+                    a.Parameters.AddWithValue("@ime", ime);
+                    a.Parameters.AddWithValue("@prezime", prezime);
+                    a.Parameters.AddWithValue("@broj_mobitela", broj_mobitela);
+                    a.Parameters.AddWithValue("@broj_vozacke", broj_vozacke);
+                    a.Parameters.AddWithValue("@id", id);
+                    if (a.ExecuteNonQuery() == 0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+
+        }
 
         /// <summary>
-        /// Provjerava valjanost ID-a 
+        /// Inserta vozaca
         /// </summary>
-        /// <param name="ID">ID</param>
+        /// <param name="ime">Ime vozaca</param>
+        /// <param name="prezime">Prezime vozaca</param>
+        /// <param name="broj_mobitela">Broj mobitela</param>
+        /// <param name="broj_vozacke">Broj vozacke</param>
         /// /// <returns>
-        /// true ako je valjani id, inace false
+        /// ID insertanog vozaca, 0 ako nije insertao
         /// </returns>
-        public static bool validID(int? ID)
+        public static bool deleteVozac(int id)
         {
-            if (ID == 0 || !Regex.IsMatch(ID.ToString(), @"^\d+$")) {
-                return false;
-            }else{
-                return true;
+            if (!Validator.validID(id)){ return false; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_vozaca", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+
+        public static int insertVozac(string ime, string prezime, string broj_mobitela, string broj_vozacke)
+        {
+            if (
+                !Validator.validBrojMobitela(broj_mobitela) ||
+                !Validator.validBrojVozacke(broj_vozacke))
+            { return 0; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("insert_vozac", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@ime", ime);
+                    a.Parameters.AddWithValue("@prezime", prezime);
+                    a.Parameters.AddWithValue("@broj_mobitela", broj_mobitela);
+                    a.Parameters.AddWithValue("@broj_vozacke", broj_vozacke);
+                    int cc = (int)a.ExecuteScalar();
+                    return cc;
+                }
             }
         }
 
@@ -38,12 +112,18 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static vozac getVozac(int ID)
         {
-            if (!validID(ID)) { return null; }
+            if (!Validator.validID(ID)) { return null; }
             using(SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using(SqlDataAdapter a = new SqlDataAdapter("select * from vozac where id="+ID, c))
+                using(SqlDataAdapter a = new SqlDataAdapter("select * from vozac where id=@ID", c))
                 {
+                    a.SelectCommand.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "@ID",
+                        Value = ID,
+                        SqlDbType = SqlDbType.Int
+                    });
                     DataTable t = new DataTable();
                     a.Fill(t);
                     if(t.Rows.Count > 0)
@@ -116,12 +196,18 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static vozilo getVozilo(int ID)
         {
-            if (!validID(ID)) { return null; }
+            if (!Validator.validID(ID)) { return null; }
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using (SqlDataAdapter a = new SqlDataAdapter($"select * from vozilo where id={ID}", c))
+                using (SqlDataAdapter a = new SqlDataAdapter($"select * from vozilo where id=@ID", c))
                 {
+                    a.SelectCommand.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "@ID",
+                        Value = ID,
+                        SqlDbType = SqlDbType.Int
+                    });
                     DataTable t = new DataTable();
                     a.Fill(t);
                     if (t.Rows.Count > 0)
@@ -194,13 +280,19 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static List<servi> getServisi(int ID)
         {
-            if (!validID(ID)) { return null; }
+            if (!Validator.validID(ID)) { return null; }
             List<servi> filler = new List<servi>();
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using (SqlDataAdapter a = new SqlDataAdapter($"select * from servis where id={ID}", c))
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from servis where id=@ID", c))
                 {
+                    a.SelectCommand.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "@ID",
+                        Value = ID,
+                        SqlDbType = SqlDbType.Int
+                    });
                     DataTable t = new DataTable();
                     a.Fill(t);
                     if (t.Rows.Count > 0)
@@ -236,12 +328,18 @@ namespace PPPK_Web.HELPERS
         /// </returns>
         public static tip_vozila getTipVozila(int ID)
         {
-            if (!validID(ID)) { return null; }
+            if (!Validator.validID(ID)) { return null; }
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using (SqlDataAdapter a = new SqlDataAdapter($"select * from tip_vozila where id={ID}", c))
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from tip_vozila where id=@ID", c))
                 {
+                    a.SelectCommand.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "@ID",
+                        Value = ID,
+                        SqlDbType = SqlDbType.Int
+                    });
                     DataTable t = new DataTable();
                     a.Fill(t);
                     if (t.Rows.Count > 0)

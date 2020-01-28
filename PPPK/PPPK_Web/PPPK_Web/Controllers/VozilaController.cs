@@ -28,7 +28,7 @@ namespace PPPK_Web.Controllers
 
         public ActionResult Vozilo(int? id)
         {
-            if (id != null)
+            if (Validator.validID(id))
             {
                 VoziloVIEW vsm = new VoziloVIEW
                 {

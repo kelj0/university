@@ -17,7 +17,7 @@ namespace PPPK_Web.Controllers
 
         public ActionResult Vozac(int? id)
         {
-            if (id != null)
+            if (Validator.validID(id))
             {
                 return View((object)DatabaseHandler.getVozac(Convert.ToInt32(id)));
             }

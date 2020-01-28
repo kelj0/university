@@ -98,6 +98,54 @@ create table [ruta]
     [prosjecna_brzina] decimal(6,2) not null
 )
 go
+
+
+-----------------------------------------------------------------
+--PROCEDURES
+-----------------------------------------------------------------
+create proc [dbo].[insert_vozac]
+  @ime nvarchar(128),
+  @prezime nvarchar(128),
+  @broj_mobitela nvarchar(32),
+  @broj_vozacke nvarchar(16) 
+as
+    insert into vozac(ime,prezime,broj_mobitela,broj_vozacke)
+    values(@ime, @prezime, @broj_mobitela, @broj_vozacke)
+    select SCOPE_IDENTITY()
+go
+
+create proc [dbo].[obrisi_vozaca]
+    @id int
+as
+    if exists(select id from [dbo].[vozac] where id=@id) begin
+        begin try
+            begin transaction
+                delete from [dbo].[zauzece_vozac] where vozac_id=@id
+                delete from [dbo].[ruta] where 
+                    putni_nalog_id in(
+                        select id from [dbo].[putni_nalog] where vozac_id=@id
+                    )
+                delete from [dbo].[kupnja_goriva] where 
+                    putni_nalog_id in(
+                        select id from [dbo].[putni_nalog] where vozac_id=@id
+                    )
+		        delete from [dbo].[putni_nalog] where vozac_id=@id
+                delete from [dbo].[vozac] where id=@id
+            commit tran
+        end try
+        begin catch
+            if @@TRANCOUNT > 0
+                rollback tran
+            select null;
+        end catch
+	end
+	else begin
+		select null
+    end
+go
+
+
+
 -----------------------------------------------------------------
 --DUMMY DATA
 -----------------------------------------------------------------
