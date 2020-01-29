@@ -49,16 +49,37 @@ else
         @if (Model.servisi != null)
         {
             <h4>Servisi:</h4>
-            <ul>
-                @foreach (servi s in Model.servisi)
-                {
-                    <li>Ime servis kuce: @s.naziv_servisa</li>
-                    <li>Datum servisa: @s.datum_servisa</li>
-                    <li>Cijena: @s.cijena</li>
-                    <li>Info: @s.info</li>
-                }
-            </ul>
-
+            foreach (servi s in Model.servisi)
+            {
+                <div class="row">
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col">
+                                Mjesto: <input class="servis_@(s.id)" readonly value="@s.naziv_servisa" name="mjesto">
+                            </div>
+                            <div class="col">
+                                Datum: <input class="servis_@(s.id)" readonly value="@s.datum_servisa" name="datum">
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                Cijena: <input class="servis_@(s.id)" readonly value="@s.cijena" name="iijena">
+                            </div>
+                            <div class="col">
+                                Info: <input class="servis_@(s.id)" readonly value="@s.info" name="info">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-center align-self-center">
+                        <div onclick="editServisi(this.id)" id="servis_@(s.id)" class="btn btn-success">
+                            Uredi
+                        </div>
+                        <input hidden="hidden" id="check_@(s.id)" readonly />
+                        <form method="post" action="/api/v1/servis/@s.id">
+                            <button type="submit" class="btn btn-danger">Obrisi</button>
+                        </form>
+                    </div>
+                </div>
+            }
         }
         else
         {
@@ -87,6 +108,27 @@ else
                         e.style.border = "1px solid red"
                     });
                 document.getElementById("inp2").disabled = true;
+            }
+        };
+        function editServisi(divID) {
+            let id = divID.slice(7);
+            let checkID = "check_" + id
+            if (document.getElementById(checkID).readOnly) {
+                document.getElementById(checkID).readOnly = false;
+                //document.getElementById('bt_send').hidden = false; TODO
+                Array.from(document.getElementsByClassName("servis_" + id))
+                    .forEach(function (e) {
+                        e.readOnly = false
+                        e.style.border = "1px dotted green"
+                    });
+            } else {
+                document.getElementById(checkID).readOnly = true;
+                // document.getElementById('bt_send').hidden = true; TODO
+                Array.from(document.getElementsByClassName("servis_" + id))
+                    .forEach(function (e) {
+                        e.readOnly = true
+                        e.style.border = "1px solid red"
+                    });
             }
         };
     </script>
