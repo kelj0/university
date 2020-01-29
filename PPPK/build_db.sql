@@ -187,65 +187,69 @@ as
     end
 go
 
------------------------------------------------------------------
---DUMMY DATA
------------------------------------------------------------------
-insert into [dbo].[tip_vozila]
-values ('Karavan'),('Kabriolet'),('Limuzina'),('Hecbek'), ('Kupe'), ('Monovolumen'), ('Dzip')
-insert into [dbo].[mjesto]
-values ('Zagreb'),('Bjelovar'),('Split'),('Karlovac'),('Dubrovnik'),('Rijeka'),('Zadar'),('Vukovar')
-insert into [dbo].[status]
-values ('Traje'),('Zavrsio')
+create proc [dbo].[insert_dummy_data]
+as
+    insert into [dbo].[tip_vozila]
+    values ('Karavan'),('Kabriolet'),('Limuzina'),('Hecbek'), ('Kupe'), ('Monovolumen'), ('Dzip')
+    insert into [dbo].[mjesto]
+    values ('Zagreb'),('Bjelovar'),('Split'),('Karlovac'),('Dubrovnik'),('Rijeka'),('Zadar'),('Vukovar')
+    insert into [dbo].[status]
+    values ('Traje'),('Zavrsio')
+    insert into [dbo].[vozac]
+    values 
+    ('Pero','Peric','+385912345678','12345678'),
+    ('Ivo','Ivic','+385912345678', '87654321')
+    insert into [dbo].[vozilo]
+    values
+    (2,'Ferrari Enzo',2012,10000.25,10010.10),
+    (4,'Golf 7',2010,143215.1,153215.2)
+    insert into [dbo].[putni_nalog]
+    values
+    (1,1,2,'1/10/2020'),
+    (2,2,2,'12/10/2019')
+    insert into [dbo].[zauzece_vozac]
+    values
+    (1,'1/10/2020'),
+    (1,'1/11/2020'),
+    (2,'12/10/2019'),
+    (2,'12/11/2019'),
+    (2,'12/12/2019'),
+    (2,'12/13/2019')
+    insert into [dbo].[zauzece_vozilo]
+    values
+    (1,'1/10/2020'),
+    (1,'1/11/2020'),
+    (2,'12/10/2019'),
+    (2,'12/11/2019'),
+    (2,'12/12/2019'),
+    (2,'12/13/2019')
+    insert into [dbo].[servis]
+    values
+    (2,'12/14/2019','Tokic',500.00,'Zamjena diskova')
+    insert into [dbo].[kupnja_goriva]
+    values
+    (1,1,9.81,20.00,'1/10/2020'),
+    (2,2,9.7,15.00,'12/11/2019'),
+    (2,3,9.90,20.00,'12/12/2019')
+    insert into [dbo].[ruta]
+    values
+    (1,50.1241241,40.1241251,40.5215121,50.512411,20.1,110.2),
+    (1,60.1241241,10.1241251,40.5215121,90.512411,30.21,90.2),
+    (2,70.1241241,30.1241251,30.5215121,60.512411,40.31,70.2),
+    (2,80.1241241,40.1241251,20.5215121,70.512411,50.41,70.2)
 go
 
-insert into [dbo].[vozac]
-values 
-('Pero','Peric','+385912345678','12345678'),
-('Ivo','Ivic','+385912345678', '87654321')
-
-insert into [dbo].[vozilo]
-values
-(2,'Ferrari Enzo',2012,10000.25,10010.10),
-(4,'Golf 7',2010,143215.1,153215.2)
-
-insert into [dbo].[putni_nalog]
-values
-(1,1,2,'1/10/2020'),
-(2,2,2,'12/10/2019')
-
-insert into [dbo].[zauzece_vozac]
-values
-(1,'1/10/2020'),
-(1,'1/11/2020'),
-(2,'12/10/2019'),
-(2,'12/11/2019'),
-(2,'12/12/2019'),
-(2,'12/13/2019')
-
-insert into [dbo].[zauzece_vozilo]
-values
-(1,'1/10/2020'),
-(1,'1/11/2020'),
-(2,'12/10/2019'),
-(2,'12/11/2019'),
-(2,'12/12/2019'),
-(2,'12/13/2019')
-
-insert into [dbo].[servis]
-values
-(2,'12/14/2019','Tokic',500.00,'Zamjena diskova')
-go
-
-insert into [dbo].[kupnja_goriva]
-values
-(1,1,9.81,20.00,'1/10/2020'),
-(2,2,9.7,15.00,'12/11/2019'),
-(2,3,9.90,20.00,'12/12/2019')
-
-insert into [dbo].[ruta]
-values
-(1,50.1241241,40.1241251,40.5215121,50.512411,20.1,110.2),
-(1,60.1241241,10.1241251,40.5215121,90.512411,30.21,90.2),
-(2,70.1241241,30.1241251,30.5215121,60.512411,40.31,70.2),
-(2,80.1241241,40.1241251,20.5215121,70.512411,50.41,70.2)
+create proc [dbo].[clean_database]
+as
+    delete from [dbo].[zauzece_vozac]
+    delete from [dbo].[zauzece_vozilo]
+    delete from [dbo].[ruta]
+    delete from [dbo].[kupnja_goriva]
+    delete from [dbo].[mjesto]
+    delete from [dbo].[servis]
+    delete from [dbo].[putni_nalog]
+    delete from [dbo].[status]
+    delete from [dbo].[vozilo]
+    delete from [dbo].tip_vozila
+    delete from [dbo].vozac
 go
