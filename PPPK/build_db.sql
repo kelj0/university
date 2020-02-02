@@ -156,6 +156,29 @@ as
     select SCOPE_IDENTITY()
 go
 
+create proc [dbo].[insert_servis]
+    @naziv_servisa nvarchar(128),
+    @datum datetime,
+    @vozilo_id int,
+    @info nvarchar(512),
+    @cijena decimal(10,2)
+as
+      insert into [dbo].[servis](naziv_servisa,datum_servisa,vozilo_id,info,cijena)
+      values(@naziv_servisa,@datum, @vozilo_id,@info,@cijena)
+      select SCOPE_IDENTITY()
+go
+
+create proc [dbo].[obrisi_servis]
+    @id int
+as
+    if exists(select id from [dbo].[servis] where id=@id) begin
+        delete from [dbo].[servis] where id=@id
+	end
+	else begin
+		select null
+    end    
+go
+
 create proc [dbo].[obrisi_vozilo]
     @id int
 as
@@ -253,3 +276,5 @@ as
     delete from [dbo].tip_vozila
     delete from [dbo].vozac
 go
+
+select * from servis

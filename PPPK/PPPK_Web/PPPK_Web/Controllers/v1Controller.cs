@@ -73,5 +73,43 @@ namespace PPPK_Web.Controllers
             else { return null; }
         }
 
+        [HttpGet]
+        public HttpResponseMessage servis(string mjesto, DateTime datum, decimal cijena, string info, int vozilo_id)
+        {
+            DatabaseHandler.insertServis(mjesto, datum, cijena, info,vozilo_id);
+            var response = Request.CreateResponse(HttpStatusCode.Moved);
+            string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/Vozila/";
+            response.Headers.Location = new Uri(fullyQualifiedUrl);
+            return response;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage servis(int id, string mjesto, DateTime datum, decimal cijena, string info, int vozilo_id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.updateServis(id, mjesto, datum, cijena, info);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + $"/Vozila/Vozilo/{vozilo_id}";
+                response.Headers.Location = new Uri(fullyQualifiedUrl);
+                return response;
+            }
+            else { return null; }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage servis(int? id, int vozilo_id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.deleteServis(id);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + $"/Vozila/Vozilo/{vozilo_id}";
+                response.Headers.Location = new Uri(fullyQualifiedUrl);
+                return response;
+            }
+            else { return null; }
+        }
+
     }
 }

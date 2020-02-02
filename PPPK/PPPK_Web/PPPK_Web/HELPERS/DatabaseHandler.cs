@@ -27,7 +27,7 @@ namespace PPPK_Web.HELPERS
         {
             if (
                 !Validators.validID(id) ||
-                !Validators.validGodinaProizvodnje(godina_proizvodnje) ||
+                !Validators.validGodina(godina_proizvodnje) ||
                 !Validators.validKilometar(pocetni_km) ||
                 !Validators.validKilometar(trenutni_km))
              { return false; }
@@ -86,7 +86,7 @@ namespace PPPK_Web.HELPERS
         public static int insertVozilo(string marka, int? tip_vozila_id, decimal trenutni_km, decimal pocetni_km, int godina_proizvodnje)
         {
             if (
-                !Validators.validGodinaProizvodnje(godina_proizvodnje) ||
+                !Validators.validGodina(godina_proizvodnje) ||
                 !Validators.validKilometar(pocetni_km) ||
                 !Validators.validKilometar(trenutni_km))
             { return 0; }
@@ -110,6 +110,96 @@ namespace PPPK_Web.HELPERS
             }
         }
 
+        /// <summary>
+        /// Inserta servis
+        /// </summary>
+        /// <param name="naziv_servisa">Naziv servisa</param>
+        /// <param name="datum">Datum obavljanja servisa</param>
+        /// <param name="cijena">Cijena servisa</param>
+        /// <param name="info">Dodatne informacije o serisu</param>
+        /// /// <returns>
+        /// ID insertanog servisa, 0 ako faila
+        /// </returns>
+        public static int insertServis(string naziv_servisa, DateTime datum, decimal cijena, string info, int vozilo_id)
+        {
+            if (!Validators.validGodina(datum.Year))
+            { return 0; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("insert_servis", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@naziv_servisa", naziv_servisa);
+                    a.Parameters.AddWithValue("@vozilo_id", vozilo_id);
+                    a.Parameters.AddWithValue("@datum", datum);
+                    a.Parameters.AddWithValue("@info", info);
+                    a.Parameters.AddWithValue("@cijena", cijena);
+                    object result = a.ExecuteScalar();
+                    result = (result == DBNull.Value) ? 0 : result;
+                    int cc = Convert.ToInt32(result);
+                    return cc;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Updatea servis
+        /// </summary>
+        /// <param name="id">Servis ID</param>
+        /// <param name="naziv_servisa">Naziv servisa</param>
+        /// <param name="datum">Datum obavljanja servisa</param>
+        /// <param name="cijena">Cijena servisa</param>
+        /// <param name="info">Dodatne informacije o serisu</param>
+        /// /// <returns>
+        /// true ako je update uspio, false inace
+        /// </returns>
+        public static bool updateServis(int id, string naziv_servisa, DateTime datum, decimal cijena, string info)
+        {
+            if (!Validators.validID(id) ||
+                !Validators.validGodina(datum.Year))
+            { return false; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("update servis set " +
+                    "naziv_servisa=@naziv_servisa,datum_servisa=@datum,info=@info,cijena=@cijena" +
+                    " where id=@id", c))
+                {
+                    a.Parameters.AddWithValue("@naziv_servisa", naziv_servisa);
+                    a.Parameters.AddWithValue("@id", id);
+                    a.Parameters.AddWithValue("@datum", datum);
+                    a.Parameters.AddWithValue("@info", info);
+                    a.Parameters.AddWithValue("@cijena", cijena);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Brise servis
+        /// </summary>
+        /// <param name="id">Servis id</param>
+        /// /// <returns>
+        /// True ako je obrisan, false inace
+        /// </returns>
+        public static bool deleteServis(int? id)
+        {
+            if (!Validators.validID(id)) { return false; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_servis", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
 
         /// <summary>
         /// Updatea vozaca
@@ -386,7 +476,7 @@ namespace PPPK_Web.HELPERS
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using (SqlDataAdapter a = new SqlDataAdapter("select * from servis where id=@ID", c))
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from servis where vozilo_id=@ID", c))
                 {
                     a.SelectCommand.Parameters.Add(new SqlParameter
                     {

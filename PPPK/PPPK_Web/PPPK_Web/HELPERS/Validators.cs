@@ -45,7 +45,7 @@ namespace PPPK_Web.HELPERS
         /// /// <returns>
         /// true ako je valjana godinja proizvodnje, inace false
         /// </returns>
-        public static bool validGodinaProizvodnje(int? godina_proizvodnje)
+        public static bool validGodina(int? godina_proizvodnje)
             => (godina_proizvodnje != null && (godina_proizvodnje > 1886 && (godina_proizvodnje <= DateTime.Now.Year))) ? true : false;
 
         /// <summary>

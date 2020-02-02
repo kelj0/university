@@ -10,6 +10,6 @@ namespace PPPK_Web.CustomValidators
     public class GodinaProizvodnjeValidator : ValidationAttribute
     {
         public override bool IsValid(object value)
-            => (value != null && Validators.validGodinaProizvodnje((int)value)) ? true : false;
+            => (value != null && Validators.validGodina((int)value)) ? true : false;
     }
 }
