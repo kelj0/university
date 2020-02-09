@@ -210,6 +210,55 @@ as
     end
 go
 
+create proc [dbo].[dohvati_putni_nalog]
+    @id int
+as
+    if exists(select id from [dbo].[putni_nalog] where id=@id) begin
+        select vozac_id,vozilo_id,s.[status],v.ime,v.prezime,vo.marka,tv.tip from [dbo].[putni_nalog] as pn
+            left join [dbo].[vozac] as v on pn.vozac_id=v.id
+            left join [dbo].[vozilo] as vo on pn.vozilo_id=vo.id
+            left join [dbo].[tip_vozila] as tv on vo.tip_vozila_id=tv.id
+            left join [dbo].[status] as s on pn.status_id=s.id
+        where pn.id=@id
+    end
+    else begin
+        select null
+    end
+go
+
+create proc [dbo].[insert_putni_nalog]
+    @vozac_id int,
+    @vozilo_id int,
+    @status_id int,
+    @datum_izrade Date
+as
+    insert into [dbo].[putni_nalog](vozac_id,vozilo_id,status_id,datum_izrade)
+    values(@vozac_id,@vozilo_id,@status_id,@datum_izrade)
+    select SCOPE_IDENTITY()
+go
+
+create proc [dbo].[obrisi_putni_nalog]
+    @id int
+as
+     if exists(select id from [dbo].[putni_nalog] where id=@id) begin
+        begin try
+            begin transaction
+                delete from [dbo].[ruta] where putni_nalog_id=@id
+                delete from [dbo].[kupnja_goriva] where putni_nalog_id=@id
+            commit tran
+        end try
+        begin catch
+            if @@TRANCOUNT > 0
+                rollback tran
+            select null;
+        end catch
+	end
+	else begin
+		select null
+    end
+go
+
+
 create proc [dbo].[insert_dummy_data]
 as
     insert into [dbo].[tip_vozila]
@@ -276,5 +325,3 @@ as
     delete from [dbo].tip_vozila
     delete from [dbo].vozac
 go
-
-select * from servis
