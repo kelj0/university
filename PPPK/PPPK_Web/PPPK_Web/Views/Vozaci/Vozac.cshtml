@@ -1,0 +1,70 @@
+﻿@model vozac
+
+@{
+    ViewBag.Title = "Vozac";
+}
+
+
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
+
+    ul {
+        list-style: none
+    }
+    .inp{
+        border: 1px solid red;
+        margin-bottom: 2px;
+    }
+</style>
+
+<div onclick="window.location.href= '@Url.Action("Index","Vozaci")'" class="btn btn-primary">Natrag na popis vozaca</div>
+@if (Model == null)
+{
+    <h2>Ne postoji vozac s tim ID-em!</h2>
+}
+else
+{
+    <div class="center">
+        <h2>Vozac ID: @Model.id  </h2>
+        <form action="/api/v1/vozac/@Model.id" method="get" name="f">
+            <ul>
+                <li>Ime: <input class="inp" readonly value="@Model.ime" name="ime"></li>
+                <li>Prezime: <input class="inp" readonly value="@Model.prezime" name="prezime"></li>
+                <li>Broj mobitela: <input class="inp" readonly value="@Model.broj_mobitela" name="broj_mobitela"></li>
+                <li>Broj vozacke: <input class="inp" readonly value="@Model.broj_vozacke" name="broj_vozacke"></li>
+            </ul>
+            <input hidden="hidden" id="check" readonly />
+            <div id="bt" onclick="edit()" class="btn btn-primary">Uredi</div>
+            <div id="bt_send" onclick="document.forms['f'].submit();" class="btn btn-success" hidden>Spremi</div>
+        </form>
+    </div>
+
+    <script>
+        function edit() {
+                if (document.getElementById('check').readOnly) {
+                    document.getElementById('check').readOnly = false;
+                    document.getElementById('bt_send').hidden = false;
+                    Array.from(document.getElementsByClassName('inp'))
+                        .forEach(function (e) {
+                                e.readOnly = false
+                                e.style.border = "1px dotted green"
+                            }
+                        );
+                } else {
+                    document.getElementById('check').readOnly = true;
+                    document.getElementById('bt_send').hidden = true;
+                    Array.from(document.getElementsByClassName('inp'))
+                        .forEach(function (e) {
+                                e.readOnly = true
+                                e.style.border = "1px solid red"
+                            }
+                        );
+                }
+        };
+    </script>
+}

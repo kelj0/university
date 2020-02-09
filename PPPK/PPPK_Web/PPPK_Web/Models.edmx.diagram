@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c475d2f71d82495b8c36d46554881bfa" Name="Diagram1">
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.kupnja_goriva" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.mjesto" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.putni_nalog" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.ruta" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.servi" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.status" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.tip_vozila" Width="1.5" PointX="1.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.vozac" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.vozilo" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.zauzece_vozac" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PPPK_DATABASEModel.zauzece_vozilo" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__mjesto__kupnja_goriva" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__putni_nalog__kupnja_goriva" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__putni_nalog__ruta" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__status__putni_nalog" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__vozac__putni_nalog" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__vozilo__putni_nalog" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__vozilo__servis" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__tip_vozila__vozilo" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__vozac__zauzece_vozac" ManuallyRouted="false" />
+        <AssociationConnector Association="PPPK_DATABASEModel.FK__vozilo__zauzece_vozilo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

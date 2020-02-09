@@ -1,0 +1,12 @@
+﻿@model int
+@if (Model == 0)
+{
+    Response.Redirect(Url.Action("Index", "PutniNalozi"));
+}
+
+@{
+    ViewBag.Title = "Putni nalog";
+}
+
+<h2>CRUD Putni nalog ID: @Model</h2>
+

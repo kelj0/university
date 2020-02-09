@@ -5,6 +5,7 @@
 [Dd]ebug/
 [Rr]elease/
 [Rr]eleases/
+[Pp]ackages/
 
 # Built application files
 *.apk

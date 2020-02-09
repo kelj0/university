@@ -1,0 +1,761 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PPPK_DATABASEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="kupnja_goriva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="putni_nalog_id" Type="int" />
+          <Property Name="mjesto_id" Type="int" />
+          <Property Name="cijena" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="kolicina" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="datum" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mjesto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naziv" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="putni_nalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vozac_id" Type="int" />
+          <Property Name="vozilo_id" Type="int" />
+          <Property Name="status_id" Type="int" />
+          <Property Name="datum_izrade" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="putni_nalog_id" Type="int" />
+          <Property Name="x_koordinata_a" Type="decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="y_koordinata_a" Type="decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="x_koordinata_b" Type="decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="y_koordinata_b" Type="decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="km_izmedu_a_b" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="prosjecna_brzina" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="servis">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vozilo_id" Type="int" />
+          <Property Name="datum_servisa" Type="date" Nullable="false" />
+          <Property Name="naziv_servisa" Type="nvarchar" MaxLength="128" />
+          <Property Name="cijena" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="info" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tip_vozila">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tip" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vozac">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ime" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="prezime" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="broj_mobitela" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="broj_vozacke" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vozilo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tip_vozila_id" Type="int" />
+          <Property Name="marka" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="godina_proizvodnje" Type="int" Nullable="false" />
+          <Property Name="pocetni_km" Type="decimal" Precision="10" Scale="1" Nullable="false" />
+          <Property Name="trenutni_km" Type="decimal" Precision="10" Scale="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zauzece_vozac">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vozac_id" Type="int" />
+          <Property Name="datum" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zauzece_vozilo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vozilo_id" Type="int" />
+          <Property Name="datum" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__mjesto__kupnja_goriva">
+          <End Role="mjesto" Type="Self.mjesto" Multiplicity="0..1" />
+          <End Role="kupnja_goriva" Type="Self.kupnja_goriva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mjesto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kupnja_goriva">
+              <PropertyRef Name="mjesto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__putni_nalog__kupnja_goriva">
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="0..1" />
+          <End Role="kupnja_goriva" Type="Self.kupnja_goriva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="putni_nalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kupnja_goriva">
+              <PropertyRef Name="putni_nalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__putni_nalog__ruta">
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="0..1" />
+          <End Role="ruta" Type="Self.ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="putni_nalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ruta">
+              <PropertyRef Name="putni_nalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__status__putni_nalog">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tip_vozila__vozilo">
+          <End Role="tip_vozila" Type="Self.tip_vozila" Multiplicity="0..1" />
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_vozila">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vozilo">
+              <PropertyRef Name="tip_vozila_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozac__putni_nalog">
+          <End Role="vozac" Type="Self.vozac" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozac">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="vozac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozac__zauzece_vozac">
+          <End Role="vozac" Type="Self.vozac" Multiplicity="0..1" />
+          <End Role="zauzece_vozac" Type="Self.zauzece_vozac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozac">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="zauzece_vozac">
+              <PropertyRef Name="vozac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__putni_nalog">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__servis">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="servis" Type="Self.servis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servis">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__zauzece_vozilo">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="zauzece_vozilo" Type="Self.zauzece_vozilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="zauzece_vozilo">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PPPK_DATABASEModelStoreContainer">
+          <EntitySet Name="kupnja_goriva" EntityType="Self.kupnja_goriva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="mjesto" EntityType="Self.mjesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="putni_nalog" EntityType="Self.putni_nalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ruta" EntityType="Self.ruta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servis" EntityType="Self.servis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tip_vozila" EntityType="Self.tip_vozila" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vozac" EntityType="Self.vozac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vozilo" EntityType="Self.vozilo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zauzece_vozac" EntityType="Self.zauzece_vozac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zauzece_vozilo" EntityType="Self.zauzece_vozilo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__mjesto__kupnja_goriva" Association="Self.FK__mjesto__kupnja_goriva">
+            <End Role="mjesto" EntitySet="mjesto" />
+            <End Role="kupnja_goriva" EntitySet="kupnja_goriva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__putni_nalog__kupnja_goriva" Association="Self.FK__putni_nalog__kupnja_goriva">
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+            <End Role="kupnja_goriva" EntitySet="kupnja_goriva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__putni_nalog__ruta" Association="Self.FK__putni_nalog__ruta">
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+            <End Role="ruta" EntitySet="ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__status__putni_nalog" Association="Self.FK__status__putni_nalog">
+            <End Role="status" EntitySet="status" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tip_vozila__vozilo" Association="Self.FK__tip_vozila__vozilo">
+            <End Role="tip_vozila" EntitySet="tip_vozila" />
+            <End Role="vozilo" EntitySet="vozilo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozac__putni_nalog" Association="Self.FK__vozac__putni_nalog">
+            <End Role="vozac" EntitySet="vozac" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozac__zauzece_vozac" Association="Self.FK__vozac__zauzece_vozac">
+            <End Role="vozac" EntitySet="vozac" />
+            <End Role="zauzece_vozac" EntitySet="zauzece_vozac" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__putni_nalog" Association="Self.FK__vozilo__putni_nalog">
+            <End Role="vozilo" EntitySet="vozilo" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__servis" Association="Self.FK__vozilo__servis">
+            <End Role="vozilo" EntitySet="vozilo" />
+            <End Role="servis" EntitySet="servis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__zauzece_vozilo" Association="Self.FK__vozilo__zauzece_vozilo">
+            <End Role="vozilo" EntitySet="vozilo" />
+            <End Role="zauzece_vozilo" EntitySet="zauzece_vozilo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PPPK_DATABASEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kupnja_goriva">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="putni_nalog_id" Type="Int32" />
+          <Property Name="mjesto_id" Type="Int32" />
+          <Property Name="cijena" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="kolicina" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="mjesto" Relationship="Self.FK__mjesto__kupnja_goriva" FromRole="kupnja_goriva" ToRole="mjesto" />
+          <NavigationProperty Name="putni_nalog" Relationship="Self.FK__putni_nalog__kupnja_goriva" FromRole="kupnja_goriva" ToRole="putni_nalog" />
+        </EntityType>
+        <EntityType Name="mjesto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naziv" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="kupnja_goriva" Relationship="Self.FK__mjesto__kupnja_goriva" FromRole="mjesto" ToRole="kupnja_goriva" />
+        </EntityType>
+        <EntityType Name="putni_nalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vozac_id" Type="Int32" />
+          <Property Name="vozilo_id" Type="Int32" />
+          <Property Name="status_id" Type="Int32" />
+          <Property Name="datum_izrade" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="kupnja_goriva" Relationship="Self.FK__putni_nalog__kupnja_goriva" FromRole="putni_nalog" ToRole="kupnja_goriva" />
+          <NavigationProperty Name="rutas" Relationship="Self.FK__putni_nalog__ruta" FromRole="putni_nalog" ToRole="ruta" />
+          <NavigationProperty Name="status" Relationship="Self.FK__status__putni_nalog" FromRole="putni_nalog" ToRole="status" />
+          <NavigationProperty Name="vozac" Relationship="Self.FK__vozac__putni_nalog" FromRole="putni_nalog" ToRole="vozac" />
+          <NavigationProperty Name="vozilo" Relationship="Self.FK__vozilo__putni_nalog" FromRole="putni_nalog" ToRole="vozilo" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="putni_nalog_id" Type="Int32" />
+          <Property Name="x_koordinata_a" Type="Decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="y_koordinata_a" Type="Decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="x_koordinata_b" Type="Decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="y_koordinata_b" Type="Decimal" Precision="20" Scale="10" Nullable="false" />
+          <Property Name="km_izmedu_a_b" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="prosjecna_brzina" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <NavigationProperty Name="putni_nalog" Relationship="Self.FK__putni_nalog__ruta" FromRole="ruta" ToRole="putni_nalog" />
+        </EntityType>
+        <EntityType Name="servi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vozilo_id" Type="Int32" />
+          <Property Name="datum_servisa" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="naziv_servisa" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="cijena" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="info" Type="String" MaxLength="512" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="vozilo" Relationship="Self.FK__vozilo__servis" FromRole="servis" ToRole="vozilo" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="putni_nalog" Relationship="Self.FK__status__putni_nalog" FromRole="status" ToRole="putni_nalog" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tip_vozila">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tip" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="voziloes" Relationship="Self.FK__tip_vozila__vozilo" FromRole="tip_vozila" ToRole="vozilo" />
+        </EntityType>
+        <EntityType Name="vozac">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ime" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="prezime" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="broj_mobitela" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="broj_vozacke" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="putni_nalog" Relationship="Self.FK__vozac__putni_nalog" FromRole="vozac" ToRole="putni_nalog" />
+          <NavigationProperty Name="zauzece_vozac" Relationship="Self.FK__vozac__zauzece_vozac" FromRole="vozac" ToRole="zauzece_vozac" />
+        </EntityType>
+        <EntityType Name="vozilo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tip_vozila_id" Type="Int32" />
+          <Property Name="marka" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="godina_proizvodnje" Type="Int32" Nullable="false" />
+          <Property Name="pocetni_km" Type="Decimal" Precision="10" Scale="1" Nullable="false" />
+          <Property Name="trenutni_km" Type="Decimal" Precision="10" Scale="1" Nullable="false" />
+          <NavigationProperty Name="putni_nalog" Relationship="Self.FK__vozilo__putni_nalog" FromRole="vozilo" ToRole="putni_nalog" />
+          <NavigationProperty Name="servis" Relationship="Self.FK__vozilo__servis" FromRole="vozilo" ToRole="servis" />
+          <NavigationProperty Name="tip_vozila" Relationship="Self.FK__tip_vozila__vozilo" FromRole="vozilo" ToRole="tip_vozila" />
+          <NavigationProperty Name="zauzece_vozilo" Relationship="Self.FK__vozilo__zauzece_vozilo" FromRole="vozilo" ToRole="zauzece_vozilo" />
+        </EntityType>
+        <EntityType Name="zauzece_vozac">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vozac_id" Type="Int32" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="vozac" Relationship="Self.FK__vozac__zauzece_vozac" FromRole="zauzece_vozac" ToRole="vozac" />
+        </EntityType>
+        <EntityType Name="zauzece_vozilo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vozilo_id" Type="Int32" />
+          <Property Name="datum" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="vozilo" Relationship="Self.FK__vozilo__zauzece_vozilo" FromRole="zauzece_vozilo" ToRole="vozilo" />
+        </EntityType>
+        <Association Name="FK__mjesto__kupnja_goriva">
+          <End Role="mjesto" Type="Self.mjesto" Multiplicity="0..1" />
+          <End Role="kupnja_goriva" Type="Self.kupnja_goriva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="mjesto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kupnja_goriva">
+              <PropertyRef Name="mjesto_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__putni_nalog__kupnja_goriva">
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="0..1" />
+          <End Role="kupnja_goriva" Type="Self.kupnja_goriva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="putni_nalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="kupnja_goriva">
+              <PropertyRef Name="putni_nalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__putni_nalog__ruta">
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="0..1" />
+          <End Role="ruta" Type="Self.ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="putni_nalog">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ruta">
+              <PropertyRef Name="putni_nalog_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__status__putni_nalog">
+          <End Role="status" Type="Self.status" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozac__putni_nalog">
+          <End Role="vozac" Type="Self.vozac" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozac">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="vozac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__putni_nalog">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="putni_nalog" Type="Self.putni_nalog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="putni_nalog">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__servis">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="servis" Type="Self.servi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="servis">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tip_vozila__vozilo">
+          <End Role="tip_vozila" Type="Self.tip_vozila" Multiplicity="0..1" />
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tip_vozila">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="vozilo">
+              <PropertyRef Name="tip_vozila_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozac__zauzece_vozac">
+          <End Role="vozac" Type="Self.vozac" Multiplicity="0..1" />
+          <End Role="zauzece_vozac" Type="Self.zauzece_vozac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozac">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="zauzece_vozac">
+              <PropertyRef Name="vozac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vozilo__zauzece_vozilo">
+          <End Role="vozilo" Type="Self.vozilo" Multiplicity="0..1" />
+          <End Role="zauzece_vozilo" Type="Self.zauzece_vozilo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vozilo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="zauzece_vozilo">
+              <PropertyRef Name="vozilo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PPPK_DATABASEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kupnja_goriva" EntityType="Self.kupnja_goriva" />
+          <EntitySet Name="mjestoes" EntityType="Self.mjesto" />
+          <EntitySet Name="putni_nalog" EntityType="Self.putni_nalog" />
+          <EntitySet Name="rutas" EntityType="Self.ruta" />
+          <EntitySet Name="servis" EntityType="Self.servi" />
+          <EntitySet Name="status" EntityType="Self.status" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tip_vozila" EntityType="Self.tip_vozila" />
+          <EntitySet Name="vozacs" EntityType="Self.vozac" />
+          <EntitySet Name="voziloes" EntityType="Self.vozilo" />
+          <EntitySet Name="zauzece_vozac" EntityType="Self.zauzece_vozac" />
+          <EntitySet Name="zauzece_vozilo" EntityType="Self.zauzece_vozilo" />
+          <AssociationSet Name="FK__mjesto__kupnja_goriva" Association="Self.FK__mjesto__kupnja_goriva">
+            <End Role="mjesto" EntitySet="mjestoes" />
+            <End Role="kupnja_goriva" EntitySet="kupnja_goriva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__putni_nalog__kupnja_goriva" Association="Self.FK__putni_nalog__kupnja_goriva">
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+            <End Role="kupnja_goriva" EntitySet="kupnja_goriva" />
+          </AssociationSet>
+          <AssociationSet Name="FK__putni_nalog__ruta" Association="Self.FK__putni_nalog__ruta">
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+            <End Role="ruta" EntitySet="rutas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__status__putni_nalog" Association="Self.FK__status__putni_nalog">
+            <End Role="status" EntitySet="status" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozac__putni_nalog" Association="Self.FK__vozac__putni_nalog">
+            <End Role="vozac" EntitySet="vozacs" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__putni_nalog" Association="Self.FK__vozilo__putni_nalog">
+            <End Role="vozilo" EntitySet="voziloes" />
+            <End Role="putni_nalog" EntitySet="putni_nalog" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__servis" Association="Self.FK__vozilo__servis">
+            <End Role="vozilo" EntitySet="voziloes" />
+            <End Role="servis" EntitySet="servis" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tip_vozila__vozilo" Association="Self.FK__tip_vozila__vozilo">
+            <End Role="tip_vozila" EntitySet="tip_vozila" />
+            <End Role="vozilo" EntitySet="voziloes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozac__zauzece_vozac" Association="Self.FK__vozac__zauzece_vozac">
+            <End Role="vozac" EntitySet="vozacs" />
+            <End Role="zauzece_vozac" EntitySet="zauzece_vozac" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vozilo__zauzece_vozilo" Association="Self.FK__vozilo__zauzece_vozilo">
+            <End Role="vozilo" EntitySet="voziloes" />
+            <End Role="zauzece_vozilo" EntitySet="zauzece_vozilo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PPPK_DATABASEModelStoreContainer" CdmEntityContainer="PPPK_DATABASEEntities">
+          <EntitySetMapping Name="kupnja_goriva">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.kupnja_goriva">
+              <MappingFragment StoreEntitySet="kupnja_goriva">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="putni_nalog_id" ColumnName="putni_nalog_id" />
+                <ScalarProperty Name="mjesto_id" ColumnName="mjesto_id" />
+                <ScalarProperty Name="cijena" ColumnName="cijena" />
+                <ScalarProperty Name="kolicina" ColumnName="kolicina" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mjestoes">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.mjesto">
+              <MappingFragment StoreEntitySet="mjesto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naziv" ColumnName="naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="putni_nalog">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.putni_nalog">
+              <MappingFragment StoreEntitySet="putni_nalog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vozac_id" ColumnName="vozac_id" />
+                <ScalarProperty Name="vozilo_id" ColumnName="vozilo_id" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+                <ScalarProperty Name="datum_izrade" ColumnName="datum_izrade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rutas">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.ruta">
+              <MappingFragment StoreEntitySet="ruta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="putni_nalog_id" ColumnName="putni_nalog_id" />
+                <ScalarProperty Name="x_koordinata_a" ColumnName="x_koordinata_a" />
+                <ScalarProperty Name="y_koordinata_a" ColumnName="y_koordinata_a" />
+                <ScalarProperty Name="x_koordinata_b" ColumnName="x_koordinata_b" />
+                <ScalarProperty Name="y_koordinata_b" ColumnName="y_koordinata_b" />
+                <ScalarProperty Name="km_izmedu_a_b" ColumnName="km_izmedu_a_b" />
+                <ScalarProperty Name="prosjecna_brzina" ColumnName="prosjecna_brzina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servis">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.servi">
+              <MappingFragment StoreEntitySet="servis">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vozilo_id" ColumnName="vozilo_id" />
+                <ScalarProperty Name="datum_servisa" ColumnName="datum_servisa" />
+                <ScalarProperty Name="naziv_servisa" ColumnName="naziv_servisa" />
+                <ScalarProperty Name="cijena" ColumnName="cijena" />
+                <ScalarProperty Name="info" ColumnName="info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="status1" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tip_vozila">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.tip_vozila">
+              <MappingFragment StoreEntitySet="tip_vozila">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tip" ColumnName="tip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vozacs">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.vozac">
+              <MappingFragment StoreEntitySet="vozac">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ime" ColumnName="ime" />
+                <ScalarProperty Name="prezime" ColumnName="prezime" />
+                <ScalarProperty Name="broj_mobitela" ColumnName="broj_mobitela" />
+                <ScalarProperty Name="broj_vozacke" ColumnName="broj_vozacke" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="voziloes">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.vozilo">
+              <MappingFragment StoreEntitySet="vozilo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tip_vozila_id" ColumnName="tip_vozila_id" />
+                <ScalarProperty Name="marka" ColumnName="marka" />
+                <ScalarProperty Name="godina_proizvodnje" ColumnName="godina_proizvodnje" />
+                <ScalarProperty Name="pocetni_km" ColumnName="pocetni_km" />
+                <ScalarProperty Name="trenutni_km" ColumnName="trenutni_km" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zauzece_vozac">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.zauzece_vozac">
+              <MappingFragment StoreEntitySet="zauzece_vozac">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vozac_id" ColumnName="vozac_id" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zauzece_vozilo">
+            <EntityTypeMapping TypeName="PPPK_DATABASEModel.zauzece_vozilo">
+              <MappingFragment StoreEntitySet="zauzece_vozilo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vozilo_id" ColumnName="vozilo_id" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
