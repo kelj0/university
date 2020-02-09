@@ -1,21 +1,73 @@
-﻿
+﻿@using PPPK_Web.Models
+@model List<PutniNalogVIEW>
+
+
 @{
     ViewBag.Title = "Putni nalozi";
 }
 
-<h2>List putni nalozi</h2>
-<ul>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 1 })'" class="btn btn-default">Putni nalog 1</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 2 })'" class="btn btn-default">Putni nalog 2</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 3 })'" class="btn btn-default">Putni nalog 3</div>
-    </li>
-    <li>
-        <div onclick="window.location.href= '@Url.Action("PutniNalog","PutniNalozi", new { id = 4 })'" class="btn btn-default">Putni nalog 4</div>
-    </li>
-</ul>
+<style>
+    .center {
+        margin: auto;
+        padding-top: 5%;
+        text-align: center;
+    }
 
+    ul {
+        list-style: none
+    }
+
+    li {
+        margin-bottom: 2%;
+    }
+
+    .pn_container {
+        border: 3px lightblue solid;
+        padding: 10px;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .pn_item {
+        padding: 1%;
+    }
+</style>
+<div class="center">
+
+    <h2>List Vozaci</h2>
+    <ul>
+        @foreach (PutniNalogVIEW pn in @Model)
+        {
+            <li>
+                <div class="pn_container">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="row">
+                                <div class="col pn_item">
+                                    Vozac: @pn.vozac.ime @pn.vozac.prezime
+                                </div>
+                                <div class="col pn_item">
+                                    Vozilo: @pn.vozilo.marka (@pn.vozilo.godina_proizvodnje)
+                                </div>
+                                <div class="w-100"></div>
+                                <div class="col pn_item">
+                                    Status: @pn.status
+                                </div>
+                                <div class="col pn_item">
+                                    Datum izrade: @pn.putni_nalog.datum_izrade
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 text-center align-self-center">
+                            <div onclick="window.location.href= '@Url.Action("UrediNalog", "PutniNalozi", new { id = pn.putni_nalog.id })'" class="btn btn-success">Uredi</div>
+                            <form name="f" method="post" action="/api/v1/putniNalog/@pn.putni_nalog.id">
+                                <button type="submit" class="btn btn-danger">Obrisi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        }
+        <div onclick="window.location.href= '@Url.Action("DodajNalog", "PutniNalozi")'" class="btn btn-primary">Dodaj novi putni nalog</div>
+    </ul>
+</div>

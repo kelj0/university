@@ -11,6 +11,16 @@ namespace PPPK_Web.HELPERS
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
 
+        internal static object getAllPutniNalozi()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static object getPutniNalog(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Updatea vozaca
         /// </summary>

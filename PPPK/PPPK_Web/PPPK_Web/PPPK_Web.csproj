@@ -175,6 +175,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PutniNalogVIEW.cs" />
     <Compile Include="Models\VozilaVIEW.cs" />
     <Compile Include="Models\VoziloVIEW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -220,6 +221,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Vozaci\DodajVozaca.cshtml" />
     <Content Include="Views\Vozila\DodajVozilo.cshtml" />
+    <Content Include="Views\PutniNalozi\DodajNalog.cshtml" />
+    <Content Include="Views\PutniNalozi\UrediNalog.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -13,17 +13,17 @@ namespace PPPK_Web.Controllers
         // GET: Vozila
         public ActionResult Index()
         {
-            VozilaVIEW vv = new VozilaVIEW { vozila_tipovi = new List<Pair<vozilo, tip_vozila>>() };
+            List<VozilaVIEW> vvl = new List<VozilaVIEW>();
             foreach(vozilo v in DatabaseHandler.getAllVozila())
             {
-                vv.vozila_tipovi.Add(new Pair<vozilo, tip_vozila>
+                vvl.Add(new VozilaVIEW
                 {
-                    Vozilo = v,
-                    Tip_vozila = DatabaseHandler.getTipVozila((int)v.tip_vozila_id)
+                    tip_vozila = DatabaseHandler.getTipVozila((int)v.tip_vozila_id),
+                    vozilo = v
                 });
             }
 
-            return View(vv);
+            return View(vvl);
         }
 
         public ActionResult Vozilo(int? id)
