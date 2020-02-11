@@ -1,5 +1,5 @@
 ﻿@using PPPK_Web.Models
-@model List<VozilaVIEW>
+@model List<VozilaVM>
 
 @{
     ViewBag.Title = "Vozila";
@@ -34,7 +34,7 @@
 <div class="center">
     <h2>Pregled Vozila</h2>
     <ul>
-        @foreach(VozilaVIEW v in Model)
+        @foreach(VozilaVM v in Model)
         {
             <li>
                 <div class="vozilo_container">

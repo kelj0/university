@@ -26,6 +26,8 @@ namespace PPPK_Web
         public Nullable<int> vozilo_id { get; set; }
         public Nullable<int> status_id { get; set; }
         public System.DateTime datum_izrade { get; set; }
+        public System.DateTime datum_pocetka { get; set; }
+        public System.DateTime datum_zavrsetka { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<kupnja_goriva> kupnja_goriva { get; set; }

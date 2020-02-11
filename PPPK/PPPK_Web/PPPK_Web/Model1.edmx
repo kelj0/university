@@ -32,6 +32,8 @@
           <Property Name="vozilo_id" Type="int" />
           <Property Name="status_id" Type="int" />
           <Property Name="datum_izrade" Type="date" Nullable="false" />
+          <Property Name="datum_pocetka" Type="date" Nullable="false" />
+          <Property Name="datum_zavrsetka" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="ruta">
           <Key>
@@ -63,16 +65,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="status" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="tip_vozila">
           <Key>
@@ -245,7 +237,6 @@
           <EntitySet Name="ruta" EntityType="Self.ruta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="servis" EntityType="Self.servis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="status" EntityType="Self.status" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tip_vozila" EntityType="Self.tip_vozila" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vozac" EntityType="Self.vozac" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vozilo" EntityType="Self.vozilo" Schema="dbo" store:Type="Tables" />
@@ -327,6 +318,8 @@
           <Property Name="vozilo_id" Type="Int32" />
           <Property Name="status_id" Type="Int32" />
           <Property Name="datum_izrade" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="datum_pocetka" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="datum_zavrsetka" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="kupnja_goriva" Relationship="Self.FK__putni_nalog__kupnja_goriva" FromRole="putni_nalog" ToRole="kupnja_goriva" />
           <NavigationProperty Name="rutas" Relationship="Self.FK__putni_nalog__ruta" FromRole="putni_nalog" ToRole="ruta" />
           <NavigationProperty Name="status" Relationship="Self.FK__status__putni_nalog" FromRole="putni_nalog" ToRole="status" />
@@ -366,16 +359,6 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="status1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="putni_nalog" Relationship="Self.FK__status__putni_nalog" FromRole="status" ToRole="putni_nalog" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tip_vozila">
           <Key>
@@ -550,14 +533,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="PPPK_DATABASEEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PPPK_DATABASEEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="kupnja_goriva" EntityType="Self.kupnja_goriva" />
           <EntitySet Name="mjestoes" EntityType="Self.mjesto" />
           <EntitySet Name="putni_nalog" EntityType="Self.putni_nalog" />
           <EntitySet Name="rutas" EntityType="Self.ruta" />
           <EntitySet Name="servis" EntityType="Self.servi" />
           <EntitySet Name="status" EntityType="Self.status" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tip_vozila" EntityType="Self.tip_vozila" />
           <EntitySet Name="vozacs" EntityType="Self.vozac" />
           <EntitySet Name="voziloes" EntityType="Self.vozilo" />
@@ -609,7 +591,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="PPPK_DATABASEModelStoreContainer" CdmEntityContainer="PPPK_DATABASEEntities">
+        <EntityContainerMapping StorageEntityContainer="PPPK_DATABASEModelStoreContainer" CdmEntityContainer="PPPK_DATABASEEntities1">
           <EntitySetMapping Name="kupnja_goriva">
             <EntityTypeMapping TypeName="PPPK_DATABASEModel.kupnja_goriva">
               <MappingFragment StoreEntitySet="kupnja_goriva">
@@ -638,6 +620,8 @@
                 <ScalarProperty Name="vozilo_id" ColumnName="vozilo_id" />
                 <ScalarProperty Name="status_id" ColumnName="status_id" />
                 <ScalarProperty Name="datum_izrade" ColumnName="datum_izrade" />
+                <ScalarProperty Name="datum_pocetka" ColumnName="datum_pocetka" />
+                <ScalarProperty Name="datum_zavrsetka" ColumnName="datum_zavrsetka" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -672,17 +656,6 @@
               <MappingFragment StoreEntitySet="status">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="status1" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="PPPK_DATABASEModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

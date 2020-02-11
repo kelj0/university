@@ -48,11 +48,13 @@ go
 
 create table [putni_nalog]
 (
-    [id]           int constraint PK_putni_nalog primary key identity,
-    [vozac_id]     int constraint FK__vozac__putni_nalog foreign key references [dbo].[vozac](id),
-    [vozilo_id]    int constraint FK__vozilo__putni_nalog foreign key references [dbo].[vozilo](id),
-    [status_id]    int constraint FK__status__putni_nalog foreign key references [dbo].[status](id),
-    [datum_izrade] date not null
+    [id]              int constraint PK_putni_nalog primary key identity,
+    [vozac_id]        int constraint FK__vozac__putni_nalog foreign key references [dbo].[vozac](id),
+    [vozilo_id]       int constraint FK__vozilo__putni_nalog foreign key references [dbo].[vozilo](id),
+    [status_id]       int constraint FK__status__putni_nalog foreign key references [dbo].[status](id),
+    [datum_izrade]    date not null,
+    [datum_pocetka]   date not null,
+    [datum_zavrsetka] date not null
 )
 create table [zauzece_vozilo]
 (
@@ -214,7 +216,7 @@ create proc [dbo].[dohvati_putni_nalog]
     @id int
 as
     if exists(select id from [dbo].[putni_nalog] where id=@id) begin
-        select vozac_id,vozilo_id,s.[status],v.ime,v.prezime,vo.marka,tv.tip from [dbo].[putni_nalog] as pn
+        select pn.*,s.[status],v.ime,v.prezime,vo.marka,vo.godina_proizvodnje,tv.tip from [dbo].[putni_nalog] as pn
             left join [dbo].[vozac] as v on pn.vozac_id=v.id
             left join [dbo].[vozilo] as vo on pn.vozilo_id=vo.id
             left join [dbo].[tip_vozila] as tv on vo.tip_vozila_id=tv.id
@@ -226,14 +228,23 @@ as
     end
 go
 
+create proc [dbo].[dohvati_sve_putne_naloge]
+as
+    select pn.*,s.[status],v.ime,v.prezime,vo.marka,vo.godina_proizvodnje,tv.tip from [dbo].[putni_nalog] as pn
+        left join [dbo].[vozac] as v on pn.vozac_id=v.id
+        left join [dbo].[vozilo] as vo on pn.vozilo_id=vo.id
+        left join [dbo].[tip_vozila] as tv on vo.tip_vozila_id=tv.id
+        left join [dbo].[status] as s on pn.status_id=s.id
+go
 create proc [dbo].[insert_putni_nalog]
     @vozac_id int,
     @vozilo_id int,
     @status_id int,
-    @datum_izrade Date
+    @datum_pocetka date,
+    @datum_zavrsetka date
 as
-    insert into [dbo].[putni_nalog](vozac_id,vozilo_id,status_id,datum_izrade)
-    values(@vozac_id,@vozilo_id,@status_id,@datum_izrade)
+    insert into [dbo].[putni_nalog](vozac_id,vozilo_id,status_id,datum_izrade,datum_pocetka,datum_zavrsetka)
+    values(@vozac_id,@vozilo_id,@status_id,GETDATE(), @datum_pocetka, @datum_zavrsetka)
     select SCOPE_IDENTITY()
 go
 
@@ -277,8 +288,8 @@ as
     (4,'Golf 7',2010,143215.1,153215.2)
     insert into [dbo].[putni_nalog]
     values
-    (1,1,2,'1/10/2020'),
-    (2,2,2,'12/10/2019')
+    (1,1,2,'1/10/2020','1/10/2020','1/11/2020'),
+    (2,2,2,'12/10/2019','12/10/2019','12/13/2020')
     insert into [dbo].[zauzece_vozac]
     values
     (1,'1/10/2020'),
@@ -322,6 +333,9 @@ as
     delete from [dbo].[putni_nalog]
     delete from [dbo].[status]
     delete from [dbo].[vozilo]
-    delete from [dbo].tip_vozila
-    delete from [dbo].vozac
+    delete from [dbo].[tip_vozila]
+    delete from [dbo].[vozac]
 go
+
+
+exec [dbo].[insert_dummy_data]

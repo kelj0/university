@@ -13,10 +13,10 @@ namespace PPPK_Web
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PPPK_DATABASEEntities : DbContext
+    public partial class PPPK_DATABASEEntities1 : DbContext
     {
-        public PPPK_DATABASEEntities()
-            : base("name=PPPK_DATABASEEntities")
+        public PPPK_DATABASEEntities1()
+            : base("name=PPPK_DATABASEEntities1")
         {
         }
     
@@ -31,7 +31,6 @@ namespace PPPK_Web
         public virtual DbSet<ruta> rutas { get; set; }
         public virtual DbSet<servi> servis { get; set; }
         public virtual DbSet<status> status { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<tip_vozila> tip_vozila { get; set; }
         public virtual DbSet<vozac> vozacs { get; set; }
         public virtual DbSet<vozilo> voziloes { get; set; }

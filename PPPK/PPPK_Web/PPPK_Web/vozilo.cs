@@ -23,7 +23,7 @@ namespace PPPK_Web
             this.servis = new HashSet<servi>();
             this.zauzece_vozilo = new HashSet<zauzece_vozilo>();
         }
-    
+
         public int id { get; set; }
         public Nullable<int> tip_vozila_id { get; set; }
         [Required(ErrorMessage = "Marka vozila je obavezno polje!")]
@@ -35,7 +35,7 @@ namespace PPPK_Web
         [KilometriValidator(ErrorMessage = "Neispravan broj kilometara")]
         public decimal pocetni_km { get; set; }
         public decimal trenutni_km { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<putni_nalog> putni_nalog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,61 +1,33 @@
-﻿@model PPPK_Web.putni_nalog
+﻿@model PPPK_Web.Models.DodajNalogVM
 
 @{
     ViewBag.Title = "DodajPutniNalog";
 }
 
+<style>
+    .center {
+        margin: auto;
+        width: 50%;
+        padding-top: 5%;
+        text-align: center;
+    }
+</style>
+
+
 <h2>Dodaj putni nalog</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>Putni nalog</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @*  TODO
-            <div class="form-group">
-            <div class="col-md-10">
-                <fieldset>
-                    <label class="control-label col-md-2">Tip vozila</label>
-                    @Html.DropDownList("")
-                </fieldset>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Marka</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.marka, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.marka, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Godina proizvodnje</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.godina_proizvodnje, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.godina_proizvodnje, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Kilometri</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.pocetni_km, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.pocetni_km, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
+<hr />
+@Html.AntiForgeryToken()
+<div class="center">
+    <form method="post" action="@(Url.Action("DodajNalog","PutniNalozi"))" name="f">
+        <h5>Pocetak</h5>
+        <input name="datum_pocetka" type="date" min="@(DateTime.Now.ToString("yyyy-mm-dd"))" />
+        <h5>Zavrsetak</h5>
+        <input name="datum_zavrsetka" type="date" min="@(DateTime.Now.ToString("yyyy-mm-dd"))" />
+        <h5>Vozac: @Html.DropDownList("vozaci")</h5>
+        <h5>Vozilo: @Html.DropDownList("vozila")</h5>
+        <input type="button" onclick="document.forms['f'].submit();" />
+    </form>
+</div>
 <div>
-    <div onclick="window.location.href= '@Url.Action("Index", "PutniNalog")'" class="btn btn-danger">Nazad na listu putnih naloga</div>
+    <div onclick="window.location.href= '@Url.Action("Index", "PutniNalozi")'" class="btn btn-danger">Nazad na listu putnih naloga</div>
 </div>

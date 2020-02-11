@@ -12,7 +12,6 @@ namespace PPPK_Web.Controllers
         // GET: PutniNalozi
         public ActionResult Index()
         {
-
             return View((object)DatabaseHandler.getAllPutniNalozi());
         }
 
@@ -20,7 +19,6 @@ namespace PPPK_Web.Controllers
         {
             if (Validators.validID(id))
             {
-
                 return View((object)DatabaseHandler.getPutniNalog((int)id));
             }
             else
@@ -32,29 +30,16 @@ namespace PPPK_Web.Controllers
         [HttpGet]
         public ActionResult DodajNalog()
         {
-            return View();
-        }
-
-
-        /*
-        [HttpGet]
-        public ActionResult DodajVozaca()
-        {
+            ViewBag.vozila = Other.getVozilaList();
+            ViewBag.vozaci = Other.getVozaciList();
             return View();
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DodajVozaca(vozac v)
+        public ActionResult DodajNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, string vozac, string vozilo)
         {
-            if (ModelState.IsValid)
-            {
-                DatabaseHandler.insertVozac(v.ime, v.prezime, v.broj_mobitela, v.broj_vozacke);
-                return RedirectToAction("Index");
-            }
-            return View();
-
+            DatabaseHandler.insertPutniNalog(datum_pocetka,datum_zavrsetka,Convert.ToInt16(vozac), Convert.ToInt16(vozilo));
+            return RedirectToAction("Index");
         }
-        */
     }
 }

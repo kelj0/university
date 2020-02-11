@@ -13,10 +13,10 @@ namespace PPPK_Web.Controllers
         // GET: Vozila
         public ActionResult Index()
         {
-            List<VozilaVIEW> vvl = new List<VozilaVIEW>();
+            List<VozilaVM> vvl = new List<VozilaVM>();
             foreach(vozilo v in DatabaseHandler.getAllVozila())
             {
-                vvl.Add(new VozilaVIEW
+                vvl.Add(new VozilaVM
                 {
                     tip_vozila = DatabaseHandler.getTipVozila((int)v.tip_vozila_id),
                     vozilo = v
@@ -30,7 +30,7 @@ namespace PPPK_Web.Controllers
         {
             if (Validators.validID(id))
             {
-                VoziloVIEW vsm = new VoziloVIEW
+                VoziloVM vsm = new VoziloVM
                 {
                     servisi = DatabaseHandler.getServisi(Convert.ToInt16(id)),
                     vozilo = DatabaseHandler.getVozilo(Convert.ToInt16(id)),

@@ -1,5 +1,5 @@
 ﻿@using PPPK_Web.Models
-@model List<PutniNalogVIEW>
+@model List<PutniNalogVM>
 
 
 @{
@@ -36,7 +36,7 @@
 
     <h2>List Vozaci</h2>
     <ul>
-        @foreach (PutniNalogVIEW pn in @Model)
+        @foreach (PutniNalogVM pn in @Model)
         {
             <li>
                 <div class="pn_container">
@@ -47,7 +47,7 @@
                                     Vozac: @pn.vozac.ime @pn.vozac.prezime
                                 </div>
                                 <div class="col pn_item">
-                                    Vozilo: @pn.vozilo.marka (@pn.vozilo.godina_proizvodnje)
+                                    Vozilo: @pn.vozilo.marka @pn.tip (@pn.vozilo.godina_proizvodnje)
                                 </div>
                                 <div class="w-100"></div>
                                 <div class="col pn_item">

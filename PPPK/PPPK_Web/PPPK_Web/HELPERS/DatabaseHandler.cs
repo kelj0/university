@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPPK_Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,14 +12,128 @@ namespace PPPK_Web.HELPERS
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
 
-        internal static object getAllPutniNalozi()
+
+
+        /// <summary>
+        /// Vraca sve putne naloge zapakirane u listu PutniNalogVM-a
+        /// </summary>
+        /// /// <returns>
+        /// List<PutniNalogVM>
+        /// </returns>
+        public static List<PutniNalogVM> getAllPutniNalozi()
+        {
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlDataAdapter a = new SqlDataAdapter("exec [dbo].[dohvati_sve_putne_naloge]", c))
+                {
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    List<PutniNalogVM> lpn = new List<PutniNalogVM>();
+                    if (t.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in t.Rows)
+                        {
+                            PutniNalogVM pn = new PutniNalogVM
+                            {
+                                putni_nalog = new putni_nalog
+                                {
+                                    id = Convert.ToInt16(dr["id"]),
+                                    vozilo_id = Convert.ToInt16(dr["vozilo_id"]),
+                                    vozac_id = Convert.ToInt16(dr["vozac_id"]),
+                                    status_id = Convert.ToInt16(dr["status_id"]),
+                                    datum_izrade = Convert.ToDateTime(dr["datum_izrade"]),
+                                    datum_pocetka = Convert.ToDateTime(dr["datum_pocetka"]),
+                                    datum_zavrsetka = Convert.ToDateTime(dr["datum_zavrsetka"])
+                                },
+                                status = Convert.ToString(dr["status"]),
+                                vozac = new vozac
+                                {
+                                    ime = Convert.ToString(dr["ime"]),
+                                    prezime = Convert.ToString(dr["prezime"])
+                                },
+                                vozilo = new vozilo
+                                {
+                                    marka = Convert.ToString(dr["marka"]),
+                                    godina_proizvodnje = Convert.ToInt16(dr["godina_proizvodnje"])
+
+                                },
+                                tip = Convert.ToString(t.Rows[0]["tip"])
+                            };
+                            lpn.Add(pn);
+                        }
+                        return lpn;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        internal static void insertPutniNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, short v1, short v2)
         {
             throw new NotImplementedException();
         }
 
-        internal static object getPutniNalog(int id)
+        /// <summary>
+        /// Vraca putne nalog zapakirane u PutniNalogVM
+        /// </summary>
+        /// /// <returns>
+        /// PutniNalogVM
+        /// </returns>
+        public static PutniNalogVM getPutniNalog(int id)
         {
-            throw new NotImplementedException();
+            if (!Validators.validID(id)) { return null; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlDataAdapter a = new SqlDataAdapter("exec [dbo].[dohvati_putni_nalog] @id", c))
+                {
+                    a.SelectCommand.Parameters.Add(new SqlParameter
+                    {
+                        ParameterName = "@id",
+                        Value = id,
+                        SqlDbType = SqlDbType.Int
+                    });
+                    DataTable t = new DataTable();
+                    a.Fill(t);
+                    if (t.Rows.Count > 0)
+                    {
+                        PutniNalogVM pn = new PutniNalogVM
+                        {
+                            putni_nalog = new putni_nalog
+                                {
+                                    id = Convert.ToInt16(t.Rows[0]["id"]),
+                                    vozilo_id = Convert.ToInt16(t.Rows[0]["vozilo_id"]),
+                                    vozac_id = Convert.ToInt16(t.Rows[0]["vozac_id"]),
+                                    status_id = Convert.ToInt16(t.Rows[0]["status_id"]),
+                                    datum_izrade = Convert.ToDateTime(t.Rows[0]["datum_izrade"]),
+                                    datum_pocetka = Convert.ToDateTime(t.Rows[0]["datum_pocetka"]),
+                                    datum_zavrsetka = Convert.ToDateTime(t.Rows[0]["datum_zavrsetka"])
+                                },
+                            status = Convert.ToString(t.Rows[0]["status"]),
+                            vozac = new vozac
+                            {
+                                ime = Convert.ToString(t.Rows[0]["ime"]),
+                                prezime = Convert.ToString(t.Rows[0]["prezime"])
+                            },
+                            vozilo = new vozilo
+                            {
+                                marka = Convert.ToString(t.Rows[0]["marka"]),
+                                godina_proizvodnje = Convert.ToInt16(t.Rows[0]["godina_proizvodnje"])
+                            },
+                            tip = Convert.ToString(t.Rows[0]["tip"])
+                        };
+                        return pn;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -370,6 +485,7 @@ namespace PPPK_Web.HELPERS
                         { 
                             vozac v = new vozac
                             {
+                                
                                 id = Convert.ToInt16(dr["id"]),
                                 broj_mobitela = Convert.ToString(dr["broj_mobitela"]),
                                 broj_vozacke = Convert.ToString(dr["broj_vozacke"]),
@@ -401,7 +517,7 @@ namespace PPPK_Web.HELPERS
             using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
             {
                 c.Open();
-                using (SqlDataAdapter a = new SqlDataAdapter($"select * from vozilo where id=@ID", c))
+                using (SqlDataAdapter a = new SqlDataAdapter("select * from vozilo where id=@ID", c))
                 {
                     a.SelectCommand.Parameters.Add(new SqlParameter
                     {

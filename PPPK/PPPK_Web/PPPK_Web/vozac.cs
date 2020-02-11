@@ -22,7 +22,7 @@ namespace PPPK_Web
             this.putni_nalog = new HashSet<putni_nalog>();
             this.zauzece_vozac = new HashSet<zauzece_vozac>();
         }
-    
+
         public int id { get; set; }
         [Required(ErrorMessage = "Ime je obavezno")]
         public string ime { get; set; }
@@ -34,7 +34,7 @@ namespace PPPK_Web
         [Required(ErrorMessage = "Broj vozacke je obavezan")]
         [BrojVozackeValidator(ErrorMessage = "Neispravan broj vozacke! (Vazece vozacke su izmedu 7 i 14 znakova)")]
         public string broj_vozacke { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<putni_nalog> putni_nalog { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
