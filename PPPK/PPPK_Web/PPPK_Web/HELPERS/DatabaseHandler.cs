@@ -11,8 +11,7 @@ namespace PPPK_Web.HELPERS
     public static class DatabaseHandler
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
-
-
+               
 
         /// <summary>
         /// Vraca sve putne naloge zapakirane u listu PutniNalogVM-a
@@ -72,9 +71,39 @@ namespace PPPK_Web.HELPERS
             }
         }
 
-        internal static void insertPutniNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, short v1, short v2)
+        /// <summary>
+        /// Ubacuje novi putni nalog
+        /// </summary>
+        /// <param name="datum_pocetka">Datum pocetka putnog naloga</param>
+        /// <param name="datum_zavrsetka">Datum zavrsetka putnog naloga</param>
+        /// <param name="vozac_id">ID vozaca</param>
+        /// <param name="vozilo_id">ID vozila</param>
+        /// /// <returns>
+        /// ID insertanog pn ili 0
+        /// </returns>
+        public static int insertPutniNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, int vozac_id, int vozilo_id)
         {
-            throw new NotImplementedException();
+            if (!Validators.validID(vozac_id) || !Validators.validID(vozilo_id))
+            { return 0; }
+
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("insert_putni_nalog", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@vozac_id ", vozac_id);
+                    a.Parameters.AddWithValue("vozilo_id", vozilo_id);
+                    a.Parameters.AddWithValue("@status_id", 1);
+                    a.Parameters.AddWithValue("@datum_pocetka", datum_pocetka);
+                    a.Parameters.AddWithValue("@datum_zavrsetka", datum_zavrsetka);
+                    object result = a.ExecuteScalar();
+                    result = (result == DBNull.Value) ? 0 : result;
+                    int cc = Convert.ToInt32(result);
+                    return cc;
+                }
+            }
+
         }
 
         /// <summary>

@@ -16,18 +16,45 @@
 
 <h2>Dodaj putni nalog</h2>
 <hr />
-@Html.AntiForgeryToken()
-<div class="center">
-    <form method="post" action="@(Url.Action("DodajNalog","PutniNalozi"))" name="f">
-        <h5>Pocetak</h5>
-        <input name="datum_pocetka" type="date" min="@(DateTime.Now.ToString("yyyy-mm-dd"))" />
-        <h5>Zavrsetak</h5>
-        <input name="datum_zavrsetka" type="date" min="@(DateTime.Now.ToString("yyyy-mm-dd"))" />
-        <h5>Vozac: @Html.DropDownList("vozaci")</h5>
-        <h5>Vozilo: @Html.DropDownList("vozila")</h5>
-        <input type="button" onclick="document.forms['f'].submit();" />
-    </form>
-</div>
-<div>
-    <div onclick="window.location.href= '@Url.Action("Index", "PutniNalozi")'" class="btn btn-danger">Nazad na listu putnih naloga</div>
-</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="center">
+        <form method="post" action="@(Url.Action("DodajNalog", "PutniNalozi"))" name="f">
+            <h5>Pocetak</h5>
+
+            <div class="editor-label">
+                Datum pocetka
+            </div>
+            <div class="editor-field">
+                <input name="datum_pocetka" type="date" min="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
+            </div>
+            <div class="editor-label">
+                Datum zavrsetka
+            </div>
+            <div class="editor-field">
+                <input name="datum_zavrsetka" type="date" min="@(DateTime.Now.ToString("yyyy-MM-dd"))" />
+            </div>
+
+            
+            <div class="editor-label">
+                Vozac:
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("vozaci")
+            </div>
+            <div class="editor-label">
+                Vozilo:
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList("vozila")
+            </div>
+            <input type="submit" value="Napravi" />
+            <!--onclick="document.forms['f'].submit();"-->
+        </form>
+    </div>
+    <div>
+        <div onclick="window.location.href= '@Url.Action("Index", "PutniNalozi")'" class="btn btn-danger">Nazad na listu putnih naloga</div>
+    </div>
+}

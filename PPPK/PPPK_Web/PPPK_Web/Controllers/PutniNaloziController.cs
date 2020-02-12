@@ -36,9 +36,10 @@ namespace PPPK_Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult DodajNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, string vozac, string vozilo)
+        [ValidateAntiForgeryToken]
+        public ActionResult DodajNalog(DateTime datum_pocetka, DateTime datum_zavrsetka, string vozaci, string vozila)
         {
-            DatabaseHandler.insertPutniNalog(datum_pocetka,datum_zavrsetka,Convert.ToInt16(vozac), Convert.ToInt16(vozilo));
+            DatabaseHandler.insertPutniNalog(datum_pocetka,datum_zavrsetka,Convert.ToInt16(vozaci), Convert.ToInt16(vozila));
             return RedirectToAction("Index");
         }
     }
