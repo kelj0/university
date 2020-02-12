@@ -1,12 +1,11 @@
-﻿@model int
-@if (Model == 0)
+﻿@model PPPK_Web.Models.PutniNalogVM
+@if (Model == null)
 {
     Response.Redirect(Url.Action("Index", "PutniNalozi"));
 }
 
-@{
-    ViewBag.Title = "Putni nalog";
-}
-
-<h2>CRUD Putni nalog ID: @Model</h2>
-
+<h2>U izradi</h2>
+<h3>ID PN: @Model.putni_nalog.id</h3>
+<div>
+    @Html.ActionLink("Nazad na listu", "Index")
+</div>

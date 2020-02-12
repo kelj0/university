@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <div class="col-2 text-center align-self-center">
-                            <div onclick="window.location.href= '@Url.Action("UrediNalog", "PutniNalozi", new { id = pn.putni_nalog.id })'" class="btn btn-success">Uredi</div>
+                            <div onclick="window.location.href= '@Url.Action("PutniNalog", "PutniNalozi", new { id = pn.putni_nalog.id })'" class="btn btn-success">Uredi</div>
                             <form name="f" method="post" action="/api/v1/putniNalog/@pn.putni_nalog.id">
                                 <button type="submit" class="btn btn-danger">Obrisi</button>
                             </form>

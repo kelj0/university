@@ -236,6 +236,7 @@ as
         left join [dbo].[tip_vozila] as tv on vo.tip_vozila_id=tv.id
         left join [dbo].[status] as s on pn.status_id=s.id
 go
+
 create proc [dbo].[insert_putni_nalog]
     @vozac_id int,
     @vozilo_id int,
@@ -256,6 +257,7 @@ as
             begin transaction
                 delete from [dbo].[ruta] where putni_nalog_id=@id
                 delete from [dbo].[kupnja_goriva] where putni_nalog_id=@id
+                delete from [dbo].[putni_nalog] where id=@id
             commit tran
         end try
         begin catch
@@ -337,5 +339,5 @@ as
     delete from [dbo].[vozac]
 go
 
-
 exec [dbo].[insert_dummy_data]
+

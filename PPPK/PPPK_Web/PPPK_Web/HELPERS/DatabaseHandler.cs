@@ -107,6 +107,28 @@ namespace PPPK_Web.HELPERS
         }
 
         /// <summary>
+        /// Brise putni nalog
+        /// </summary>
+        /// <param name="id">Putni nalog ID </param>
+        /// /// <returns>
+        /// True ako je obrisan, false inace
+        /// </returns>
+        public static bool deletePutniNalog(int id)
+        {
+            if (!Validators.validID(id)) { return false; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_putni_nalog", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+    
+        /// <summary>
         /// Vraca putne nalog zapakirane u PutniNalogVM
         /// </summary>
         /// /// <returns>

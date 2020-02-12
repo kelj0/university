@@ -111,5 +111,20 @@ namespace PPPK_Web.Controllers
             else { return null; }
         }
 
+        [HttpPost]
+        public HttpResponseMessage putniNalog(int? id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.deletePutniNalog((int)id);
+                var response = Request.CreateResponse(HttpStatusCode.Moved);
+                string fullyQualifiedUrl = Request.RequestUri.GetLeftPart(UriPartial.Authority) + "/PutniNalozi";
+                response.Headers.Location = new Uri(fullyQualifiedUrl);
+                return response;
+            }
+            else { return null; }
+        }
+
+
     }
 }
