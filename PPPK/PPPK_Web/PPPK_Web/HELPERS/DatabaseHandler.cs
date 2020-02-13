@@ -188,6 +188,51 @@ namespace PPPK_Web.HELPERS
         }
 
         /// <summary>
+        /// Brise sve rute putnog naloga
+        /// </summary>
+        /// <param name="id">Putni nalog ID </param>
+        /// /// <returns>
+        /// Broj obrisanih redova
+        /// </returns>
+        public static int deleteRute(int id)
+        {
+            if (!Validators.validID(id)) { return 0; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_rute", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return a.ExecuteNonQuery();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Brise rutu
+        /// </summary>
+        /// <param name="id">Ruta ID</param>
+        /// /// <returns>
+        /// True ako je obrisan, false inace
+        /// </returns>
+        public static bool deleteRuta(int id)
+        {
+            if (!Validators.validID(id)) { return false; }
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("obrisi_rutu", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.Parameters.AddWithValue("@id", id);
+                    return (a.ExecuteNonQuery() == 0) ? false : true;
+                }
+            }
+        }
+
+
+        /// <summary>
         /// Updatea vozaca
         /// </summary>
         /// <param name="ID">Vozilo ID</param>

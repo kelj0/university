@@ -125,6 +125,28 @@ namespace PPPK_Web.Controllers
             else { return null; }
         }
 
+        [HttpPost]
+        public HttpResponseMessage obrisiRutu(int? id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.deleteRuta((int)id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            else { return Request.CreateResponse(HttpStatusCode.BadRequest); }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage obrisiRute(int? id)
+        {
+            if (Validators.validID(id))
+            {
+                DatabaseHandler.deleteRute((int)id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            else { return Request.CreateResponse(HttpStatusCode.BadRequest); }
+        }
+
 
     }
 }
