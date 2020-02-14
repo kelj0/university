@@ -5,12 +5,29 @@
  */
 package com.kkeglje.dataapp;
 
+import db.dbHandler;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 /**
  *
  * @author keljo
  */
 public class main {
-    public static void main(String[] args) {
-        System.out.println("TEST");
+    public static dbHandler dh = dbHandler.getInstance();
+    public static void main(String[] args) throws SQLException {
+        // vozila/vozaci from CSV to database 
+        
+        
+        System.out.println("Test");
+        
+        // rute Import/export to XML
+        
+        // backup db to XML
+        // restoredb
+        
+        // putni nalog generate PDF (hibernate)
+        
     }
 }

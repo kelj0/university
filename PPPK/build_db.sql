@@ -271,6 +271,32 @@ as
     end
 go
 
+create proc [dbo].[obrisi_rute]
+    @id int
+as 
+    delete from [dbo].[ruta] where putni_nalog_id=@id
+go
+
+create proc [dbo].[obrisi_rutu]
+    @id int
+as
+   if exists(select id from [dbo].[ruta] where id=@id) begin
+        begin try
+            begin transaction
+                delete from [dbo].[ruta] where id=@id
+            commit tran
+        end try
+        begin catch
+            if @@TRANCOUNT > 0
+                rollback tran
+            select null;
+        end catch
+	end
+	else begin
+		select null
+    end  
+go
+
 
 create proc [dbo].[insert_dummy_data]
 as
@@ -340,4 +366,3 @@ as
 go
 
 exec [dbo].[insert_dummy_data]
-
