@@ -56,6 +56,12 @@ public class Vozac {
     private String broj_mobitela;
     private String broj_vozacke;    
 
+    public Vozac(String ime, String prezime, String broj_mobitela, String broj_vozacke) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.broj_mobitela = broj_mobitela;
+        this.broj_vozacke = broj_vozacke;
+    }
     public Vozac(int id, String ime, String prezime, String broj_mobitela, String broj_vozacke) {
         this.id = id;
         this.ime = ime;

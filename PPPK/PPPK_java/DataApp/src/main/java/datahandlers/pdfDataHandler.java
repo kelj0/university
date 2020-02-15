@@ -10,5 +10,9 @@ package datahandlers;
  * @author keljo
  */
 public class pdfDataHandler {
+
+    public void generatePutniNalogPdf(int id, String path, String fname) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
