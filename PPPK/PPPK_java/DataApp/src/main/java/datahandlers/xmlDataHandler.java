@@ -7,6 +7,12 @@ package datahandlers;
 
 import db.dbHandler;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.w3c.dom.Document;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,8 +36,40 @@ public class xmlDataHandler {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void exportRute(int ruta_id,String path, String fname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int exportRute(int putni_nalog_id,String path, String fname) {
+        List<Ruta> l = db.SelectRute(putni_nalog_id);
+        int n = 0;
+        try {
+            FileWriter fWriter = new FileWriter(Paths.get(path,fname).toFile());
+            fWriter.append(String.format(
+                    "<?xml version=\"1.0\"?>\n"
+                    + "<putni_nalog id=\"%d\">\n"
+                    ,putni_nalog_id));
+            
+            for(Ruta r : l){
+                fWriter.append(
+                    String.format(
+                        "    <ruta id=\"%d\">\n"
+                        + "        <x_koordinata_a>%f</x_koordinata_a>\n"
+                        + "        <y_koordinata_a>%f</y_koordinata_a>\n"
+                        + "        <x_koordinata_b>%f</x_koordinata_b>\n"
+                        + "        <y_koordinata_b>%f</y_koordinata_b>\n"
+                        + "        <km_izmedu_a_b>%f</km_izmedu_a_b>\n"
+                        + "        <prosjecna_brzina>%f</prosjecna_brzina>\n"
+                        + "    </ruta>\n",
+                        r.getId(),r.getX_koordinata_a(),
+                        r.getY_koordinata_a(),r.getX_koordinata_b(),
+                        r.getY_koordinata_b(),r.getKm_izmedu_a_b(),r.getProsjecna_brzina()
+                    )
+                );
+                ++n;
+            }
+            fWriter.append("</putni_nalog>\n");
+            fWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(xmlDataHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
     }
 
     public int importRute(String path) {
@@ -42,13 +80,13 @@ public class xmlDataHandler {
 
 	    Document doc = dBuilder.parse(fXmlFile);
             doc.getDocumentElement().normalize();
-            System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getElementsByTagName("ruta");
             int temp = 0;
             for(; temp<nList.getLength(); ++temp){
                 Node nNode = nList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
+                    int putni_nalog_id =      Integer.parseInt(eElement.getElementsByTagName("putni_nalog_id").item(0).getTextContent());
                     double x_koordinata_a =   Double.parseDouble(eElement.getElementsByTagName("x_koordinata_a").item(0).getTextContent());
                     double y_koordinata_a =   Double.parseDouble(eElement.getElementsByTagName("y_koordinata_a").item(0).getTextContent());
                     double x_koordinata_b =   Double.parseDouble(eElement.getElementsByTagName("x_koordinata_b").item(0).getTextContent());
@@ -56,6 +94,7 @@ public class xmlDataHandler {
                     double km_izmedu_a_b =    Double.parseDouble(eElement.getElementsByTagName("km_izmedu_a_b").item(0).getTextContent());
                     double prosjecna_brzina = Double.parseDouble(eElement.getElementsByTagName("prosjecna_brzina").item(0).getTextContent());
                     Ruta r = new Ruta(
+                            putni_nalog_id,
                             x_koordinata_a,y_koordinata_a,
                             x_koordinata_b,y_koordinata_b,
                             km_izmedu_a_b,

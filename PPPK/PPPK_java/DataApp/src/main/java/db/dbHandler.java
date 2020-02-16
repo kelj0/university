@@ -15,8 +15,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Ruta;
 import models.Vozac;
 import models.Vozilo;
 
@@ -134,7 +137,6 @@ public class dbHandler {
     
     public void InsertVozilo(Vozilo v){
         CallableStatement cstmt = null;
-        ResultSet rs = null;
         try{
             OpenConnection();
             cstmt = connection.prepareCall("{call insert_vozilo(?,?,?,?,?)}");
@@ -144,11 +146,60 @@ public class dbHandler {
             cstmt.setDouble("trenutni_km", v.getTrenutni_km());
             cstmt.setInt("godina_proizvodnje", v.getGodina_proizvodnje());
             cstmt.execute();
-        }catch(Exception ex){
+        }catch(SQLException ex){
             ex.printStackTrace();
         }finally{
             CloseConnection();
         }
     }
-    
+
+    public void InsertRuta(Ruta r) {
+        CallableStatement cstmt = null;
+        try{
+            OpenConnection();
+            cstmt = connection.prepareCall("{call insert_ruta(?,?,?,?,?,?,?)}");
+            cstmt.setInt("putni_nalog_id", r.getPutni_nalog_id());
+            cstmt.setDouble("x_koordinata_a", r.getX_koordinata_a());
+            cstmt.setDouble("y_koordinata_a", r.getY_koordinata_a());
+            cstmt.setDouble("x_koordinata_b", r.getX_koordinata_b());
+            cstmt.setDouble("y_koordinata_b", r.getY_koordinata_b());
+            cstmt.setDouble("km_izmedu_a_b", r.getKm_izmedu_a_b());
+            cstmt.setDouble("prosjecna_brzina", r.getProsjecna_brzina());
+            cstmt.execute();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            CloseConnection();
+        }
+        
+    }
+
+    public ArrayList<Ruta> SelectRute(int putni_nalog_id) {
+        ArrayList<Ruta> l = new ArrayList<Ruta>();
+        ResultSet rs = null;
+        Statement statement = null;
+        try {
+            OpenConnection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM RUTA WHERE putni_nalog_id=" + putni_nalog_id);
+            while(rs.next()){
+                Ruta r = new Ruta(
+                        rs.getInt("id"),
+                        rs.getInt("putni_nalog_id"),
+                        rs.getDouble("x_koordinata_a"),
+                        rs.getDouble("y_koordinata_a"),
+                        rs.getDouble("x_koordinata_b"),
+                        rs.getDouble("y_koordinata_b"),
+                        rs.getDouble("km_izmedu_a_b"),
+                        rs.getDouble("prosjecna_brzina")
+                );
+                l.add(r);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(dbHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            CloseConnection();
+        }
+        return l;
+    }
 }

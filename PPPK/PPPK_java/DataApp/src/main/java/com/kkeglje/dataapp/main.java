@@ -40,7 +40,8 @@ public class main {
         System.out.println("Broj uvezenih ruta: " + n);
         
         System.out.println("Izvoz rute..");
-        xdh.exportRute(1,DATA_DIRECTORY_PATH,"EXPORT_rute.xml");
+        n = xdh.exportRute(1,DATA_DIRECTORY_PATH,"EXPORT_rute.xml");
+        System.out.println("Broj izvezenih ruta: " + n);
         
         // backup db to XML
         xdh.fullDatabaseBackup("PPPK_DATABASE");

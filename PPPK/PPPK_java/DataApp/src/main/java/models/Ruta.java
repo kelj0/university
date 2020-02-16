@@ -10,6 +10,7 @@ package models;
  * @author keljo
  */
 public class Ruta {
+    private int putni_nalog_id;
     private int id;
     private double x_koordinata_a;
     private double y_koordinata_a;
@@ -17,9 +18,11 @@ public class Ruta {
     private double y_koordinata_b;
     private double km_izmedu_a_b;
     private double prosjecna_brzina;
-
-    public Ruta(int id, double x_koordinata_a, double y_koordinata_a, double x_koordinata_b, double y_koordinata_b, double km_izmedu_a_b, double prosjecna_brzina) {
+    
+    
+    public Ruta(int id, int putni_nalog_id, double x_koordinata_a, double y_koordinata_a, double x_koordinata_b, double y_koordinata_b, double km_izmedu_a_b, double prosjecna_brzina) {
         this.id = id;
+        this.putni_nalog_id = putni_nalog_id;
         this.x_koordinata_a = x_koordinata_a;
         this.y_koordinata_a = y_koordinata_a;
         this.x_koordinata_b = x_koordinata_b;
@@ -28,7 +31,8 @@ public class Ruta {
         this.prosjecna_brzina = prosjecna_brzina;
     }
     
-    public Ruta(double x_koordinata_a, double y_koordinata_a, double x_koordinata_b, double y_koordinata_b, double km_izmedu_a_b, double prosjecna_brzina) {
+    public Ruta(int putni_nalog_id,double x_koordinata_a, double y_koordinata_a, double x_koordinata_b, double y_koordinata_b, double km_izmedu_a_b, double prosjecna_brzina) {
+        this.putni_nalog_id = putni_nalog_id;
         this.x_koordinata_a = x_koordinata_a;
         this.y_koordinata_a = y_koordinata_a;
         this.x_koordinata_b = x_koordinata_b;
@@ -36,6 +40,15 @@ public class Ruta {
         this.km_izmedu_a_b = km_izmedu_a_b;
         this.prosjecna_brzina = prosjecna_brzina;
     }
+    
+    public int getPutni_nalog_id() {
+        return putni_nalog_id;
+    }
+    
+    public void setPutni_nalog_id(int putni_nalog_id) {
+        this.putni_nalog_id = putni_nalog_id;
+    }
+    
     public int getId() {
         return id;
     }

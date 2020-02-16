@@ -271,6 +271,19 @@ as
     end
 go
 
+create proc [dbo].[insert_ruta]
+    @putni_nalog_id   int,
+    @x_koordinata_a   decimal(20,10),
+    @y_koordinata_a   decimal(20,10),
+    @x_koordinata_b   decimal(20,10),
+    @y_koordinata_b   decimal(20,10),
+    @km_izmedu_a_b    decimal(10,2),
+    @prosjecna_brzina decimal(6,2)
+as
+    insert into ruta
+    values(@putni_nalog_id,@x_koordinata_a,@y_koordinata_a,@x_koordinata_b,@y_koordinata_b,@km_izmedu_a_b,@prosjecna_brzina)
+go
+
 create proc [dbo].[obrisi_rute]
     @id int
 as 
@@ -296,7 +309,6 @@ as
 		select null
     end  
 go
-
 
 create proc [dbo].[insert_dummy_data]
 as
