@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<rute>
+	<ruta>
+		<putni_nalog_id>1</putni_nalog_id>
+		<x_koordinata_a>50.123456</x_koordinata_a>
+		<y_koordinata_a>50.123456</y_koordinata_a>
+		<x_koordinata_b>70.123456</x_koordinata_b>
+		<y_koordinata_b>60.123456</y_koordinata_b>
+		<km_izmedu_a_b>10.2</km_izmedu_a_b>
+		<prosjecna_brzina>63.2</prosjecna_brzina>
+	</ruta>
+	<ruta>
+		<putni_nalog_id>2</putni_nalog_id>
+		<x_koordinata_a>10.123456</x_koordinata_a>
+		<y_koordinata_a>20.123456</y_koordinata_a>
+		<x_koordinata_b>10.123456</x_koordinata_b>
+		<y_koordinata_b>20.123456</y_koordinata_b>
+		<km_izmedu_a_b>6.2</km_izmedu_a_b>
+		<prosjecna_brzina>20</prosjecna_brzina>
+	</ruta>
+</rute>
