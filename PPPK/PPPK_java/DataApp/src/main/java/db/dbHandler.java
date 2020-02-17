@@ -16,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Ruta;
@@ -36,10 +35,6 @@ public class dbHandler {
     
     private dbHandler(String url) throws ClassNotFoundException{
         Class.forName(url);
-        //if(!new File(PROJECT_DIRECTORY + "../PPPK_DATABASE.db").exists()){
-        //    System.out.println("Directory: " + (PROJECT_DIRECTORY+"/../../build-db."));
-        //    //ExecuteScript(PROJECT_DIRECTORY + "../build-db.sql");
-        //}
     }
     
     public static dbHandler getInstance(){

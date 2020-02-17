@@ -23,7 +23,6 @@ public class main {
     public static final String DATA_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"),"DATA").toString();
     public static void main(String[] args) throws SQLException {
         // vozila/vozaci from CSV to database 
-        
         csvDataHandler cdh = new csvDataHandler();
         System.out.println("Uvoz vozaca..");
         int n = cdh.importVozaci(Paths.get(DATA_DIRECTORY_PATH,"vozaci.csv").toString());
@@ -39,17 +38,18 @@ public class main {
         n = xdh.importRute(Paths.get(DATA_DIRECTORY_PATH,"rute.xml").toString());
         System.out.println("Broj uvezenih ruta: " + n);
         
-        System.out.println("Izvoz rute..");
+        System.out.println("Izvoz ruta..");
         n = xdh.exportRute(1,DATA_DIRECTORY_PATH,"EXPORT_rute.xml");
         System.out.println("Broj izvezenih ruta: " + n);
-        
+    
         // backup db to XML
-        xdh.fullDatabaseBackup("PPPK_DATABASE");
+        //xdh.fullDatabaseBackup("PPPK_DATABASE");
         // restoredb
-        xdh.fullDatabaseRestore(Paths.get(DATA_DIRECTORY_PATH,"PPPK_DATABASE.xml").toString());
+        //xdh.fullDatabaseRestore(Paths.get(DATA_DIRECTORY_PATH,"PPPK_DATABASE.xml").toString());
         // putni nalog generate PDF (hibernate)
+        System.out.println("Generiranje PDF-a");
         pdfDataHandler pdh = new pdfDataHandler();
-        
         pdh.generatePutniNalogPdf(1,DATA_DIRECTORY_PATH,"putni_nalog_1_report.pdf");
+        System.out.println("PDF generiran..");
     }
 }
