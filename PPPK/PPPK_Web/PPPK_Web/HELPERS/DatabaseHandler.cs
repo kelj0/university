@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -11,7 +12,102 @@ namespace PPPK_Web.HELPERS
     public static class DatabaseHandler
     {
         public static string CONNECTION_STRING = System.Configuration.ConfigurationManager.ConnectionStrings["PPPK_DATABASE"].ConnectionString;
-               
+        public static string DATA_DIR = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,"../DATA");
+        private static List<string> TABLE_NAMES = new List<string> {
+            "tip_vozila","mjesto","status","vozac","vozilo","putni_nalog","zauzece_vozilo","zauzece_vozac","servis","kupnja_goriva","ruta" };
+
+    public static void NukeDb()
+        {
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("clean_database", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.ExecuteNonQuery();
+                }
+                c.Close();
+            }
+        }
+
+        public static void BackupDb()
+        {
+            foreach (DataSet tblDs in GetFullDb())
+            {
+                tblDs.WriteXml(Path.Combine(DATA_DIR, tblDs.DataSetName+".xml"));
+            }
+        }
+
+        public static void RestoreDb()
+        {
+            EnableIDInsert();
+            foreach (string tblname in TABLE_NAMES)
+            {
+                using(SqlConnection c = new SqlConnection(CONNECTION_STRING))
+                {
+                    DataSet ds = new DataSet(tblname);
+                    ds.ReadXml(Path.Combine(DATA_DIR, tblname + ".xml"));
+                    c.Open();
+                    using(SqlBulkCopy cop = new SqlBulkCopy(c, SqlBulkCopyOptions.KeepIdentity, null))
+                    {
+                        cop.DestinationTableName = $"[dbo].[{tblname}]";
+                        cop.WriteToServer(ds.Tables[0]);
+                    }
+                    c.Close();
+                }
+            }
+            DisableIDInsert();
+        }
+
+        public static List<DataSet> GetFullDb()
+        {
+            List<DataSet> l = new List<DataSet>();
+
+            foreach (string tblname in TABLE_NAMES)
+            {
+                using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+                {
+                    c.Open();
+                    using (SqlDataAdapter a = new SqlDataAdapter($"select * from [dbo].[{tblname}]", c))
+                    {
+                        DataSet t = new DataSet(tblname);
+                        a.Fill(t);
+                        l.Add(t);
+                    }
+                    c.Close();
+                }
+            }
+            return l;
+        }
+
+        private static void EnableIDInsert()
+        {
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("enable_id_insert", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.ExecuteNonQuery();
+                }
+                c.Close();
+            }
+        }
+
+        private static void DisableIDInsert()
+        {
+            using (SqlConnection c = new SqlConnection(CONNECTION_STRING))
+            {
+                c.Open();
+                using (SqlCommand a = new SqlCommand("disable_id_insert", c))
+                {
+                    a.CommandType = CommandType.StoredProcedure;
+                    a.ExecuteNonQuery();
+                }
+                c.Close();
+            }
+        }
+
 
         /// <summary>
         /// Vraca sve putne naloge zapakirane u listu PutniNalogVM-a

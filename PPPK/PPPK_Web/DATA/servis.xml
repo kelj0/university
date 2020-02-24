@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<servis>
+  <Table>
+    <id>1</id>
+    <vozilo_id>2</vozilo_id>
+    <datum_servisa>2019-12-14T00:00:00+01:00</datum_servisa>
+    <naziv_servisa>Tokic</naziv_servisa>
+    <cijena>500.00</cijena>
+    <info>Zamjena diskova</info>
+  </Table>
+</servis>

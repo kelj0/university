@@ -1,0 +1,19 @@
+<?xml version="1.0" standalone="yes"?>
+<vozilo>
+  <Table>
+    <id>1</id>
+    <tip_vozila_id>2</tip_vozila_id>
+    <marka>Ferrari Enzo</marka>
+    <godina_proizvodnje>2012</godina_proizvodnje>
+    <pocetni_km>10000.3</pocetni_km>
+    <trenutni_km>10010.1</trenutni_km>
+  </Table>
+  <Table>
+    <id>2</id>
+    <tip_vozila_id>4</tip_vozila_id>
+    <marka>Golf 7</marka>
+    <godina_proizvodnje>2010</godina_proizvodnje>
+    <pocetni_km>143215.1</pocetni_km>
+    <trenutni_km>153215.2</trenutni_km>
+  </Table>
+</vozilo>

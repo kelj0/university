@@ -1,0 +1,17 @@
+<?xml version="1.0" standalone="yes"?>
+<vozac>
+  <Table>
+    <id>1</id>
+    <ime>Pero</ime>
+    <prezime>Peric</prezime>
+    <broj_mobitela>+385912345678</broj_mobitela>
+    <broj_vozacke>12345678</broj_vozacke>
+  </Table>
+  <Table>
+    <id>2</id>
+    <ime>Ivo</ime>
+    <prezime>Ivic</prezime>
+    <broj_mobitela>+385912345678</broj_mobitela>
+    <broj_vozacke>87654321</broj_vozacke>
+  </Table>
+</vozac>

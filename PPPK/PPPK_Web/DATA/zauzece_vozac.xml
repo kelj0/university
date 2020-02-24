@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+<zauzece_vozac>
+  <Table>
+    <id>1</id>
+    <vozac_id>1</vozac_id>
+    <datum>2020-01-10T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>2</id>
+    <vozac_id>1</vozac_id>
+    <datum>2020-01-11T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>3</id>
+    <vozac_id>2</vozac_id>
+    <datum>2019-12-10T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>4</id>
+    <vozac_id>2</vozac_id>
+    <datum>2019-12-11T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>5</id>
+    <vozac_id>2</vozac_id>
+    <datum>2019-12-12T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>6</id>
+    <vozac_id>2</vozac_id>
+    <datum>2019-12-13T00:00:00+01:00</datum>
+  </Table>
+</zauzece_vozac>

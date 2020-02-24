@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes"?>
+<status>
+  <Table>
+    <id>1</id>
+    <status>Traje</status>
+  </Table>
+  <Table>
+    <id>2</id>
+    <status>Zavrsio</status>
+  </Table>
+</status>

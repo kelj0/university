@@ -310,6 +310,16 @@ as
     end  
 go
 
+create proc enable_id_insert
+as
+    exec sp_MSForEachTable 'SET IDENTITY_INSERT ? ON'
+go
+
+create proc disable_id_insert
+as
+    exec sp_MSForEachTable 'SET IDENTITY_INSERT ? OFF'
+go
+
 create proc [dbo].[insert_dummy_data]
 as
     insert into [dbo].[tip_vozila]
@@ -375,6 +385,7 @@ as
     delete from [dbo].[vozilo]
     delete from [dbo].[tip_vozila]
     delete from [dbo].[vozac]
+    exec sp_MSforeachtable 'DBCC CHECKIDENT ([?], reseed, 0)'
 go
 
 exec [dbo].[insert_dummy_data]

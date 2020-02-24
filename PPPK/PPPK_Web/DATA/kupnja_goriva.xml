@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<kupnja_goriva>
+  <Table>
+    <id>1</id>
+    <putni_nalog_id>1</putni_nalog_id>
+    <mjesto_id>1</mjesto_id>
+    <cijena>9.81</cijena>
+    <kolicina>20.00</kolicina>
+    <datum>2020-01-10T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>2</id>
+    <putni_nalog_id>2</putni_nalog_id>
+    <mjesto_id>2</mjesto_id>
+    <cijena>9.70</cijena>
+    <kolicina>15.00</kolicina>
+    <datum>2019-12-11T00:00:00+01:00</datum>
+  </Table>
+  <Table>
+    <id>3</id>
+    <putni_nalog_id>2</putni_nalog_id>
+    <mjesto_id>3</mjesto_id>
+    <cijena>9.90</cijena>
+    <kolicina>20.00</kolicina>
+    <datum>2019-12-12T00:00:00+01:00</datum>
+  </Table>
+</kupnja_goriva>

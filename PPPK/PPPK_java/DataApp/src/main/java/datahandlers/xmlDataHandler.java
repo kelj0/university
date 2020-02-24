@@ -28,14 +28,6 @@ import org.w3c.dom.NodeList;
 public class xmlDataHandler {
     private static dbHandler db = dbHandler.getInstance();
 
-    public void fullDatabaseRestore(String dbname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void fullDatabaseBackup(String dbname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public int exportRute(int putni_nalog_id,String path, String fname) {
         List<Ruta> l = db.SelectRute(putni_nalog_id);
         int n = 0;

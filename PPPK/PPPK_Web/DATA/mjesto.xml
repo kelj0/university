@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="yes"?>
+<mjesto>
+  <Table>
+    <id>1</id>
+    <naziv>Zagreb</naziv>
+  </Table>
+  <Table>
+    <id>2</id>
+    <naziv>Bjelovar</naziv>
+  </Table>
+  <Table>
+    <id>3</id>
+    <naziv>Split</naziv>
+  </Table>
+  <Table>
+    <id>4</id>
+    <naziv>Karlovac</naziv>
+  </Table>
+  <Table>
+    <id>5</id>
+    <naziv>Dubrovnik</naziv>
+  </Table>
+  <Table>
+    <id>6</id>
+    <naziv>Rijeka</naziv>
+  </Table>
+  <Table>
+    <id>7</id>
+    <naziv>Zadar</naziv>
+  </Table>
+  <Table>
+    <id>8</id>
+    <naziv>Vukovar</naziv>
+  </Table>
+</mjesto>

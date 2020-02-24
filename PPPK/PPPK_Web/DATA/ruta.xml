@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<ruta>
+  <Table>
+    <id>1</id>
+    <putni_nalog_id>1</putni_nalog_id>
+    <x_koordinata_a>50.1241241000</x_koordinata_a>
+    <y_koordinata_a>40.1241251000</y_koordinata_a>
+    <x_koordinata_b>40.5215121000</x_koordinata_b>
+    <y_koordinata_b>50.5124110000</y_koordinata_b>
+    <km_izmedu_a_b>20.10</km_izmedu_a_b>
+    <prosjecna_brzina>110.20</prosjecna_brzina>
+  </Table>
+  <Table>
+    <id>2</id>
+    <putni_nalog_id>1</putni_nalog_id>
+    <x_koordinata_a>60.1241241000</x_koordinata_a>
+    <y_koordinata_a>10.1241251000</y_koordinata_a>
+    <x_koordinata_b>40.5215121000</x_koordinata_b>
+    <y_koordinata_b>90.5124110000</y_koordinata_b>
+    <km_izmedu_a_b>30.21</km_izmedu_a_b>
+    <prosjecna_brzina>90.20</prosjecna_brzina>
+  </Table>
+  <Table>
+    <id>3</id>
+    <putni_nalog_id>2</putni_nalog_id>
+    <x_koordinata_a>70.1241241000</x_koordinata_a>
+    <y_koordinata_a>30.1241251000</y_koordinata_a>
+    <x_koordinata_b>30.5215121000</x_koordinata_b>
+    <y_koordinata_b>60.5124110000</y_koordinata_b>
+    <km_izmedu_a_b>40.31</km_izmedu_a_b>
+    <prosjecna_brzina>70.20</prosjecna_brzina>
+  </Table>
+  <Table>
+    <id>4</id>
+    <putni_nalog_id>2</putni_nalog_id>
+    <x_koordinata_a>80.1241241000</x_koordinata_a>
+    <y_koordinata_a>40.1241251000</y_koordinata_a>
+    <x_koordinata_b>20.5215121000</x_koordinata_b>
+    <y_koordinata_b>70.5124110000</y_koordinata_b>
+    <km_izmedu_a_b>50.41</km_izmedu_a_b>
+    <prosjecna_brzina>70.20</prosjecna_brzina>
+  </Table>
+</ruta>

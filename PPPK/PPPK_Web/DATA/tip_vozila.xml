@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<tip_vozila>
+  <Table>
+    <id>1</id>
+    <tip>Karavan</tip>
+  </Table>
+  <Table>
+    <id>2</id>
+    <tip>Kabriolet</tip>
+  </Table>
+  <Table>
+    <id>3</id>
+    <tip>Limuzina</tip>
+  </Table>
+  <Table>
+    <id>4</id>
+    <tip>Hecbek</tip>
+  </Table>
+  <Table>
+    <id>5</id>
+    <tip>Kupe</tip>
+  </Table>
+  <Table>
+    <id>6</id>
+    <tip>Monovolumen</tip>
+  </Table>
+  <Table>
+    <id>7</id>
+    <tip>Dzip</tip>
+  </Table>
+</tip_vozila>

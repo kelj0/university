@@ -42,11 +42,6 @@ public class main {
         n = xdh.exportRute(1,DATA_DIRECTORY_PATH,"EXPORT_rute.xml");
         System.out.println("Broj izvezenih ruta: " + n);
     
-        // backup db to XML
-        //xdh.fullDatabaseBackup("PPPK_DATABASE");
-        // restoredb
-        //xdh.fullDatabaseRestore(Paths.get(DATA_DIRECTORY_PATH,"PPPK_DATABASE.xml").toString());
-        // putni nalog generate PDF (hibernate)
         System.out.println("Generiranje PDF-a");
         pdfDataHandler pdh = new pdfDataHandler();
         pdh.generatePutniNalogPdf(1,DATA_DIRECTORY_PATH,"putni_nalog_1_report.pdf");
