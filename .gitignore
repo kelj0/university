@@ -127,3 +127,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+# jupyter notebook
+.ipynb_checkpoints/
+
