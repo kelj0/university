@@ -9,7 +9,7 @@
         | ${param.title}
     </h1>
     <p class="shop__text">
-        <a class="button js-toggle-cart" href="#" title="View cart">
+        <a class="button js-toggle-cart" onclick="open_cart()" href="#" title="View cart">
             View cart
         </a>
     </p>

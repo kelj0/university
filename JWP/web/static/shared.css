@@ -145,9 +145,7 @@ body.open .cart {
 .cart__products article p a {
     color: #f00;
 }
-.cart__product {
-    display: none;
-}
+
 .cart__empty {
     padding: 30px 15px;
     margin: 0;
