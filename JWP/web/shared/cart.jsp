@@ -22,4 +22,17 @@
     </div>
 </aside>
 
+<template id="product_cart_template">
+    <div class="cart__product">
+       <article class="js-cart-product">
+            <h1 class="product_cart_template_heading"></h1>
+            <p>
+                <a class="js-remove-product product_cart_template_heading" href="#" title="Delete product">
+                    <!--onclick="remove_product({0})"-->
+                </a>
+            </p>
+        </article>
+    </div>
+</template>
+
 <div onload="fill_items()" class="lightbox js-lightbox js-toggle-cart"></div>

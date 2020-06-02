@@ -3,6 +3,7 @@ var numberOfProducts = 0;
 var items = null;
 var items_in_cart = [];
 
+
 String.format = function() {
     var s = arguments[0];
     for (var i = 0; i < arguments.length - 1; i += 1) {
@@ -35,32 +36,20 @@ function fill_items() {
 
 function open_cart() {
     cart_open = true;
-    fill_items();
+
     var html =
-        '<div class="cart__product">'+
-        '   <article class="js-cart-product">'+
-        '       <h1>{1} ({2})</h1>'+
-        '       <p>'+
-        '           <a class="js-remove-product" onclick="remove_product({0})" href="#" title="Delete product">'+
-        '               Remove {1}'+
-        '           </a>'+
-        '       </p>'+
-        '   </article>'+
-        '</div>'
     // 0 id, 1 name, 2 price
     JSON.parse(localStorage.getItem("items_in_cart")).forEach(
         x =>
             $('.js-cart-products').prepend($(String.format(html,x.id, x.name, x.price)))
     )
-
-    console.log("open cart: " + items_in_cart);
-    console.log("open cart: " + localStorage.getItem("items_in_cart"));
     $('body').addClass('open');
 }
 
 function close_cart() {
     cart_open = false;
     $('body').removeClass('open');
+    $('.js-cart-products').empty();
 }
 
 function add_to_cart(id, name, price) {
