@@ -21,18 +21,6 @@
                 </div>
             </div>
         </div>
-        <template id="product__template">
-            <div class="products__item">
-                <article class="product">
-                    <h1 class="product__title"></h1>
-                    <p class="product__text">
-                        <a class="button js-add-product" href="#" title="Add to cart">
-                            Add to cart
-                        </a>
-                    </p>
-                </article>
-            </div>
-        </template>
         <!-- END BODY TAG -->
     </section>
 

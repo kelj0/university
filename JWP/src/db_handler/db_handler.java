@@ -9,14 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class db_handler {
-    private static final String DEFAULT_JAVA_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static final String DEFAULT_JAVA_CLASS = "s";//"com.microsoft.sqlserver.jdbc.SQLServerDriver";
     //private final String PROJECT_DIRECTORY = System.getProperty("user.dir");
     //private static final String URL_FORMAT = "jdbc:sqlserver://KELJO-PC\\SQLEXPRESS;databaseName=PPPK_DATABASE;user=sa;password=SQL"; //CHANGE ME
     private static db_handler instance = null;
     private static Connection connection = null;
 
     private db_handler(String url) throws ClassNotFoundException{
-        Class.forName(url);
+        //Class.forName(url);
     }
 
     public static db_handler getInstance(){
@@ -31,10 +31,14 @@ public class db_handler {
     }
 
     public static List<Product> get_all_products(){
+        // query db and return
         List<Product> products = List.of(
                 new Product("Product 1", 1.2, "1fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
                 new Product("Product 2", 1.3, "2fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 3", 1.4, "3fe5a67e-246a-4cb5-bc65-a42ab13fc15e")
+                new Product("Product 3", 1.4, "3fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
+                new Product("Product 5", 1.5, "4fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
+                new Product("Product 6", 1.6, "5fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
+                new Product("Product 7", 1.7, "6fe5a67e-246a-4cb5-bc65-a42ab13fc15e")
             );
 
         return products;
