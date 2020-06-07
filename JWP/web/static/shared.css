@@ -23,7 +23,7 @@ body.open {
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.shop__products {
+#base {
     padding-top: 70px;
 }
 .shop__title {
@@ -152,7 +152,7 @@ body.open .cart {
     font-style: italic;
     text-align: center;
 }
-.cart__empty.hide {
+.hide {
     display: none;
 }
 .cart__footer {
@@ -189,4 +189,16 @@ body.open .lightbox {
     opacity: 0.8;
     transition: opacity 250ms ease-in-out, width 0ms ease-in-out;
 }
- 
+
+#alerter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: auto;
+    background-color: rgba(80, 111, 184, 0.84);
+    color: #01fc65;
+    text-align: center;
+    display: none;
+    z-index: 999;
+}

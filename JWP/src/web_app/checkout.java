@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "checkout")
 public class checkout extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
 
     }
 

@@ -15,7 +15,7 @@
     </div>
     <div class="cart__footer">
         <p class="cart__text">
-            <a class="button" href="/checkout" title="Buy products">
+            <a class="button" href="${pageContext.request.contextPath}/checkout" title="Buy products">
                 Buy products
             </a>
         </p>

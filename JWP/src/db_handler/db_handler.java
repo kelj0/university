@@ -1,28 +1,34 @@
 package db_handler;
 
+import models.Category;
 import models.Product;
 
-import java.sql.Connection;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class db_handler {
-    private static final String DEFAULT_JAVA_CLASS = "s";//"com.microsoft.sqlserver.jdbc.SQLServerDriver";
+    private static final String DEFAULT_JAVA_CLASS = "org.sqlite.JDBC";
     //private final String PROJECT_DIRECTORY = System.getProperty("user.dir");
-    //private static final String URL_FORMAT = "jdbc:sqlserver://KELJO-PC\\SQLEXPRESS;databaseName=PPPK_DATABASE;user=sa;password=SQL"; //CHANGE ME
+    private static final String URL_FORMAT = "jdbc:sqlite:C:\\Users\\keljo\\Desktop\\JWP\\JWP_DB.db";
     private static db_handler instance = null;
     private static Connection connection = null;
 
     private db_handler(String url) throws ClassNotFoundException{
-        //Class.forName(url);
+        Class.forName(url);
     }
 
     public static db_handler getInstance(){
         if(instance == null){
             try {
                 instance = new db_handler(DEFAULT_JAVA_CLASS);
+                instance.initial_database_fill();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -30,132 +36,111 @@ public class db_handler {
         return instance;
     }
 
-    public static List<Product> get_all_products(){
-        // query db and return
-        List<Product> products = List.of(
-                new Product("Product 1", 1.2, "1fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 2", 1.3, "2fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 3", 1.4, "3fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 5", 1.5, "4fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 6", 1.6, "5fe5a67e-246a-4cb5-bc65-a42ab13fc15e"),
-                new Product("Product 7", 1.7, "6fe5a67e-246a-4cb5-bc65-a42ab13fc15e")
-            );
-
-        return products;
+    private void initial_database_fill(){
+        if(!new File("C:\\Users\\keljo\\Desktop\\JWP\\db_builder.sql").exists()) {
+            instance.execute_script("C:\\Users\\keljo\\Desktop\\JWP\\db_builder.sql");
+        }
     }
 
-/*
-    public void ExecuteScript(String path){
-        System.out.println("Executing script " + path);
-        OpenConnection();
-        String content = "";
-        try {
-            content = new String(Files.readAllBytes(Paths.get(path)));
-        }catch (IOException ex) {
-            Logger.getLogger(dbHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        for(String query : content.split(";")){
-            ExecuteUpdate(query);
-        }
-        CloseConnection();
-        System.out.println("Done");
-    }
-
-    public void ExecuteUpdate(String query){
+    public void execute_update(String query){
         Statement statement = null;
         try {
-            OpenConnection();
+            open_connection();
             statement = connection.createStatement();
             statement.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }finally{
-            CloseConnection();
+            close_connection();
         }
     }
 
-    public ResultSet ExecuteQuery(String query){
-        Statement statement = null;
+    public ResultSet execute_query(String query){
+        Statement statement;
         ResultSet rs = null;
         try {
-            OpenConnection();
+            open_connection();
             statement = connection.createStatement();
             rs = statement.executeQuery(query);
         } catch (SQLException ex) {
             System.out.println("Why you do this?");
         }finally{
-            CloseConnection();
+            close_connection();
             return rs;
         }
     }
 
-    private void OpenConnection(){
+
+    public void execute_script(String path){
+        System.out.println("Executing script " + path);
+        open_connection();
+        String content = "";
+        try {
+            content = new String(Files.readAllBytes(Paths.get(path)));
+        }catch (IOException ex) {
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for(String query : content.split(";")){
+            execute_update(query);
+        }
+        close_connection();
+        System.out.println("Done");
+    }
+
+    private void open_connection(){
         try {
             connection = DriverManager.getConnection(URL_FORMAT);
         } catch (SQLException e) {
-            CloseConnection();
-            Logger.getLogger(dbHandler.class.getName()).log(Level.SEVERE, null, e);
+            close_connection();
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, e);
         }
-
     }
 
-    private void CloseConnection(){
+    private void close_connection(){
         try{
             connection.close();
         }catch(SQLException e){
-            Logger.getLogger(dbHandler.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, e);
         }
-
     }
 
-    public void InsertRuta(Ruta r) {
-        CallableStatement cstmt = null;
-        try{
-            OpenConnection();
-            cstmt = connection.prepareCall("{call insert_ruta(?,?,?,?,?,?,?)}");
-            cstmt.setInt("putni_nalog_id", r.getPutni_nalog_id());
-            cstmt.setDouble("x_koordinata_a", r.getX_koordinata_a());
-            cstmt.setDouble("y_koordinata_a", r.getY_koordinata_a());
-            cstmt.setDouble("x_koordinata_b", r.getX_koordinata_b());
-            cstmt.setDouble("y_koordinata_b", r.getY_koordinata_b());
-            cstmt.setDouble("km_izmedu_a_b", r.getKm_izmedu_a_b());
-            cstmt.setDouble("prosjecna_brzina", r.getProsjecna_brzina());
-            cstmt.execute();
-        }catch (SQLException ex){
-            ex.printStackTrace();
-        }finally{
-            CloseConnection();
-        }
-
-    }
-
-    public ArrayList<Ruta> SelectRute(int putni_nalog_id) {
-        ArrayList<Ruta> l = new ArrayList<Ruta>();
+    public List<Category> get_all_categories(){
+        ArrayList<Category> l = new ArrayList<Category>();
         ResultSet rs = null;
         Statement statement = null;
         try {
-            OpenConnection();
+            open_connection();
             statement = connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM RUTA WHERE putni_nalog_id=" + putni_nalog_id);
+            rs = statement.executeQuery("SELECT * FROM categories");
             while(rs.next()){
-                Ruta r = new Ruta(
-                        rs.getInt("id"),
-                        rs.getInt("putni_nalog_id"),
-                        rs.getDouble("x_koordinata_a"),
-                        rs.getDouble("y_koordinata_a"),
-                        rs.getDouble("x_koordinata_b"),
-                        rs.getDouble("y_koordinata_b"),
-                        rs.getDouble("km_izmedu_a_b"),
-                        rs.getDouble("prosjecna_brzina")
-                );
-                l.add(r);
+                Category c = new Category(rs.getString("category"),rs.getString("id"));
+                l.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(dbHandler.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            CloseConnection();
+            close_connection();
         }
         return l;
     }
- */
+
+    public List<Product> get_all_products(){
+        ArrayList<Product> l = new ArrayList<Product>();
+        ResultSet rs = null;
+        Statement statement = null;
+        try {
+            open_connection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM products");
+            while(rs.next()){
+                Product p = new Product(rs.getString("name"),rs.getDouble("price"),rs.getString("id"), rs.getString("category_id"));
+                l.add(p);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close_connection();
+        }
+        return l;
+    }
 }

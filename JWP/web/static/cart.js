@@ -1,29 +1,56 @@
-var cart_open = false;
-var numberOfProducts = 0;
-var items = null;
-var items_in_cart = [];
-
+let cart_open = false;
+let items_in_cart = [];
+let items = [];
 
 $(document).ready(get_products());
+$(document).ready(populate_dropdown());
+$("#categories").on('change', filter_products)
+
 
 String.format = function() {
-    var s = arguments[0];
-    for (var i = 0; i < arguments.length - 1; i += 1) {
-        var reg = new RegExp('\\{' + i + '\\}', 'gm');
+    let s = arguments[0];
+    for (let i = 0; i < arguments.length - 1; i += 1) {
+        let reg = new RegExp('\\{' + i + '\\}', 'gm');
         s = s.replace(reg, arguments[i + 1]);
     }
     return s;
 };
 
+function filter_products() {
+    let cat_uuid = this.value;
+    items.forEach(
+       function(p) {
+           if(cat_uuid==="All" || cat_uuid === p.category_id){
+               $("#"+p.uuid).removeClass('hide');
+           }else{
+               $("#"+p.uuid).addClass('hide');
+           }
+       }
+    );
+    if(cat_uuid !=="All") {
+        show_msg("Showing only " + $("#categories option:selected").text())
+    }
+}
+
+function populate_dropdown(){
+    $.getJSON("/api/get_categories", function(result) {
+        let options = $("#categories");
+        [...result].forEach(
+            c => options.append($("<option />").val(c.uuid).text(c.category))
+        )
+    });
+}
+
 function get_products(){
-    $.get("http://localhost:8080/api/get_products").done(function(d){fill_products(d)})
+    $.get("/api/get_products").done(function(d){fill_products(d)})
 }
 
 function fill_products(data) {
     data.forEach(product => {
         let html =
-        "<div id=\"" + product.uuid  + "\" class=\"products__item\">\n  <article class=\"product\">\n    <h1 class=\"product__title\">" + product.name + "</h1>\n    <p class=\"product__text\">\n" + product.price +"   </p>\n  <a class=\"button js-add-product " + product.uuid + "\" href=\"#\" title=\"Add to cart\" onclick=\"add_to_cart('" + product.uuid + "', '" + product.name + "', " + product.price + ")\">\n Add to cart\n </a>\n </article>\n </div>"
+        "<div id=\"" + product.uuid  + "\" class=\"products__item\">\n  <article class=\"product\">\n    <h1 class=\"product__title\">" + product.name + "</h1>\n    <p class=\"product__text\">\n$" + product.price +"   </p>\n  <a class=\"button js-add-product " + product.uuid + "\" href=\"#\" title=\"Add to cart\" onclick=\"add_to_cart('" + product.uuid + "', '" + product.name + "', " + product.price + ")\">\n Add to cart\n </a>\n </article>\n </div>"
         $(".products").append(html);
+        items.push(product);
     })
 }
 
@@ -57,7 +84,6 @@ function add_to_cart(uuid, name, price) {
                 'price': price
             });
         localStorage.setItem("items_in_cart", JSON.stringify(items_in_cart));
-        numberOfProducts++;
         console.log("ADD ITEM ID: " + uuid);
     }else{
         $("#"+uuid).css("border","");
@@ -66,11 +92,10 @@ function add_to_cart(uuid, name, price) {
         $('.js-cart-empty').addClass('hide');
         let ind = 0;
         for(let i=0; i < items_in_cart.length; ++i){
-            if(uuid == items_in_cart[0]['uuid']){ind=i;break}
+            if(uuid === items_in_cart[0]['uuid']){ind=i;break}
         }
         items_in_cart.splice(ind,1);
         localStorage.setItem("items_in_cart", JSON.stringify(items_in_cart));
-        numberOfProducts--;
         console.log("REMOVED ITEM ID: " + uuid);
     }
 }

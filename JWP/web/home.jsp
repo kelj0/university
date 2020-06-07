@@ -16,6 +16,9 @@
         <!-- BODY TAG -->
         <div id="base">
             <div class="shop__products">
+                <select id="categories">
+                    <option>All</option>
+                </select>
                 <div class="products">
                     <!-- FILL WITH JS -->
                 </div>
@@ -29,5 +32,6 @@
         <%@include file="shared/footer.jsp"%>
     </div>
     <!-- END FOOTER TAG -->
+    <script src="${pageContext.request.contextPath}/static/cart.js"></script>
 
 </body>

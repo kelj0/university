@@ -15,7 +15,11 @@
 
         <!-- BODY TAG -->
         <div id="base">
-
+            <form method="post" >
+                <div id="cart_items">
+                    <!-- FILL WITH JS-->
+                </div>
+            </form>
         </div>
         <!-- END BODY TAG -->
     </section>
@@ -24,5 +28,5 @@
         <%@include file="shared/footer.jsp"%>
     </div>
     <!-- END FOOTER TAG -->
-
+    <script src="${pageContext.request.contextPath}/static/checkout.js"></script>
 </body>
