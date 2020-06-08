@@ -3,13 +3,18 @@ package db_handler;
 import models.Category;
 import models.Product;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -142,5 +147,39 @@ public class db_handler {
             close_connection();
         }
         return l;
+    }
+
+    public boolean login(String username, String password) {
+        return true;
+    }
+
+    public int register(String username, String password) {
+        return 0;
+    }
+
+
+    public void log_info(HttpServletRequest r){
+        String address = r.getRemoteAddr().toString();
+        String time_stamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        String uuid = (r.getParameter("uuid")==null? "Anonymous":r.getParameter("uuid"));
+        StringBuffer requestURL = r.getRequestURL();
+        if (r.getQueryString() != null) {
+            requestURL.append("?").append(r.getQueryString());
+        }
+        String completeURL = requestURL.toString();
+        try {
+            open_connection();
+            PreparedStatement ps = connection.prepareStatement("insert into log(id,ip,url,user_id,time) values(?,?,?,?,?);");
+            ps.setString(1, UUID.randomUUID().toString());
+            ps.setString(2, address);
+            ps.setString(3, String.valueOf(requestURL));
+            ps.setString(4,uuid);
+            ps.setString(5,time_stamp);
+            ps.executeUpdate();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }finally {
+            close_connection();
+        }
     }
 }

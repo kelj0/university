@@ -28,7 +28,8 @@ CREATE TABLE log(
   id TEXT PRIMARY KEY,
   ip TEXT NOT NULL,
   url TEXT NOT NULL,
-  user_id TEXT
+  user_id TEXT,
+  time TEXT
 );
 
 INSERT INTO categories(id, category)

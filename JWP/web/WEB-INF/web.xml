@@ -52,5 +52,13 @@
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>user_mgmt</servlet-name>
+        <servlet-class>web_app.user_mgmt</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>user_mgmt</servlet-name>
+        <url-pattern>/user_mgmt</url-pattern>
+    </servlet-mapping>
 
 </web-app>
