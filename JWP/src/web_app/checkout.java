@@ -30,6 +30,7 @@ public class checkout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         db.log_info(request);
         RequestDispatcher view = request.getRequestDispatcher("web/checkout.jsp");
+
         view.forward(request, response);
     }
 }

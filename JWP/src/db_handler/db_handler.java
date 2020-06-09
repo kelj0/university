@@ -60,22 +60,6 @@ public class db_handler {
         }
     }
 
-    public ResultSet execute_query(String query){
-        Statement statement;
-        ResultSet rs = null;
-        try {
-            open_connection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery(query);
-        } catch (SQLException ex) {
-            System.out.println("Why you do this?");
-        }finally{
-            close_connection();
-            return rs;
-        }
-    }
-
-
     public void execute_script(String path){
         System.out.println("Executing script " + path);
         open_connection();
@@ -149,12 +133,46 @@ public class db_handler {
         return l;
     }
 
-    public boolean login(String username, String password) {
-        return true;
+    public boolean check_creds(String username, String password){
+        open_connection();
+        PreparedStatement ps = null;
+        boolean correct = false;
+        try {
+            ps = connection.prepareStatement("SELECT * FROM users WHERE name=? AND password=?;");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            correct = ps.executeQuery().next();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
+            close_connection();
+        }
+
+        return correct;
     }
 
     public int register(String username, String password) {
-        return 0;
+        open_connection();
+
+        PreparedStatement ps = null;
+        int return_code = 2;
+        // 0 success
+        // 1 exists
+        // 2 bad request
+        try {
+            ps = connection.prepareStatement("INSERT INTO users(id,name,password) VALUES(?,?,?);");
+            ps.setString(1, UUID.randomUUID().toString());
+            ps.setString(2, username);
+            ps.setString(3, password);
+            return_code = ps.executeUpdate();
+        } catch (SQLException throwables) {
+            return_code = 2;
+            throwables.printStackTrace();
+        }finally{
+            close_connection();
+        }
+
+        return return_code;
     }
 
 
@@ -169,7 +187,7 @@ public class db_handler {
         String completeURL = requestURL.toString();
         try {
             open_connection();
-            PreparedStatement ps = connection.prepareStatement("insert into log(id,ip,url,user_id,time) values(?,?,?,?,?);");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO log(id,ip,url,user_id,time) VALUES(?,?,?,?,?);");
             ps.setString(1, UUID.randomUUID().toString());
             ps.setString(2, address);
             ps.setString(3, String.valueOf(requestURL));

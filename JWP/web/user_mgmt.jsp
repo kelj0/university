@@ -22,7 +22,8 @@
                 <input id="rpassword" class="hide" type="password" name="rpassword" placeholder="Repeat password"/>
                 <input class="btn btn-success" type="submit" value="Submit"/>
             </form>
-            <div>${message}</div>
+            <br/>
+            <div><%= (String)request.getAttribute("message") %></div>
         </div>
         <!-- END BODY TAG -->
 

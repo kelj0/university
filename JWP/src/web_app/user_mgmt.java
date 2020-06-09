@@ -27,24 +27,26 @@ public class user_mgmt extends HttpServlet {
             return;
         }
 
-        if(request.getParameter("rpassword") != ""){
-            if(db.login(request.getParameter("username"), request.getParameter("password"))){
+        if(request.getParameter("rpassword") == ""){
+            if(db.check_creds(request.getParameter("username"), request.getParameter("password"))){
                 view = request.getRequestDispatcher("web/checkout.jsp");
                 session.setAttribute("logged_in",true);
+                session.setAttribute("user", request.getParameter("username"));
             }else {
                 view = request.getRequestDispatcher("web/user_mgmt.jsp");
                 message = "Username/password combination doesnt exist!";
             }
         }else{
             view = request.getRequestDispatcher("web/user_mgmt.jsp");
-            if(request.getParameter("password") == request.getParameter("rpassword")) {
+
+            if(request.getParameter("password").equals(request.getParameter("rpassword"))) {
                 int ret = db.register(request.getParameter("username"), request.getParameter("password"));
                 switch (ret){
                     case 0:
-                        message = "Successfully create a new account, please login";
+                        message = "Account already exists!";
                         break;
                     case 1:
-                        message = "Account already exists!";
+                        message = "Successfully create a new account, please login";
                         break;
                     default:
                         message = "Bad request";
@@ -54,13 +56,14 @@ public class user_mgmt extends HttpServlet {
                 message = "Passwords dont match!";
             }
         }
-
+        request.setAttribute("message", message);
         view.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         db.log_info(request);
         RequestDispatcher view = request.getRequestDispatcher("web/user_mgmt.jsp");
+        request.setAttribute("message", "");
         view.forward(request, response);
     }
 }

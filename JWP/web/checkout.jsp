@@ -19,6 +19,12 @@
                 <div id="cart_items">
                     <!-- FILL WITH JS-->
                 </div>
+                <br/>
+                <% if(request.getParameter("logged_in")!=null) {%>
+                    <input class="btn btn-success" type="submit" value="Buy"/>
+                <% }else{ %>
+                    <a href="/user_mgmt">Log in first</a>
+                <%} %>
             </form>
         </div>
         <!-- END BODY TAG -->
