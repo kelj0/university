@@ -120,7 +120,7 @@ public class db_handler {
         try {
             open_connection();
             statement = connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM products");
+            rs = statement.executeQuery("SELECT * FROM products;");
             while(rs.next()){
                 Product p = new Product(rs.getString("name"),rs.getDouble("price"),rs.getString("id"), rs.getString("category_id"));
                 l.add(p);
@@ -131,6 +131,25 @@ public class db_handler {
             close_connection();
         }
         return l;
+    }
+
+    public String get_user_uuid(String username){
+        String uuid = "";
+        ResultSet rs = null;
+        Statement statement = null;
+        try {
+            open_connection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM users;");
+            while(rs.next()){
+                uuid = rs.getString("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close_connection();
+        }
+        return uuid;
     }
 
     public boolean check_creds(String username, String password){
@@ -150,6 +169,28 @@ public class db_handler {
 
         return correct;
     }
+
+    public List<String> get_purchases(String uuid){
+        open_connection();
+        PreparedStatement ps = null;
+        List<String> purchases = new ArrayList<>();
+
+        try {
+            ps = connection.prepareStatement("SELECT * FROM purchase WHERE user_id=?");
+            ps.setString(1, uuid);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                purchases.add(rs.getString("id") + "|" + rs.getString("total"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
+            close_connection();
+        }
+        return purchases;
+
+    }
+
 
     public int register(String username, String password) {
         open_connection();
@@ -179,7 +220,7 @@ public class db_handler {
     public void log_info(HttpServletRequest r){
         String address = r.getRemoteAddr().toString();
         String time_stamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        String uuid = (r.getParameter("uuid")==null? "Anonymous":r.getParameter("uuid"));
+        String uuid = (r.getSession().getAttribute("uuid")==null? "Anonymous":r.getSession().getAttribute("uuid").toString());
         StringBuffer requestURL = r.getRequestURL();
         if (r.getQueryString() != null) {
             requestURL.append("?").append(r.getQueryString());

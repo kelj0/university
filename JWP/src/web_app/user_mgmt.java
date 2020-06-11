@@ -32,6 +32,7 @@ public class user_mgmt extends HttpServlet {
                 view = request.getRequestDispatcher("web/checkout.jsp");
                 session.setAttribute("logged_in",true);
                 session.setAttribute("user", request.getParameter("username"));
+                session.setAttribute("uuid", db.get_user_uuid(request.getParameter("username")));
             }else {
                 view = request.getRequestDispatcher("web/user_mgmt.jsp");
                 message = "Username/password combination doesnt exist!";

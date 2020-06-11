@@ -8,6 +8,10 @@
         </a>
         | ${param.title}
     </h1>
+    <% if(session.getAttribute("logged_in") != null) {%>
+        <a class="btn btn-success" href="/profile/<%= session.getAttribute("uuid") %>" role="button">Profile</a>
+        <a class="btn btn-danger" href="/api/logout/<%= session.getAttribute("uuid") %>" role="button">Sign out</a>
+    <% }; %>
     <p class="shop__text">
         <a class="button js-toggle-cart" onclick="open_cart()" href="#" title="View cart">
             View cart

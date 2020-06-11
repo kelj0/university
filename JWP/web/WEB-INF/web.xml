@@ -32,6 +32,14 @@
         <url-pattern>/api/get_categories</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>web_api.logout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/api/logout/*</url-pattern>
+    </servlet-mapping>
 
     <!-- WEB PAGE -->
     <servlet>
@@ -60,5 +68,15 @@
         <servlet-name>user_mgmt</servlet-name>
         <url-pattern>/user_mgmt</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>web_app.profile</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile/*</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
