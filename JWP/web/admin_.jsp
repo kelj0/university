@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<% if(request.getSession().getAttribute("admin") == null ){ response.sendRedirect("/web/admin.jsp");} %>
+
 <head>
     <%@include file="shared/static.jsp"%>
 </head>
@@ -8,16 +11,17 @@
     <!-- HEADER TAG -->
     <div id="pageheader">
         <jsp:include page="shared/header.jsp">
-            <jsp:param name="title" value="Home"/>
+            <jsp:param name="title" value="ADMIN"/>
         </jsp:include>
     </div>
     <!-- END HEADER TAG -->
 
     <!-- BODY TAG -->
     <div id="base">
-        <h1>Welcome <%= request.getSession().getAttribute("user") %>, here are your purchases: </h1>
+        <h1>Welcome <%= request.getSession().getAttribute("user") %>, here are website logs: </h1>
         <div class="shop__products">
-            <div class="purchases">
+            <div class="logs">
+                <div>ip|user_id|url|time</div>
                 <!-- FILL WITH JS -->
             </div>
         </div>
@@ -33,12 +37,12 @@
 <script>
     $(document).ready(get_purchases());
     function get_purchases(){
-        $.get("/api/get_purchases/" + '<%= request.getSession().getAttribute("uuid")%>').done(function(d){fill_purchases(d)})
+        $.get("/api/get_logs").done(function(d){fill_purchases(d)})
     };
 
     function fill_purchases(data) {
-        data.forEach(purchase => {
-            $(".purchases").append("<div>Purchase[" + purchase.split('|')[0] + "] total: " + purchase.split('|')[1] + "<br></div>");
+        [...data].forEach(log => {
+            $(".logs").append("<div>" + log + "<br></div>");
         })
     }
 </script>

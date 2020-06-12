@@ -6,6 +6,8 @@ import models.Product;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.net.http.HttpRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -152,6 +154,25 @@ public class db_handler {
         return uuid;
     }
 
+    public List<String> get_logs(){
+        List<String> logs = new ArrayList<String>();
+        ResultSet rs = null;
+        Statement statement = null;
+        try {
+            open_connection();
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM log;");
+            while(rs.next()){
+                logs.add(rs.getString("ip") + "|" + rs.getString("user_id") + "|" + rs.getString("url") + "|" + rs.getString("time"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(db_handler.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            close_connection();
+        }
+        return logs;
+    }
+
     public boolean check_creds(String username, String password){
         open_connection();
         PreparedStatement ps = null;
@@ -190,8 +211,7 @@ public class db_handler {
         return purchases;
 
     }
-
-
+    
     public int register(String username, String password) {
         open_connection();
 
@@ -218,9 +238,19 @@ public class db_handler {
 
 
     public void log_info(HttpServletRequest r){
-        String address = r.getRemoteAddr().toString();
+        String address = r.getRemoteAddr();
+        if (address.equalsIgnoreCase("0:0:0:0:0:0:0:1")) {
+            InetAddress inetAddress = null;
+            try {
+                inetAddress = InetAddress.getLocalHost();
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
+            String ipAddress = inetAddress.getHostAddress();
+            address = ipAddress;
+        }
         String time_stamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        String uuid = (r.getSession().getAttribute("uuid")==null? "Anonymous":r.getSession().getAttribute("uuid").toString());
+        String uuid = (r.getSession().getAttribute("user")==null? "Anonymous":r.getSession().getAttribute("uuid").toString());
         StringBuffer requestURL = r.getRequestURL();
         if (r.getQueryString() != null) {
             requestURL.append("?").append(r.getQueryString());
