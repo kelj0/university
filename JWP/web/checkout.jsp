@@ -15,17 +15,15 @@
 
         <!-- BODY TAG -->
         <div id="base">
-            <form method="post" >
-                <div id="cart_items">
-                    <!-- FILL WITH JS-->
-                </div>
-                <br/>
-                <% if(session.getAttribute("logged_in") != null) {%>
-                    <input class="btn btn-success" type="submit" value="Buy"/>
-                <% }else{ %>
-                    <a href="/user_mgmt">Log in first</a>
-                <%} %>
-            </form>
+            <div id="cart_items">
+                <!-- FILL WITH JS-->
+            </div>
+            <br/>
+            <% if(session.getAttribute("logged_in") != null) {%>
+                <input class="btn btn-success" type="submit" value="Buy" onclick="handle_checkout()"/>
+            <% }else{ %>
+                <a href="/user_mgmt">Log in first</a>
+            <%} %>
         </div>
         <!-- END BODY TAG -->
     </section>

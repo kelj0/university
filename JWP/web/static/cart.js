@@ -48,7 +48,7 @@ function get_products(){
 function fill_products(data) {
     data.forEach(product => {
         let html =
-        "<div id=\"" + product.uuid  + "\" class=\"products__item\">\n  <article class=\"product\">\n    <h1 class=\"product__title\">" + product.name + "</h1>\n    <p class=\"product__text\">\n$" + product.price +"   </p>\n  <a class=\"button js-add-product " + product.uuid + "\" href=\"#\" title=\"Add to cart\" onclick=\"add_to_cart('" + product.uuid + "', '" + product.name + "', " + product.price + ")\">\n Add to cart\n </a>\n </article>\n </div>"
+        "<div id=\"" + product.uuid  + "\" class=\"products__item\">\n  <article class=\"product\">\n    <h1 class=\"product__title\">" + product.name + "</h1>\n    <p class=\"product__text\">\n$" + product.price +"   </p>\n  <a class=\"button js-add-product " + product.uuid + "\" href=\"#\" title=\"Add to cart\" onclick=\"add_to_cart('" + product.uuid + "', '" + product.name + "', " + product.price + ", '" + product.category_id + "')\">\n Add to cart\n </a>\n </article>\n </div>"
         $(".products").append(html);
         items.push(product);
     })
@@ -70,7 +70,7 @@ function close_cart() {
     $('.js-cart-products').empty();
 }
 
-function add_to_cart(uuid, name, price) {
+function add_to_cart(uuid, name, price, category_id) {
     let txt = $("."+uuid).text();
     if(txt.toString().includes("Add to cart")) {
         $("#"+uuid).css("border","3px solid green")
@@ -81,7 +81,8 @@ function add_to_cart(uuid, name, price) {
             {
                 'id': uuid,
                 'name': name,
-                'price': price
+                'price': price,
+                'category_id': category_id
             });
         localStorage.setItem("items_in_cart", JSON.stringify(items_in_cart));
         console.log("ADD ITEM ID: " + uuid);
