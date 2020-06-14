@@ -88,7 +88,6 @@
         <url-pattern>/profile/*</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>admin</servlet-name>
         <servlet-class>web_app.admin</servlet-class>
@@ -98,5 +97,21 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>paypal_fail</servlet-name>
+        <servlet-class>web_app.paypal_fail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>paypal_fail</servlet-name>
+        <url-pattern>/paypal_fail</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>paypal_success</servlet-name>
+        <servlet-class>web_app.paypal_success</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>paypal_success</servlet-name>
+        <url-pattern>/paypal_success</url-pattern>
+    </servlet-mapping>
 </web-app>

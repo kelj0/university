@@ -138,11 +138,12 @@ public class db_handler {
     public String get_user_uuid(String username){
         String uuid = "";
         ResultSet rs = null;
-        Statement statement = null;
+        PreparedStatement ps = null;
         try {
             open_connection();
-            statement = connection.createStatement();
-            rs = statement.executeQuery("SELECT * FROM users;");
+            ps = connection.prepareStatement("SELECT * FROM users WHERE name=?;");
+            ps.setString(1, username);
+            rs = ps.executeQuery();
             while(rs.next()){
                 uuid = rs.getString("id");
             }
@@ -268,6 +269,22 @@ public class db_handler {
         }catch (SQLException ex){
             ex.printStackTrace();
         }finally {
+            close_connection();
+        }
+    }
+
+    public void insert_purchase(String uuid, double total) {
+        PreparedStatement ps = null;
+        open_connection();
+        try {
+            ps = connection.prepareStatement("INSERT INTO purchase(id,user_id,total) VALUES(?,?,?);");
+            ps.setString(1, UUID.randomUUID().toString());
+            ps.setString(2, uuid);
+            ps.setString(3, String.valueOf(total));
+            ps.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally{
             close_connection();
         }
     }

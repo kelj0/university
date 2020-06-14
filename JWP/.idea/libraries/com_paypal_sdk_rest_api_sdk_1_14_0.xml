@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.paypal.sdk:rest-api-sdk:1.14.0" type="repository">
+    <properties maven-id="com.paypal.sdk:rest-api-sdk:1.14.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/rest-api-sdk-1.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.21.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/gson-2.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
