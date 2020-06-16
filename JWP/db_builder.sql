@@ -46,3 +46,8 @@ VALUES
   ('e64a46ff-3793-4d09-aeb6-7c46bdf2616a', '4k tv', 1111, 'afe5a67e-246a-4cb5-bc65-a42ab13fc15e'),
   ('16ce2dbf-d03d-40b9-8187-4060c7397688', 'phone 1', 20, 'afe5a67e-246a-4cb5-bc65-a42ab13fc15e'),
   ('88f73db9-b0fc-4732-854e-067db71e2686', 'headphone 2.3', 594, 'afe5a67e-246a-4cb5-bc65-a42ab13fc15e');
+
+INSERT INTO users(id, name, password)
+VALUES
+  ('5555552c-3d8d-4b21-8b47-31d89eb21d3e', 'test', 'te'),
+  ('2222222c-3d8d-4b21-8b47-31d89eb21d3e', 'admin', 'admin');

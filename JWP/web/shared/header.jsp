@@ -9,12 +9,15 @@
         | ${param.title}
     </h1>
     <% if(session.getAttribute("logged_in") != null) {%>
-        <a class="btn btn-success" href="/profile/<%= session.getAttribute("uuid") %>" role="button">Profile</a>
+        <a style="padding-left: 10px;" class="btn btn-success" href="/profile/<%= session.getAttribute("uuid") %>" role="button">Profile</a>
         <a class="btn btn-danger" href="/api/logout/<%= session.getAttribute("uuid") %>" role="button">Sign out</a>
     <% }; %>
-    <p class="shop__text">
-        <a class="button js-toggle-cart" onclick="open_cart()" href="#" title="View cart">
-            View cart
-        </a>
-    </p>
+
+    <% if(request.getContextPath().length() <2 ) { %>
+        <p class="shop__text">
+            <a id="cart_button" class="button js-toggle-cart hide" onclick="open_cart()" href="#" title="View cart">
+                View cart
+            </a>
+        </p>
+    <% }; %>
 </div>

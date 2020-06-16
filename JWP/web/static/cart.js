@@ -6,7 +6,6 @@ $(document).ready(get_products());
 $(document).ready(populate_dropdown());
 $("#categories").on('change', filter_products)
 
-
 String.format = function() {
     let s = arguments[0];
     for (let i = 0; i < arguments.length - 1; i += 1) {
@@ -85,7 +84,6 @@ function add_to_cart(uuid, name, price, category_id) {
                 'category_id': category_id
             });
         localStorage.setItem("items_in_cart", JSON.stringify(items_in_cart));
-        console.log("ADD ITEM ID: " + uuid);
     }else{
         $("#"+uuid).css("border","");
         $("."+uuid).text("Add to cart");
@@ -98,5 +96,10 @@ function add_to_cart(uuid, name, price, category_id) {
         items_in_cart.splice(ind,1);
         localStorage.setItem("items_in_cart", JSON.stringify(items_in_cart));
         console.log("REMOVED ITEM ID: " + uuid);
+    }
+    if(localStorage.getItem("items_in_cart").length > 2){
+        $("#cart_button").removeClass("hide")
+    }else{
+        $("#cart_button").addClass("hide")
     }
 }
